@@ -1,0 +1,91 @@
+
+
+
+/* 重置bootstrap默认样式 */
+body{
+  padding: 0px 0px 100px
+}
+.btn:focus{
+  color: initial;
+}
+/*****************************/
+
+
+/* 重置火狐浏览器默认样式 */
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+} 
+/*****************************/
+
+/* 模态框 */
+
+.index{
+    background: url('../assets/images/bodybg.png');
+  }
+
+html{
+	height: 100%;
+	min-width: 90px;
+}
+body{
+	min-height: 100%;
+	padding: 0px;
+	height: 100%;
+}
+
+ol,li{
+	list-style: none;
+}
+a{
+	color: inherit;
+}
+/*.container{
+	min-width: 970px !important;
+}*/
+.modal-open {
+    overflow: auto;
+}
+.img-responsive{
+	border-top: 2px #3c3c3c solid;
+}
+#app{
+  background: url('../assets/images/bodybg.png');
+  position: absolute;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+/* 分页 */
+.pagination {
+	position: relative;
+}
+.pagination li{
+	display: inline-block;
+	margin:0 5px;
+}
+.pagination li a{
+	padding:.5rem 1rem;
+	display:inline-block;
+	background:#fff;
+	color:#1e1c1a;
+	border:none; 
+}
+.pagination li a:hover{
+	background:#eee;
+}
+.pagination li.active a{
+	background:#ed952f;
+	color:#fff;
+}
+
+
+.modal-dialog{
+	width: 400px;
+}
