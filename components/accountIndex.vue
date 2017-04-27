@@ -170,8 +170,10 @@
               </div>
             </div>
 
+            <p style="text-align: center;padding:20px 0px;margin-right: 30px;" v-show="allpage<1">无更多数据</p>
+
             <!-- 分页 -->
-            <div class="content">
+            <div class="content" v-show="allpage.length>1">
               <div class="row sure-btn">
                 <div class="border-t">
                     <ul class="pagination" >
@@ -369,6 +371,14 @@ export default {
             showItem:10,
             allpage:0,
           },
+          {
+            name: 'tab6',
+            list:[],
+            // 分页
+            current:1,
+            showItem:10,
+            allpage:0,
+          },
         ]
       },
       current:1,
@@ -476,10 +486,10 @@ export default {
     },
     // 选择选项卡
     activeTab: function(index){
-      if(index == 6){
-        this.tabs.select = index;
-        return false;
-      }
+      // if(index == 6){
+      //   this.tabs.select = index;
+      //   return false;
+      // }
       var self = this;
       // if(self.tabs.tabsObj[index-1].list.length == 0){
         var url = '';
@@ -493,6 +503,8 @@ export default {
           url = myFn.apiAddress.gameRecord.myExtractGold;
         }else if(index == 5){
           url = myFn.apiAddress.gameRecord.myTransferGold;
+        }else if(index == 6){
+          url = myFn.apiAddress.gameRecord.myGoldincome;
         }
         myFn.myAjax('get', {page:self.current,pagenumber: self.showItem}, url, function(res){
 
@@ -525,6 +537,8 @@ export default {
         url = myFn.apiAddress.gameRecord.myExtractGold;
       }else if(self.tabs.select == 5){
         url = myFn.apiAddress.gameRecord.myTransferGold;
+      }else if(index == 6){
+        url = myFn.apiAddress.gameRecord.myGoldincome;
       }
 
       var data = {

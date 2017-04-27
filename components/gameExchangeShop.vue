@@ -39,7 +39,7 @@
             <div class="border-t">
               <div class="col-md-3 right-border border-b"><p v-html="item.time">2017-4-5</p></div>
               <div class="col-md-3 right-border left-border border-b"><p v-html="item.sale_ratio">2：1</p></div>
-              <div class="col-md-3 right-border left-border border-b"><p v-html="item.money">300</p></div>
+              <div class="col-md-3 right-border left-border border-b"><p v-html="item.rev_sale_count">300</p></div>
               <div class="col-md-3 left-border border-b"><p v-html="item.money">150</p></div>
             </div>
           </div>
@@ -145,13 +145,15 @@ export default {
          this.expenditure = parseInt(this.exchangeNum) + (this.exchangeNum * localStorage.fee / 100);
       }
       // 获得金币数量
-      this.getGold = this.exchangeNum * localStorage.foodGame.substr(0,1) / localStorage.foodGame.substr(2,1);
+      var proportionArray = localStorage.foodGame.split(':');
+      console.log(proportionArray[0])
+      this.getGold = this.exchangeNum *  (proportionArray[1] / proportionArray[0]);
       if(this.getGold == 0){
         this.getGold = 0;
       }
 
       // 手续费换算
-      this.counterFee = (this.exchangeNum * localStorage.fee) / 100;
+      this.counterFee = ((this.exchangeNum * localStorage.fee) / 100).toFixed(4);
     },
     submitExchange: function(){
 
@@ -171,6 +173,8 @@ export default {
       }
       myFn.myAjax('get', data, myFn.apiAddress.game.exchangeGold, function(res){
           myFn.setUserInfo('total_foods',res.data.totalfood);
+          myFn.setUserInfo('total_currency',res.data.totalmoney);
+          self.userInfo =  myFn.setUserInfo('total_foods',res.data.totalfood);
           self.userInfo =  myFn.setUserInfo('total_currency',res.data.totalmoney);
           alert( self.$t("staticMsg.msg006") );
       })

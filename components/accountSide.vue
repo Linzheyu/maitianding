@@ -9,7 +9,7 @@
           <li class="border-t border-b"><router-link to="/game/account/index" activeClass="on-click">{{$t("sider.accountInfo")}}</router-link></li>
           <li class="border-t border-b"><router-link to="/game/account/card" activeClass="on-click">{{$t("sider.accountMycard")}}</router-link></li>
           <li class="border-t border-b"><router-link to="/game/account/benefit" >{{$t("sider.accountMycommonweal")}}</router-link></li>
-          <li class="border-t"><router-link to="/game/account/myProfile" activeClass="on-click">{{$t("sider.accountMyProfile")}}</router-link></li>
+          <!-- <li class="border-t"><router-link to="/game/account/myProfile" activeClass="on-click">{{$t("sider.accountMyProfile")}}</router-link></li> -->
         </div>
         <div class="accountAdministration margin-t-Separate">
           <div class="border-b title"><p>{{$t("sider.accountsafetyManagement")}}</p></div>

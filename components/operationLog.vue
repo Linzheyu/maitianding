@@ -35,8 +35,8 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="content">
+			<p style="text-align: center;padding:20px 0px;margin-right: 30px;" v-show="allpage<1">无更多数据</p>
+			<div class="content" v-show="allpage>1">
               <div class="row sure-btn">
                 <div class="border-t">
                     <ul class="pagination" >

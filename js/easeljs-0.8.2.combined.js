@@ -1132,7 +1132,7 @@ createjs.indexOf = function (array, searchElement){
 			interval: { get: Ticker.getInterval, set: Ticker.setInterval },
 			framerate: { get: Ticker.getFPS, set: Ticker.setFPS }
 		});
-	} catch (e) { console.log(e); console.log(2);}
+	} catch (e) { console.log(e); }
 
 
 // public static methods:
@@ -7917,7 +7917,6 @@ createjs.indexOf = function (array, searchElement){
 		 * @property canvas
 		 * @type HTMLCanvasElement | Object
 		 **/
-		alert(this.canvas)
 		this.canvas = (typeof canvas == "string") ? document.getElementById(canvas) : canvas;
 		
 		/**
@@ -8465,6 +8464,7 @@ createjs.indexOf = function (array, searchElement){
 	 **/
 
 	p._handlePointerMove = function(id, e, pageX, pageY, owner) {
+
 		if (this._prevStage && owner === undefined) { return; } // redundant listener.
 		if (!this.canvas) { return; }
 		var nextStage=this._nextStage, o=this._getPointerData(id);
@@ -9757,56 +9757,75 @@ createjs.indexOf = function (array, searchElement){
 	 * @protected
 	 **/
 	p._drawText = function(ctx, o, lines) {
-		var paint = !!ctx;
-		if (!paint) {
-			ctx = Text._workingContext;
-			ctx.save();
-			this._prepContext(ctx);
-		}
-		var lineHeight = this.lineHeight||this.getMeasuredLineHeight();
-		
-		var maxW = 0, count = 0;
-		var hardLines = String(this.text).split(/(?:\r\n|\r|\n)/);
-		for (var i=0, l=hardLines.length; i<l; i++) {
-			var str = hardLines[i];
-			var w = null;
-			
-			if (this.lineWidth != null && (w = ctx.measureText(str).width) > this.lineWidth) {
-				// text wrapping:
-				var words = str.split(/(\s)/);
-				str = words[0];
-				w = ctx.measureText(str).width;
-				
-				for (var j=1, jl=words.length; j<jl; j+=2) {
-					// Line needs to wrap:
-					var wordW = ctx.measureText(words[j] + words[j+1]).width;
-					if (w + wordW > this.lineWidth) {
-						if (paint) { this._drawTextLine(ctx, str, count*lineHeight); }
-						if (lines) { lines.push(str); }
-						if (w > maxW) { maxW = w; }
-						str = words[j+1];
-						w = ctx.measureText(str).width;
-						count++;
-					} else {
-						str += words[j] + words[j+1];
-						w += wordW;
-					}
-				}
-			}
-			
-			if (paint) { this._drawTextLine(ctx, str, count*lineHeight); }
-			if (lines) { lines.push(str); }
-			if (o && w == null) { w = ctx.measureText(str).width; }
-			if (w > maxW) { maxW = w; }
-			count++;
-		}
-		
-		if (o) {
-			o.width = maxW;
-			o.height = count*lineHeight;
-		}
-		if (!paint) { ctx.restore(); }
-		return o;
+		var paint = !!ctx;  
+        if (!paint) {  
+            ctx = Text._workingContext;  
+            ctx.save();  
+            this._prepContext(ctx);  
+        }  
+        var lineHeight = this.lineHeight||this.getMeasuredLineHeight();  
+  
+        var maxW = 0, count = 0;  
+        var hardLines = String(this.text).split(/(?:\r\n|\r|\n)/);  
+        for (var i=0, l=hardLines.length; i<l; i++) {  
+            var str = hardLines[i];  
+            var w = null;  
+  
+            if (this.lineWidth != null && (w = ctx.measureText(str).width) > this.lineWidth) {  
+                // text wrapping:  
+                var words = str.split(/(\s|[\u4e00-\u9fa5]+)/);//按照中文和空格来分割  
+                var splitChineseWords = [];  
+                for(var wordIndex = 0; wordIndex < words.length; wordIndex++)  
+                {  
+                    var chineseWordStr = words[wordIndex];  
+                                        if(chineseWordStr == "")  
+                                             continue;  
+                    if((/([\u4e00-\u9fa5]+)/).test(chineseWordStr))  
+                    {  
+                        splitChineseWords = splitChineseWords.concat(chineseWordStr.split(""));//再把中文拆分成一个一个的  
+                    }  
+                    else  
+                    {  
+                        splitChineseWords.push(chineseWordStr);  
+                    }  
+                }  
+                words = splitChineseWords;//重新组成数组  
+                str = words[0];  
+                w = ctx.measureText(str).width;  
+  
+                for (var j=1, jl=words.length; j<jl; j+=2) {  
+                    // Line needs to wrap:  
+                    var nextStr = j+1 < jl ? words[j+1] : "";  
+                    var wordW = ctx.measureText(words[j] + nextStr).width;  
+                    if (w + wordW > this.lineWidth) {  
+                        if(words[j] != "\s") //原版没有这个IF，  
+                            str += words[j]; //英文时为空格，不需要加，中文时为汉字，所以不能漏了  
+                        if (paint) { this._drawTextLine(ctx, str, count*lineHeight); }  
+                        if (lines) { lines.push(str); }  
+                        if (w > maxW) { maxW = w; }  
+                        str = nextStr;  
+                        w = ctx.measureText(str).width;  
+                        count++;  
+                    } else {  
+                        str += words[j] + nextStr;  
+                        w += wordW;  
+                    }  
+                }    
+            }  
+  
+            if (paint) { this._drawTextLine(ctx, str, count*lineHeight); }  
+            if (lines) { lines.push(str); }  
+            if (o && w == null) { w = ctx.measureText(str).width; }  
+            if (w > maxW) { maxW = w; }  
+            count++;  
+        }  
+  
+        if (o) {  
+            o.width = maxW;  
+            o.height = count*lineHeight;  
+        }  
+        if (!paint) { ctx.restore(); }  
+        return o;  
 	};
 
 	/**

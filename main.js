@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import App from './App'
-require('easel-js/lib/easeljs-0.8.2.combined.js');
+// require('easel-js/lib/easeljs-0.8.2.combined.js');
+import './js/easeljs-0.8.2.combined.js'
+import './js/preloadjs-0.6.2.min.js'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'

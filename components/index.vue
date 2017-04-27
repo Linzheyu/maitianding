@@ -27,7 +27,7 @@
                       <li><router-link to="/index" activeClass="activeNav">{{ $t("nav.home") }}</router-link></li>
                       <li><router-link to="/news"  activeClass="activeNav">{{ $t("nav.news") }}</router-link></li>
                       <li>
-                        <a href="#">{{ $t("nav.notice") }}</a></li>
+                        <router-link to="/notice"  activeClass="activeNav">{{ $t("nav.notice") }}</router-link></li>
                         <!-- <a href="#"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publicmsg" data-whatever="@mdo">{{ $t("nav.notice") }}</button></a></li> -->
                       <li><router-link to="/aboutUs" activeClass="activeNav">{{ $t("nav.about") }}</router-link></li>
                       <li v-if="userinfo.email"><a @click="goGame">{{ $t("nav.game") }}</a></li>
@@ -253,7 +253,7 @@
         </div>
 
       </div>
-      <router-view name="indexContent"></router-view>
+      <router-view :message="indexContent" name="indexContent"></router-view>
       <router-view name="indexFoot"></router-view>
   </div>
 </template>
@@ -265,31 +265,53 @@ export default {
   name: 'index',
   data () {
     return {
+
       // 用户信息
       userinfo:{},
+
       // 登录表单
       login:{
         email:'',
         password:'',
         emailCode:''
       },
+
       // 静态验证码
       staticCode:'',
       // 静态验证码图片
       codeImg: myFn.apiAddress.code.getStaticCode + '?' + Math.random(),
+
       // 邀请码
       invitationCode:'',
+
       // 重置密码
       resetPwd:{
         pwd:'',
         repeatpwd:''
       },
+
       // 注册时候的新密码和重复新密码
       pswd:'',
       repswd:'',
+
       // 是否同意条款
       isClause: false,
-      PayPassword:''
+      // 支付密码
+      PayPassword:'',
+
+      // 关于我们&新闻动态&官方公告
+      indexContent:{
+        aboutAs:{
+          title:'',
+          content:'',
+          desc:''
+        },
+        nuwsList:null,
+        communique:{
+          desc:'',
+          content:''
+        },
+      }
     }
   },
 
@@ -298,7 +320,6 @@ export default {
     // this. sa();
     // userInfo.a = '515151a5'
   },
-
   mounted(){
 
 
@@ -310,8 +331,28 @@ export default {
           if(self.userinfo.pay_pwd == null || self.userinfo.pay_pwd == ''){
             $('#setPaymentpPassword').modal('toggle');
           }
-       })
-    })
+       });
+    });
+
+    /*
+    * 关于我们
+    * 新闻动态
+    * 官方公告
+    */
+    myFn.myAjax('get', {}, myFn.apiAddress.index.aboutus, function(res){
+        self.indexContent.aboutAs.title = res.data.title;
+        self.indexContent.aboutAs.content = res.data.content;
+        self.indexContent.aboutAs.desc = res.data.desc;
+    });
+    myFn.myAjax('get', {page:1,pagenumber:6}, myFn.apiAddress.index.nuwList, function(res){
+        self.indexContent.nuwsList = res.data.list;
+    });
+    myFn.myAjax('get', {}, myFn.apiAddress.index.communique, function(res){
+        self.indexContent.communique.title  = res.data.title;
+        self.indexContent.communique.desc  = res.data.desc;
+        self.indexContent.communique.content  = res.data.content;
+    
+    });
 
   },
 
@@ -324,7 +365,7 @@ export default {
 
     /* 获取静态验证码 */
     getCode: function(){
-      if(this.login.email == '' || this.login.email == ''){
+      if(this.login.email == ''){
         alert( this.$t("staticMsg.msg007") );
         return false;
       }

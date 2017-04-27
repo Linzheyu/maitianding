@@ -3,8 +3,10 @@ import Router from 'vue-router'
 import index from '@/components/index'
 import indexContent from '@/components/indexContent'
 import indexNews from '@/components/indexNews'
+import indexNewsDetails from '@/components/indexNewsDetails'
 import indexFoot from '@/components/indexFoot'
 import indexAbout from '@/components/indexAbout'
+import indexNotice from '@/components/indexNotice'
 
 import game from '@/components/game'
 // import gameIndex from '@/components/gameIndex'
@@ -46,10 +48,24 @@ export default new Router({
       			indexFoot: indexFoot
       		}
       	},
+        { 
+          path: '/news',
+          components: {
+            indexContent: indexNews,
+            indexFoot: indexFoot
+          }
+        },
+        { 
+          path: '/NewsDetails',
+          components: {
+            indexContent: indexNewsDetails,
+            indexFoot: indexFoot
+          }
+        },
       	{ 
-      		path: '/news',
+      		path: '/notice',
       		components: {
-      			indexContent: indexNews,
+      			indexContent: indexNotice,
       			indexFoot: indexFoot
       		}
       	},

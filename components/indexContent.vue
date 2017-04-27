@@ -17,7 +17,7 @@
               </div>
             
             <div class="col-md-12 text">
-              <p v-html="aboutAs">月光如洗，如流水般涌动;流水如镜，如月光般静谧。岸柳依依，探出细腰，欲与水中月比美;穿梭千年的小舟从月里推波而来，荡开一圈圈涟漪。古韵厚重的石拱桥，他的目光如水，皎洁月色为衣，夜风为乐。小楼高处，我的目光如水，他化为淡淡水墨画。</p>
+              <p v-html="message.aboutAs.desc">月光如洗，如流水般涌动;流水如镜，如月光般静谧。岸柳依依，探出细腰，欲与水中月比美;穿梭千年的小舟从月里推波而来，荡开一圈圈涟漪。古韵厚重的石拱桥，他的目光如水，皎洁月色为衣，夜风为乐。小楼高处，我的目光如水，他化为淡淡水墨画。</p>
             </div>
             </div>
           </div>
@@ -33,7 +33,7 @@
             
             <div class="col-md-12 ">
               <ul class="newsList">
-                <li v-for="item in newsList">
+                <li v-for="item in message.nuwsList">
                   <p v-html="item.title">1.XXXXXXXXXXXXX212121XXXXXXXXXXXXXXXXXXXXXXX</p>
                   <span v-html="item. create_at">2015/02/04</span>
                 </li>
@@ -52,7 +52,7 @@
               </div>
             
             <div class="col-md-12 text">
-              <p v-html="communique"></p>
+              <p v-html="message.communique.desc"></p>
             </div>
           </div>
           </div>
@@ -76,23 +76,13 @@ export default {
         userinfo:{}
     }
   },
+  props:{
+    message:{
+      type: Object
+    }
+  },
   mounted(){
-
-    var self = this;
-    // myFn.myAjax('get', {}, myFn.apiAddress.index.aboutus, function(res){
-    //     self.aboutAs = res.data.list.desc;
-        
-    //     myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.index.nuwList, function(res){
-    //         self.newsList = res.data.list.data;
-
-    //         myFn.myAjax('get', {}, myFn.apiAddress.index.communique, function(res){
-    //             self.communique = res.data.list.content;
-            
-    //         })
-    //     })
-        
-    // });
-
+    
 
   },
   methods:{
@@ -131,11 +121,13 @@ export default {
         right: -85px;
       }
       .newsList p {
+        width: 95%;
+        white-space:nowrap;
         display: inline-block;
         margin-bottom: 0px;
         padding-right: 50px;
-        width: 95%;
         overflow: hidden;
+        text-overflow:ellipsis; 
       }
       .itemBox{
         box-sizing: content-box;
@@ -190,5 +182,9 @@ export default {
         color: #e4a904;
         margin: 20px 0px;
         padding: 0px 19px;
+        height: 142px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: justify;
       }
 </style>
