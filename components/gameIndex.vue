@@ -575,6 +575,10 @@ export default {
             }, 
             myFn.apiAddress.game.seed, 
             function(res){
+
+              self.userInfo.total_investment = res.data.total_investment;
+              myFn.setUserInfo('total_investment', res.data.total_investment);
+
               myFn.myAjax('get',{id:res.data.list[0].id}, myFn.apiAddress.game.getflmessage, function(msg){
                   self.gameObj.land.list.push(msg.data.list);
                   self.showLand();
