@@ -322,6 +322,9 @@ export default {
   },
   mounted(){
 
+    if(localStorage.userinfo != undefined){
+      this.userinfo = JSON.parse(localStorage.userinfo);
+    }
 
     var self = this;
     myFn.myAjax('get', {}, myFn.apiAddress.memberLogin.isLogin, function(res){

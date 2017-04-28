@@ -407,6 +407,7 @@ export default {
 
       myFn.myAjax('get',{}, myFn.apiAddress.memberInfo.getInfo, function(msg){
         localStorage.userinfo = JSON.stringify(msg.data);
+        self.userInfo = msg.data;
         self.activeTab(1);
       });
 
@@ -415,11 +416,12 @@ export default {
       pages:function(){
         var pag = [];
           if( this.current < this.showItem ){ //如果当前的激活的项 小于要显示的条数
-               //总页数和要显示的条数那个大就显示多少条
-               var i = Math.min(this.showItem,this.allpage);
-               while(i){
+                //总页数和要显示的条数那个大就显示多少条
+                // var i = Math.min(this.showItem,this.allpage);
+                var i = Math.max(this.showItem,this.allpage);
+                while(i){
                    pag.unshift(i--);
-               }
+                }
            }else{ //当前页数大于显示页数了
                var middle = this.current - Math.floor(this.showItem / 2 ),//从哪里开始
                    i = this.showItem;
@@ -430,8 +432,8 @@ export default {
                    pag.push( middle++ );
                }
            }
-         return pag
-           }
+            return pag
+        }
   },
   methods:{
     getCode: function(){

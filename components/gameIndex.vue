@@ -14,6 +14,9 @@
             <input type="text"  maxlength="6" class="passwordText" id="mailCode"/>
             <input type="button" class="passwordText" :value="$t('publicText.get')" id="getMailCode"/>
           </div>
+          <div id="pageBox" class="pageBox">
+              <span>1</span>
+          </div>
           <input id="InvitationUrl" value="2a28a98ee1c2b74c4d3fd27f61b3e65107" readonly="" />
           <canvas id="canvas" width="1140" height="647"></canvas>
       </div>
@@ -208,22 +211,23 @@ export default {
         // 左右切换按钮
         toggleButton: null
       },
-      // 记录
-      record:[{
-        current:1,
-        showItem:5,
-        allpage:0,
-      },
-      {
-        current:1,
-        showItem:5,
-        allpage:0,
-      },
-      {
-        current:1,
-        showItem:5,
-        allpage:0,
-      }],
+
+        // 记录
+        record:[{
+            current:1,
+            showItem:4,
+            allpage:0,
+        },
+        {
+            current:1,
+            showItem:4,
+            allpage:0,
+        },
+        {
+            current:1,
+            showItem:4,
+            allpage:0,
+        }],
       // 当前查看记录
       activeRecord: 0
     }
@@ -583,7 +587,8 @@ export default {
                   self.gameObj.land.list.push(msg.data.list);
                   self.showLand();
                   alert('播种成功');
-                  if(self.gameObj.land.list.length % self.gameObj.land.pageNum == 1){
+
+                  if(self.gameObj.land.list.length % self.gameObj.land.pageNum == 1 && self.gameObj.land.list.length >= self.gameObj.land.pageNum){
                     self.gameObj.toggleButton.right.alpha = 1;
                   }
                   payPassview.closePopup();
@@ -763,64 +768,43 @@ export default {
      * 返回左右切换按键对象
      */
     showToggleLand: function(){
-      var self = this;
+        var self = this;
       
-      // 左右土地切换图片
-      var leftLandmg = creatImgObj(EXTENSIONL_PATH, 170, 350);
-      var rightLandmg = creatImgObj(EXTENSIONR_PATH, 920, 380);
-      leftLandmg.alpha = 0;
-      if(self.gameObj.land.list.length > 11){
-        rightLandmg.alpha = 1;
-      }else{
-        rightLandmg.alpha = 0;
-      }
-      // 上一块切换事件
-      leftLandmg.addEventListener("click", function(){
-        if(1 < self.gameObj.land.currentPage){
-          self.gameObj.land.currentPage--;
-          self.gameObj.land.exampleObj.children = self.landSeat(self.gameObj.land.currentPage);
+        // 左右土地切换图片
+        var leftLandmg = creatImgObj(EXTENSIONL_PATH, 170, 350);
+        var rightLandmg = creatImgObj(EXTENSIONR_PATH, 920, 380);
+        leftLandmg.alpha = 0;
+        if(self.gameObj.land.list.length > 11){
+            rightLandmg.alpha = 1;
+        }else{
+            rightLandmg.alpha = 0;
         }
-        if(1 == self.gameObj.land.currentPage){
-          leftLandmg.alpha = 0;
-        }
-        rightLandmg.alpha = 1;
-        // rightLandmg.alpha = 1;
-        // self.selectLand = self.selectLand - 1 ;
-        // leftLandmg.isShow();
-      });
-      // 下一块块切换事件
-      rightLandmg.addEventListener("click", function(){
-        if(self.gameObj.land.page > self.gameObj.land.currentPage){
-          self.gameObj.land.currentPage++;
-          self.gameObj.land.exampleObj.children = self.landSeat(self.gameObj.land.currentPage);
-        }
-        if(self.gameObj.land.page == self.gameObj.land.currentPage){
-          rightLandmg.alpha = 0;
-        }
-        leftLandmg.alpha = 1;
-        // leftLandmg.alpha = 1;
-        // self.selectLand = self.selectLand + 1 ;
-        // rightLandmg.isShow();
-      });
-      // leftLandmg.isShow = function(){
-      //   if(self.selectLand == 0){
-      //     this.alpha = 0;
-      //   }
-      // }
-      // 
-      // 
-  
-      // rightLandmg.isShow = function(){
-      //   if(self.lands.length > 1 && self.selectLand  < (self.lands.length - 1)){
-      //     this.alpha = 1;
-      //   }else{
-      //     this.alpha = 0;
-      //   }
-      // }
-      // leftLandmg.isShow();
-      // rightLandmg.isShow();
-      this.stage.addChild(leftLandmg, rightLandmg); 
-      return {left:leftLandmg,right:rightLandmg}
+        // 上一块切换事件
+        leftLandmg.addEventListener("click", function(){
+            if(1 < self.gameObj.land.currentPage){
+                self.gameObj.land.currentPage--;
+                self.gameObj.land.exampleObj.children = self.landSeat(self.gameObj.land.currentPage);
+            }
+            if(1 == self.gameObj.land.currentPage){
+                leftLandmg.alpha = 0;
+            }
+            rightLandmg.alpha = 1;
+        });
+        // 下一块块切换事件
+        rightLandmg.addEventListener("click", function(){
+            if(self.gameObj.land.page > self.gameObj.land.currentPage){
+                self.gameObj.land.currentPage++;
+                self.gameObj.land.exampleObj.children = self.landSeat(self.gameObj.land.currentPage);
+            }
+            if(self.gameObj.land.page == self.gameObj.land.currentPage){
+                rightLandmg.alpha = 0;
+            }
+            leftLandmg.alpha = 1;
+                htLandmg.isShow();
+        });
+
+        this.stage.addChild(leftLandmg, rightLandmg); 
+        return {left:leftLandmg,right:rightLandmg}
     },
  
     // 创建游戏宝典
@@ -848,7 +832,10 @@ export default {
     },
     // 底部我的仓库& 邀请好友 &游戏记录
     showMyInformation: function () {
+
         var self = this;
+
+        // 我的仓库
         var myWarehouseImg = creatImgObj(MYWAREHOUSE_PATH, 370, 350);
         myWarehouseImg.shadow = new createjs.Shadow("#000000", 4, 5, 10);
         myWarehouseImg.addEventListener("click", function() {
@@ -889,316 +876,379 @@ export default {
             myWarehousePopup.setCloseButtonSeat(545, -20);
             myWarehousePopup.showPopup();
         })
+
+
+        // 邀请好友弹出层
         var InvitationImg = creatImgObj(INVITATION_PATH, 468, 350);
         InvitationImg.shadow = new createjs.Shadow("#000000", 4, 5, 10);
-        // 邀请好友弹出层
         InvitationImg.addEventListener("click", function() {
-          var codeInput = document.getElementById('InvitationUrl');
-          myFn.myAjax('get', {}, myFn.apiAddress.inviteCode.create, function(res){
-            codeInput.value = res.data;
-          })
-          var InvitationPopup =  new popup(self.stage);
-          var invitationPoputBg = creatImgObj(POPUP_HAS_TITLE_PATH);
-          var InvitationTitle = creatTextObj("邀请好友", "17px Arial", "#ec9530", 250, 25);
-          var InvitationContent = creatTextObj("使用下面的链接邀请好友注册并参与游戏!即可获得好友投资额除以您的投资额剩余5%的直推收益", "13px Arial", "#ec9530", 63, 110);
-          InvitationContent.lineHeight = 20;
-          InvitationContent.lineWidth = 450;
-          document.getElementById('InvitationUrl').style.display = "block";
-          var InvitationUrl = new createjs.DOMElement(codeInput);
-          InvitationUrl.x = 90;
-          InvitationUrl.y = 180;
-          var copylink = creatImgObj(POPUPBG_COPYLINK_BUTTON, 240, 275);
-          var Warn_isCopy = creatTextObj("复制成功", "17px Arial", "#ec9530", 250, 240);
-          copylink.addEventListener("click", function(){
-              var Url2=document.getElementById("InvitationUrl");
-              Url2.select(); // 选择对象
-              document.execCommand("Copy"); // 执行浏览器复制命令
-              alert("复制成功");
-              myFn.myAjax('get', {}, myFn.apiAddress.inviteCode.create, function(res){
+            var codeInput = document.getElementById('InvitationUrl');
+            myFn.myAjax('get', {}, myFn.apiAddress.inviteCode.create, function(res){
                 codeInput.value = res.data;
-              })
-            Warn_isCopy.alpha = 1;
-        })
-        Warn_isCopy.alpha = 0;
+            })
+            var InvitationPopup =  new popup(self.stage);
+            var invitationPoputBg = creatImgObj(POPUP_HAS_TITLE_PATH);
+            var InvitationTitle = creatTextObj("邀请好友", "17px Arial", "#ec9530", 250, 25);
+            var InvitationContent = creatTextObj("使用下面的链接邀请好友注册并参与游戏!即可获得好友投资额除以您的投资额剩余5%的直推收益", "13px Arial", "#ec9530", 63, 110);
+            InvitationContent.lineHeight = 20;
+            InvitationContent.lineWidth = 450;
+            document.getElementById('InvitationUrl').style.display = "block";
+            var InvitationUrl = new createjs.DOMElement(codeInput);
+            InvitationUrl.x = 90;
+            InvitationUrl.y = 180;
+            // var Warn_isCopy = creatTextObj("复制成功", "17px Arial", "#ec9530", 250, 240);
           
-            InvitationPopup.addOtherElements([invitationPoputBg, InvitationTitle, InvitationContent, InvitationUrl, copylink, Warn_isCopy]);
-            InvitationPopup.callBackClose = function() {
-                document.getElementById("InvitationUrl").style.display = "none";
-            }
+            // 点击复制链接
+            var copylink = creatImgObj(POPUPBG_COPYLINK_BUTTON, 240, 275);
+            copylink.addEventListener("click", function(){
+                var Url2=document.getElementById("InvitationUrl");
+                Url2.select(); // 选择对象
+                document.execCommand("Copy"); // 执行浏览器复制命令
+                alert("复制成功");
+                myFn.myAjax('get', {}, myFn.apiAddress.inviteCode.create, function(res){
+                codeInput.value = res.data;
+            })
+            // Warn_isCopy.alpha = 1;
+        })
+            // Warn_isCopy.alpha = 0;
+          
+        InvitationPopup.addOtherElements([invitationPoputBg, InvitationTitle, InvitationContent, InvitationUrl, copylink.png]);
+        InvitationPopup.callBackClose = function() {
+            document.getElementById("InvitationUrl").style.display = "none";
+        }
             InvitationPopup.setBoxSeat(283, 150);
             InvitationPopup.setCloseButtonSeat(545, -20);
             InvitationPopup.showPopup();
         })
+
+
+        // 游戏记录
         var recordImg = creatImgObj(RECORD_PATH, 550, 358);
         recordImg.shadow = new createjs.Shadow("#000000", 4, 5, 10);
         recordImg.addEventListener("click", function() {
-        var recordPoputBg = creatImgObj(POPUP_HAS_TITLE_PATH);
-        // 播种记录
-        var planting_record_button = creatImgObj(POPUPBUTTON_SOWING_PATH, -117, 0);
-        var planting_record_active_button = creatImgObj(POPUPBUTTON_SOWING_ACTIVE_PATH, -117, 0);
-        // 每行数据数组
-        var planting_record_content_row = creatViewObj([], 0, 70);
-        var planting_record_content = creatViewObj([
-            // 表格头
-            creatViewObj([
-              creatTextObj("播种时间", "17px Arial", "#ec9530", 120, 25),
-              creatTextObj("种子数量", "17px Arial", "#ec9530", 380, 25)
-            ], 0, 0),
-            // 表格内容行
-            planting_record_content_row
-          ], 0, 0);
+
+            var recordPoputBg = creatImgObj(POPUP_HAS_TITLE_PATH);
+
+            // 播种记录
+            var planting_record_button = creatImgObj(POPUPBUTTON_SOWING_PATH, -117, 0);
+            var planting_record_active_button = creatImgObj(POPUPBUTTON_SOWING_ACTIVE_PATH, -117, 0);
+            // 每行数据数组
+            var planting_record_content_row = creatViewObj([], 0, 70);
+            var planting_record_content = creatViewObj([
+                        // 表格头
+                        creatViewObj([
+                        creatTextObj("播种时间", "17px Arial", "#ec9530", 120, 25),
+                        creatTextObj("种子数量", "17px Arial", "#ec9530", 380, 25)
+                    ], 0, 0),
+                        // 表格内容行
+                    planting_record_content_row
+                ], 0, 0);
         
-        planting_record_content.alpha = 1;
-        planting_record_button.addEventListener("click", function(){
-          self.activeRecord = 0;
-          toggleRecord();
-          planting_record_content.alpha = 1;
-          planting_record_active_button.alpha = 1;
-        })
-        // 邀请记录
-        var invite_record_button = creatImgObj(POPUPBUTTON_INVITE_PATH, -116, 36);
-        var invite_record_active_button = creatImgObj(POPUPBUTTON_INVITE_ACTIVE_PATH, -116, 36);
-        var invite_record_content_row = creatViewObj([], 0, 70);
-        var invite_record_content = creatViewObj([
-            // 表格头
-            creatViewObj([
-              creatTextObj("用户", "17px Arial", "#ec9530", 95, 25),
-              creatTextObj("投资数量", "17px Arial", "#ec9530", 250, 25),
-              creatTextObj("投资时间", "17px Arial", "#ec9530", 400, 25)
-            ], 0, 0),
-            // 表格内容行
-            invite_record_content_row
-          ])
-        
-        invite_record_button.addEventListener("click", function(){
-          self.activeRecord = 1;
-          toggleRecord();
-          invite_record_content.alpha = 1;
-          invite_record_active_button.alpha = 1;
-        })
-        // 加速记录
-        var speed_record_button = creatImgObj(POPUPBUTTON_ACCELERATE_PATH, -116, 72);
-        var speed_record_active_button = creatImgObj(POPUPBUTTON_ACCELERATE_ACTIVE_PATH, -116, 72);
-        var speed_record_content_row = creatViewObj([], 0, 70);
-        var speed_record_content = creatViewObj([
-            // 表格头
-            creatViewObj([
-              creatTextObj("加速时间", "17px Arial", "#ec9530", 80, 25),
-              creatTextObj("类型", "17px Arial", "#ec9530", 210, 25),
-              creatTextObj("加速比", "17px Arial", "#ec9530", 275, 25),
-              creatTextObj("时间收益", "17px Arial", "#ec9530", 350, 25),
-              creatTextObj("粮食收益", "17px Arial", "#ec9530", 450, 25)
-            ], 0, 0),
-            // 表格内容行
-            speed_record_content_row
-          ])
-        myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.gameRecord.mySeed, function(res){
-          var textList = [];
-          for(var i=0; i<res.data.list.length; i++){
-            textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
-          }
-          self.record[0].allpage = res.data.totalpage;
-          // 播种列表每行数据
-          planting_record_content_row.children = textList;
-        myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.gameRecord.myInvite, function(res){
-          var textList = [];
-          for(var i=0; i<res.data.list.length; i++){
-            textList.push(creatViewObj([
-                creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
-                creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
-                creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
-                creatImgObj(DIVISION_PATH, 30, 30)
-              ], 0, 0+i*55));
-          }
-          self.record[1].allpage = res.data.totalpage;
-          // 播种列表每行数据
-          invite_record_content_row.children = textList;
-        myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.gameRecord.mySeedAccelerate, function(res){
-          var textList = [];
-          for(var i=0; i<res.data.list.length; i++){
-            textList.push(creatViewObj([
-                // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
-                creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
-                creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
-                creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
-                creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
-                creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
-                creatImgObj(DIVISION_PATH, 30, 30)
-              ], 0, 0+i*55));
-          }
-          self.record[2].allpage = res.data.totalpage;
-            // 播种列表每行数据
-            speed_record_content_row.children = textList;
-            recordPopup.showPopup();
+                planting_record_content.alpha = 1;
+                planting_record_button.addEventListener("click", function(){
+                self.activeRecord = 0;
+                toggleRecord();
+                planting_record_content.alpha = 1;
+                planting_record_active_button.alpha = 1;
+            })
+
+            // 播种记录请求
+            myFn.myAjax('get', {page:1,pagenumber:self.record[0].showItem}, myFn.apiAddress.gameRecord.mySeed, function(res){
+                var textList = [];
+
+                for(var i=0; i<res.data.list.length; i++){
+                    textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
+                }
+                // 播种记录总页数
+                self.record[0].allpage = res.data.totalpage;
+                // 播种列表每行数据
+                planting_record_content_row.children = textList;          
             });
+
+            // 邀请记录
+            var invite_record_button = creatImgObj(POPUPBUTTON_INVITE_PATH, -116, 36);
+            var invite_record_active_button = creatImgObj(POPUPBUTTON_INVITE_ACTIVE_PATH, -116, 36);
+            // 每行数据数组
+            var invite_record_content_row = creatViewObj([], 0, 70);
+            var invite_record_content = creatViewObj([
+                // 表格头
+                creatViewObj([
+                    creatTextObj("用户", "17px Arial", "#ec9530", 95, 25),
+                    creatTextObj("投资数量", "17px Arial", "#ec9530", 250, 25),
+                    creatTextObj("投资时间", "17px Arial", "#ec9530", 400, 25)
+                ], 0, 0),
+                // 表格内容行
+                invite_record_content_row
+            ])
+        
+            invite_record_button.addEventListener("click", function(){
+                self.activeRecord = 1;
+                toggleRecord();
+                invite_record_content.alpha = 1;
+                invite_record_active_button.alpha = 1;
+            });
+            // 邀请记录请求
+            myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.gameRecord.myInvite, function(res){
+                var textList = [];
+                for(var i=0; i<res.data.list.length; i++){
+                    textList.push(creatViewObj([
+                        creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
+                        creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
+                        creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
+                        creatImgObj(DIVISION_PATH, 30, 30)
+                    ], 0, 0+i*55));
+                }
+
+                // 邀请记录总页数
+                self.record[1].allpage = res.data.totalpage;
+                // 邀请记录每行数据
+                invite_record_content_row.children = textList;
+            });
+
+
+            // 加速记录
+            var speed_record_button = creatImgObj(POPUPBUTTON_ACCELERATE_PATH, -116, 72);
+            var speed_record_active_button = creatImgObj(POPUPBUTTON_ACCELERATE_ACTIVE_PATH, -116, 72);
+            // 每行数据组
+            var speed_record_content_row = creatViewObj([], 0, 70);
+            var speed_record_content = creatViewObj([
+                // 表格头
+                creatViewObj([
+                    creatTextObj("加速时间", "17px Arial", "#ec9530", 80, 25),
+                    creatTextObj("类型", "17px Arial", "#ec9530", 210, 25),
+                    creatTextObj("加速比", "17px Arial", "#ec9530", 275, 25),
+                    creatTextObj("时间收益", "17px Arial", "#ec9530", 350, 25),
+                    creatTextObj("粮食收益", "17px Arial", "#ec9530", 450, 25)
+                ], 0, 0),
+                // 表格内容行
+                speed_record_content_row
+            ])
+
+            speed_record_button.addEventListener("click", function(){
+                self.activeRecord = 2;
+                toggleRecord();
+                speed_record_content.alpha = 1;
+                speed_record_active_button.alpha = 1;
+            })
+
+            // 加速记录请求
+            myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.gameRecord.mySeedAccelerate, function(res){
+                var textList = [];
+                for(var i=0; i<res.data.list.length; i++){
+                    textList.push(creatViewObj([
+                        // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
+                        creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
+                        creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
+                        creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
+                        creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
+                        creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
+                        creatImgObj(DIVISION_PATH, 30, 30)
+                    ], 0, 0+i*55));
+                }
+                // 加速记录总页数
+                self.record[2].allpage = res.data.totalpage;
+                // 加速列表每行数据
+                speed_record_content_row.children = textList;    
+            });
+
             
-          });
-          
-        });
-        speed_record_content.alpha = 0;
-        speed_record_button.addEventListener("click", function(){
-          self.activeRecord = 2;
-          toggleRecord();
-          speed_record_content.alpha = 1;
-          speed_record_active_button.alpha = 1;
-        })
-          /* page */
-          var pageLeft = creatImgObj(POPUPBUTTON_PAGE_LEFT_PATH, 15, 290,);
-          var pageRight = creatImgObj(POPUPBUTTON_PAGE_RIGHT_PATH, 530, 290);
-          pageLeft.addEventListener("click", function(){
-             self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
-            if(self.activeRecord == 0){
-              if(self.record[self.activeRecord].current == 0){
-                self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
-                alert('已经是第一页了');
-                return false;
-              }
-              myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeed, function(res){
-                var textList = [];
-                for(var i=0; i<res.data.list.length; i++){
-                  textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
-                }
-                planting_record_content_row.children = textList;
-              });
-            }else if(self.activeRecord == 1){
-              if(self.record[self.activeRecord].current == 0){
-                self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
-                 alert('已经是第一页了');
-                return false;
-              }
-              myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.myInvite, function(res){
-                var textList = [];
-                for(var i=0; i<res.data.list.length; i++){
-                  textList.push(creatViewObj([
-                      creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
-                      creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
-                      creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
-                      creatImgObj(DIVISION_PATH, 30, 30)
-                    ], 0, 0+i*55));
-                }
-                // 播种列表每行数据
-                invite_record_content_row.children = textList;
-              });
-            }else if(self.activeRecord == 2){
-              if(self.record[self.activeRecord].current == 0){
-                self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
-                 alert('已经是第一页了');
-                return false;
-              }
-               myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeedAccelerate, function(res){
-                var textList = [];
-                for(var i=0; i<res.data.list.length; i++){
-                  textList.push(creatViewObj([
-                      // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
-                      creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
-                      creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
-                      creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
-                      creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
-                      creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
-                      creatImgObj(DIVISION_PATH, 30, 30)
-                    ], 0, 0+i*55));
-                }
-                  // 播种列表每行数据
-                  speed_record_content_row.children = textList;
-                })
-            }
-          });
-          pageRight.addEventListener("click", function(){
-            self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
-            if(self.activeRecord == 0){
-              if(self.record[self.activeRecord].current > self.record[self.activeRecord].allpage){
+            /* page */
+            var pageLeft = creatImgObj(POPUPBUTTON_PAGE_LEFT_PATH, 15, 290,);
+            var pageRight = creatImgObj(POPUPBUTTON_PAGE_RIGHT_PATH, 530, 290);
+
+            // 上一页
+            pageLeft.addEventListener("click", function(){
                 self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
-                alert('没有更多数据了');
-                return false;
-              }
-              myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeed, function(res){
-                var textList = [];
-                for(var i=0; i<res.data.list.length; i++){
-                  textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
+
+
+                if(self.activeRecord == 0){
+
+
+                    if(self.record[self.activeRecord].current == 0){
+                        self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
+                        alert('已经是第一页了');
+                        return false;
+                    }
+                    myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeed, function(res){
+                        var textList = [];
+                        for(var i=0; i<res.data.list.length; i++){
+                            textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
+                        }
+                        planting_record_content_row.children = textList;
+                    });
+
+
+                }else if(self.activeRecord == 1){
+
+
+                    if(self.record[self.activeRecord].current == 0){
+                        self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
+                        alert('已经是第一页了');
+                        return false;
+                    }
+                    myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.myInvite, function(res){
+                        var textList = [];
+                        for(var i=0; i<res.data.list.length; i++){
+                            textList.push(creatViewObj([
+                                creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
+                                creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
+                                creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
+                                creatImgObj(DIVISION_PATH, 30, 30)
+                            ], 0, 0+i*55));
+                        }
+                        // 播种列表每行数据
+                        invite_record_content_row.children = textList;
+                    });
+
+
+                }else if(self.activeRecord == 2){
+
+
+                    if(self.record[self.activeRecord].current == 0){
+                        self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
+                        alert('已经是第一页了');
+                        return false;
+                    }
+                    myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeedAccelerate, function(res){
+                        var textList = [];
+                        for(var i=0; i<res.data.list.length; i++){
+                            textList.push(creatViewObj([
+                                // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
+                                creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
+                                creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
+                                creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
+                                creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
+                                creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
+                                creatImgObj(DIVISION_PATH, 30, 30)
+                            ], 0, 0+i*55));
+                        }
+                        // 播种列表每行数据
+                        speed_record_content_row.children = textList;
+                    })
                 }
-                planting_record_content_row.children = textList;
-              });
-            }else if(self.activeRecord == 1){
-              if(self.record[self.activeRecord].current > self.record[self.activeRecord].allpage){
-                self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
-                alert('没有更多数据了');
-                return false;
-              }
-              myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.myInvite, function(res){
-                var textList = [];
-                for(var i=0; i<res.data.list.length; i++){
-                  textList.push(creatViewObj([
-                      creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
-                      creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
-                      creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
-                      creatImgObj(DIVISION_PATH, 30, 30)
-                    ], 0, 0+i*55));
+            });
+            // 下一页
+            pageRight.addEventListener("click", function(){
+                self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) + 1;
+
+                if(self.activeRecord == 0){
+
+
+                    if(self.record[self.activeRecord].current > self.record[self.activeRecord].allpage){
+                        self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
+                        alert('没有更多数据了');
+                        return false;
+                    }
+                    myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeed, function(res){
+                        var textList = [];
+                        for(var i=0; i<res.data.list.length; i++){
+                            textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
+                        }
+                        planting_record_content_row.children = textList;
+                    });
+
+                }else if(self.activeRecord == 1){
+
+
+                    if(self.record[self.activeRecord].current > self.record[self.activeRecord].allpage){
+                        self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
+                        alert('没有更多数据了');
+                        return false;
+                    }
+
+                    myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.myInvite, function(res){
+                        var textList = [];
+                        for(var i=0; i<res.data.list.length; i++){
+                            textList.push(creatViewObj([
+                                creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
+                                creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
+                                creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
+                                creatImgObj(DIVISION_PATH, 30, 30)
+                            ], 0, 0+i*55));
+                        }
+                        // 播种列表每行数据
+                        invite_record_content_row.children = textList;
+                    });
+
+
+                }else if(self.activeRecord == 2){
+                    if(self.record[self.activeRecord].current > self.record[self.activeRecord].allpage){
+                        self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
+                        alert('没有更多数据了');
+                        return false;
+                    }
+                    myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeedAccelerate, function(res){
+                        var textList = [];
+                        for(var i=0; i<res.data.list.length; i++){
+                            textList.push(creatViewObj([
+                                // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
+                                creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
+                                creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
+                                creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
+                                creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
+                                creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
+                                creatImgObj(DIVISION_PATH, 30, 30)
+                            ], 0, 0+i*55));
+                        }
+                        // 播种列表每行数据
+                        speed_record_content_row.children = textList;
+                    })
                 }
-                // 播种列表每行数据
-                invite_record_content_row.children = textList;
-              });
-            }else if(self.activeRecord == 2){
-              if(self.record[self.activeRecord].current > self.record[self.activeRecord].allpage){
-                self.record[self.activeRecord].current = parseInt(self.record[self.activeRecord].current) - 1;
-                alert('没有更多数据了');
-                return false;
-              }
-               myFn.myAjax('get', {page:self.record[self.activeRecord].current,pagenumber:5}, myFn.apiAddress.gameRecord.mySeedAccelerate, function(res){
-                var textList = [];
-                for(var i=0; i<res.data.list.length; i++){
-                  textList.push(creatViewObj([
-                      // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
-                      creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
-                      creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
-                      creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
-                      creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
-                      creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
-                      creatImgObj(DIVISION_PATH, 30, 30)
-                    ], 0, 0+i*55));
-                }
-                  // 播种列表每行数据
-                  speed_record_content_row.children = textList;
-                })
-            }
-          })
-          var recordPopup = new popup(self.stage);
-          recordPopup.addOtherElements([recordPoputBg, 
-              // 添加播种记录元素
-              planting_record_button,
-              planting_record_active_button, 
-              planting_record_content, 
-              // 添加播种邀请元素
-              invite_record_button,
-              invite_record_active_button, 
-              invite_record_content, 
-              // 添加播种收益元素
-              speed_record_button, 
-              speed_record_active_button, 
-              speed_record_content,
-              // page
-              pageLeft,
-              pageRight 
+            })
+            
+            // var standard2000 = new createjs.DOMElement(document.getElementById("standard2000"));
+            // 分页
+            var pageBox_El = document.getElementById("pageBox");
+            pageBox_El.style.display = 'block';
+            var pageBox = new createjs.DOMElement(pageBox_El);
+
+
+            var recordPopup = new popup(self.stage);
+
+            recordPopup.addOtherElements([recordPoputBg, 
+                // 添加播种记录元素
+                planting_record_button,
+                planting_record_active_button, 
+                planting_record_content, 
+                // 添加播种邀请元素
+                invite_record_button,
+                invite_record_active_button, 
+                invite_record_content, 
+                // 添加播种收益元素
+                speed_record_button, 
+                speed_record_active_button, 
+                speed_record_content,
+                // page
+                pageLeft,
+                pageRight,
+                pageBox
             ]);
+
+            recordPopup.showPopup();
             recordPopup.setBoxSeat(283, 150);
             recordPopup.setCloseButtonSeat(545, -20);
             
+            // 切换显示隐藏
             function toggleRecord(){
-              planting_record_button = planting_record_button;
-              planting_record_content.alpha = 0;
-              planting_record_active_button.alpha = 0;
-              invite_record_button = invite_record_button;
-              invite_record_content.alpha = 0;
-              invite_record_active_button.alpha = 0;
-              speed_record_button = speed_record_button;
-              speed_record_content.alpha = 0;
-              speed_record_active_button.alpha = 0;
+                planting_record_button = planting_record_button;
+                planting_record_content.alpha = 0;
+                planting_record_active_button.alpha = 0;
+                invite_record_button = invite_record_button;
+                invite_record_content.alpha = 0;
+                invite_record_active_button.alpha = 0;
+                speed_record_button = speed_record_button;
+                speed_record_content.alpha = 0;
+                speed_record_active_button.alpha = 0;
             }
             toggleRecord();
             planting_record_content.alpha = 1;
             planting_record_active_button.alpha = 1;
         })
+        
+        // 创建点击图标
         var decorateBanch = creatImgObj(DECORATE_BENCH, 363, 415);
         var bottomButton = creatViewObj([myWarehouseImg, InvitationImg, recordImg, decorateBanch], 100, 195);
+        // 添加底部图标
         this.stage.addChild(bottomButton);
     },
     
@@ -1337,5 +1387,10 @@ function popup(stage) {
     padding: 10px 5px;
     display: none;
     font-size: 16px;
+  }
+  /* 分页 */
+  .pageBox{
+    display: none;
+    background:'red';
   }
 </style>
