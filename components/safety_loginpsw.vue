@@ -5,16 +5,16 @@
 		<div class="row record">
 			<div class="back-color border-b">
 				<ul class="record-list">
-					<p class="part-title">{{$t("safetySetWPwd.title")}}</p>
+					<p class="part-title"><i class="icon" style="background: transparent url('../static/images/icon.png')"></i>{{$t("safetySetWPwd.title")}}</p>
 				</ul>	
 			</div>
 			<div class="content border-t">
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
-						<div class="row border-b padding-t-30 padding-b-30 part1">
+						<div class="row border-b part1">
 							<p>{{$t("safetyPayment.changePassword1")}}</p>
-							<p>{{$t("safetyPayment.changePassword2")}}</p>
-							<p>{{$t("safetyPayment.changePassword3")}}</p>
+							<p><span>*</span>{{$t("safetyPayment.changePassword2")}}</p>
+							<p><span>*</span>{{$t("safetyPayment.changePassword3")}}</p>
 						</div>
 					</div>
 					
@@ -26,15 +26,15 @@
 						<div class="row border-t border-b padding-t-30 padding-b-30">
 							<div class="btn-group">
 								<label for="#">{{$t("safetyPayment.oldpswd")}}</label>
-								<input v-model="oldpswd" type="text"/>
+								<input v-model="oldpswd" :placeholder="$t('safetyPayment.oldpswdPrompt')" type="text"/>
 							</div>
 							<div class="btn-group">
 								<label for="#">{{$t("safetyPayment.newpswd")}}</label>
-								<input v-model="newpswd" type="password"/>
+								<input v-model="newpswd" :placeholder="$t('safetyPayment.newpswdPrompt')" type="password"/>
 							</div>
-							<div class="btn-group" style="margin-left:-23px;">
+							<div class="btn-group">
 								<label for="#">{{$t("safetyPayment.newpswdAgain")}}</label>
-								<input v-model="againNewpswd" type="password"/>
+								<input v-model="againNewpswd" :placeholder="$t('safetyPayment.newpswdAgainPrompt')" type="password"/>
 							</div>
 							<div class="group btn-group">
 								<!-- <button>{{$t("publicText.off")}}</button> -->
@@ -84,29 +84,37 @@ export default {
 
 	.record{
 		width: 100%;
-		border: 1px solid #272523;
+		min-height: 550px;
 		border-radius: 3px;
-		background: #1F1C1B;
+		background: #fff;
 		padding:0;
 		text-align: left;
-		color: #EC9530;
+		color: #436672;
 	}
 	.record-list{
-		width: 100%;
-		height: 42px;
-		margin-bottom: 0;
+		width: 92%;
+		margin: auto;
 		padding-left: 0;
+		margin-bottom: 30px;
+		border-bottom: 1px #ccc solid;
+	}
+	.record-list .icon{
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		vertical-align: sub;
+		margin-right: 7px;
+		background-position: 21px 78px !important;
 	}
 	.on-active{
 		color: #EC9530!important;
 		border-bottom: 1px solid #EC9530;
 	}
 	.back-color{
-		background: #161413;
+		background: #fff;
 	}
 	.content{
-		text-align: center;
-		color: #EC9530;
+		color: #436672;
 	}
 	.content > .row{
 		width: 100%;
@@ -114,40 +122,58 @@ export default {
 		padding: 0 30px; 
 	}
 	.part-title{
-		font-size: 16px;
-		text-align: center;
-		padding-top: 7px;
-	}
-	.padding-t-30{
-		padding-top: 30px;
+		display: inline-block;
+		font-size: 15px;
+		text-align: left;
+		margin-bottom: 0px;
+		padding-top: 20px;
+		padding-bottom: 7px;
+		border-bottom: 3px #30ADB3 solid;
 	}
 	.padding-b-30{
 		padding-bottom: 30px;
 	}
 	.part1{
 		text-align: left;
+		margin-left: 10px;
+		padding-bottom: 10px;
 	}
 	.part1 p{
 		margin-top: 5px;
+		color: #436D80;
+	}
+	.part1 p span{
+		color: red;
+		margin-right: 10px;
+	}
+	.part1 p:first-child{
+		font-weight: 700;
 	}
 	.btn-group{
 		display: block;
 		margin: 15px 0;
+		margin-left: 25px;
 	}
 	.btn-group input{
-		width: 35%;
+		width: 230px;
+		height: 40px;
+		padding-left: 15px;
+		border:1px #ccc solid;
+	}
+	.btn-group label{
+		width: 95px;
 	}
 	.btn-group button{
-		width: 80px;
-		height: 32px;
-		color: #EC9530;
-		background: none;
-		border: 1px solid #EC9530;
-		border-radius: 3px;
+		width: 130px;
+		height: 40px;
+		color: #fff;
+		background: #30ADB3;
+		border: none;
+		border-radius: 20px;
 		margin-top: 15px;
 	}
 	.btn-group button:first-child{
-		margin-left: 50px;
-		margin-right: 15px;
+		margin-left: 90px;
+		margin-top: 30px;
 	}
 </style>

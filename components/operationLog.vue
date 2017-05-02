@@ -5,13 +5,13 @@
 		<div class="row record">
 			<div class="back-color border-b">
 				<ul class="record-list">
-					<p class="part-title">{{$t("log.operatingLog")}}</p>
+					<p class="part-title"><i class="icon" style="background: transparent url('../static/images/icon.png')"></i>{{$t("log.operatingLog")}}</p>
 				</ul>	
 			</div>
 			<div class="content">
 				<div class="row border-t">
 					<div class="col-md-12 col-sm-12">
-						<div class="row border-b padding-tb-20">
+						<div class="row border-b  exchange-term">
 							<div class="col-md-3 col-sm-3">{{$t("log.time")}}</div>
 							<div class="col-md-3 col-sm-3">{{$t("log.types")}}</div>
 							<div class="col-md-3 col-sm-3">{{$t("log.loginIP")}}</div>
@@ -20,11 +20,9 @@
 						
 					</div>
 				</div>
-			</div>
-			<div class="content color-content">
 				<div class="row" v-for="item in addressList">
 					<div class="col-md-12 col-sm-12">
-						<div class="row border-t border-b padding-tb-20">
+						<div class="row border-t border-b exchange-term-cotent">
 							<div class="col-md-3 col-sm-3" v-html="item.crt_time"></div>
 							<div class="col-md-3 col-sm-3" v-show="item.ltype == 0">{{$t("log.typesList")}}</div>
 							<div class="col-md-3 col-sm-3" v-show="item.ltype == 1">{{$t("log.quirt")}}</div>
@@ -101,7 +99,7 @@ export default {
     }
     myFn.myAjax('get', data, myFn.apiAddress.memberInfo.getLog, function(res){
         self.addressList = res.data.list;
-        self.allpage = res.data.pagenum;
+        self.allpage = res.data.totalpage;
     });
   },
   methods:{
@@ -115,6 +113,7 @@ export default {
         }
         myFn.myAjax('get', data, myFn.apiAddress.memberInfo.getLog, function(res){
             self.addressList = res.data.list;
+            self.allpage = res.data.totalpage;
        	});
     }
   }
@@ -176,25 +175,43 @@ export default {
 	/*========================  main Start Part-3 & Part-2 ========================*/
 	.record{
 		width: 100%;
-		border: 1px solid #272523;
+		min-height: 550px;
 		border-radius: 3px;
-		background: #1F1C1B;
+		background: #fff;
 		padding:0;
 		text-align: left;
-		color: #EC9530;
+		color: #436672;
 	}
+	.part-title{
+		width: 150px;
+		font-size: 15px;
+		text-align: left;
+		margin-bottom: 0px;
+		padding-top: 20px;
+		padding-bottom: 7px;
+		border-bottom: 3px #30ADB3 solid;
+	}
+
 	.record-list{
-		width: 100%;
-		height: 42px;
-		margin-bottom: 0;
+		width: 92%;
+		margin: auto;
 		padding-left: 0;
+		border-bottom: 1px #ccc solid;
+	}
+	.record-list .icon{
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		vertical-align: sub;
+		margin-right: 7px;
+		background-position: 21px 78px !important;
 	}
 	.on-active{
 		color: #EC9530!important;
 		border-bottom: 1px solid #EC9530;
 	}
 	.back-color{
-		background: #161413;
+		background: #fff;
 	}
 	.content{
 		text-align: center;
@@ -206,14 +223,37 @@ export default {
 		padding: 0 30px; 
 	}
 	.part-title{
-		font-size: 16px;
-		text-align: center;
-		padding-top: 7px;
+		display: inline-block;
+		font-size: 15px;
+		text-align: left;
+		margin-bottom: 0px;
+		padding-top: 20px;
+		padding-bottom: 7px;
+		border-bottom: 3px #30ADB3 solid;
 	}
-	.padding-tb-20{
-		padding: 20px 0;
-	}
+
 	.color-content{
 		color: #837D7A;
 	}
+	.exchange-term{
+      	color: #436D80;
+      	background: #F6F6F6;
+      	font-size: 16px;
+      	height: 40px;
+      	line-height: 40px;
+		margin:0px -7px;
+      	margin-top: 10px;
+      	font-size: 0.9em;
+    }
+    .exchange-term div{
+    	text-align: left;
+    }
+    .exchange-term-cotent{
+    	text-align: left;
+    	margin:10px -7px;
+    	color: #436D80;
+    	border-bottom: 1px #ccc solid;
+    	padding-bottom: 10px;
+    	padding-top: 7px;
+    }
 </style>

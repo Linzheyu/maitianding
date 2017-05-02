@@ -1,45 +1,168 @@
 
 <template>
-  <div class="gameBg">
-      <!-- 导航 -->   
-      <div class="container back-block">
-        <ul class="game">
-          <li class="backButton"><router-link to="/index"><img src="../assets/icon/back.png"></router-link></li>
-          <li><router-link to="/game/index"><img src="../assets/icon/gameCentre.png"></router-link></li>
-          <li><router-link to="/game/shop"><img src="../assets/icon/exchangeShop.png"></router-link></li>
-          <li><router-link to="/game/benefit"><img src="../assets/icon/benefitCentre.png"></router-link></li>
-          <li><router-link to="/game/account/index"><img src="../assets/icon/accountCentre.png"></router-link></li>
-        </ul>
-      </div>
+    <div class="gameBg">
+        <!-- 导航 -->   
+        <div class="container back-block">
+            <div class="row header-top">
 
-      <router-view></router-view>
-  </div>
+                <div class="col-lg-4 logo">
+                    <img src="../assets/images/mtdLogo.png" alt="">
+                </div>
+                <div class="col-lg-5"></div>
+                <div class="col-lg-3 info">
+                    <span v-html="userinfo.email"></span>
+                    <!-- <a href="#" class="notice">
+                        <i class=" glyphicon glyphicon-bell"></i>
+                        <span class="badge">0</span>
+                    </a> -->
+                    <a @click="outLogin" class="signOut">退出</a>
+                    <div class="btn-group toggle-language">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span v-show="selectLanguage==1">{{ $t("nav.Chinese")}}</span>
+                        <span v-show="selectLanguage==2">{{ $t("nav.English")}}</span>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a @click="cutLanguage(1)" >{{ $t("nav.Chinese")}}</a></li>
+                        <li><a @click="cutLanguage(2)" >{{ $t("nav.English")}}</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="game">
+<!--                 <li class="backButton"><router-link to="/index"><img src="../assets/icon/back.png"></router-link></li> -->
+                <li><router-link to="/game/index" activeClass="active">游戏中心</router-link></li>
+                <li><router-link to="/game/shop" activeClass="active">兑换商店</router-link></li>
+                <li><router-link to="/game/benefit" activeClass="active">公益中心</router-link></li>
+                <li><router-link to="/game/account/index" activeClass="active">账户中心</router-link></li>
+            </ul>
+        </div>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
   name: 'game',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+        userinfo:{},
+        selectLanguage:1,
+    }
+  },
+  created(){
+    if(localStorage.userinfo == undefined){
+        this.$router.push({path:'/index'});
     }
   },
   mounted(){
-     myFn.hiddenLoding();
+    myFn.hiddenLoding();
+    this.userinfo = JSON.parse(localStorage.userinfo);
   },
   methods:{
-    
+    /**
+     * 退出登录
+     * 清除localStorage数据
+     */
+    outLogin:function(){
+        var self = this;
+        myFn.myAjax('get',{}, myFn.apiAddress.memberLogin.quitLogin, function(res){
+            localStorage.clear();
+            self.userinfo = {};
+            self.$router.push({path:'/index'});
+        })
+    },
+    // 切换语言包
+    cutLanguage: function(type){
+      if(type == 1){
+        this.selectLanguage = 1;
+        Vue.config.lang = 'cn';
+      }else if(type == 2){
+        this.selectLanguage = 2;
+        Vue.config.lang = 'en';
+      }
+    }
   }
 }
 </script>
-<style>
-  body{
-    background: url('/static/img/back-img.d251409.png');
-  }
-</style>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.header-top{
+    height: 75px;
+    line-height: 75px;
+    background: #FFF;
+    box-shadow: 0px 0px 27px rgba(0,0,0,.1);
+}
+.header-top .logo{
+    text-align: left;
+}
+.header-top .logo img{
+     width: 40%;
+     margin-left: 20px;
+}
+.header-top .info{
+    font-weight: 700;
+    text-align: center;
+}
+.header-top .signOut, .header-top .toggle-language{
+    margin-left: 20px;
+}
+.header-top .notice{
+    margin-left: 0px;
+    font-size:1.3em;
+    text-decoration: none;
+    line-height: 10px;
+    position: relative;
+    top: 3px;
+}
+.header-top .notice .badge{
+    position: relative;
+    top: -10px;
+    left: -15px;
+    padding:3px 6px;
+    background: #EC5156;
+}
+.header-top .toggle-language button{
+    width: 100px;
+    background: #F6F6F6;
+    border:none;
+}
+.header-top .toggle-language button .caret{
+    margin-left:10px;
+}
+.header-top .dropdown-menu{
+    min-width: 100px;
+}
+.game{
+    margin-bottom: 0px
+}
+.game li{
+    display: inline-block;
+}
+.game li a{
+    width: 80px;
+    height: 52px;
+    display: inline-block;
+    line-height: 52px;
+    margin: 0px 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size:14px;
+    text-decoration: none;
+}
+.game li .active{
+    border-bottom: 2px #31AEB3 solid;
+}
+.back-block{
+  width: 100%;
+  background: #F5F5F5;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  margin-bottom:30px;
+}
 .backButton{
   position:relative;
   right: 300px;
@@ -48,27 +171,9 @@ export default {
 }
 .gameBg{
     min-height: 100%;
-    background: url(../assets/images/back-img.png);
+    background: #F5F5F5;
     letter-spacing: 0.5px;
-    color: #EC9530;
+    color: #44697A;
     text-align: center;
 }
-.back-block{
-  width: 100%;
-  background: #000;
-  border-bottom: 1px solid #333;
-  text-align: center;
-  margin-bottom:60px;
-}
-.back-block ul{
-  display: inline-block;
-  padding-top: 6px;
-  padding-left: 0;
-  margin-bottom: 0;
-}
-.back-block li{
-  float: left;
-}
-
-  
 </style>

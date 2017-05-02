@@ -206,18 +206,24 @@ var CnLanguage = {
 		runDescription:"绑定可获得每周运动2.5%收益",
 		ExchangePlatform:"愿力兑换平台",
 		ExchangePlatformDescription:"账号游戏币充值",
-		laserExchangePlatform:"激光兑换平台",
+		laserExchangePlatform:"极光兑换平台",
 		laserExchangePlatformDescription:"账号游戏币提现",
+		noBing:'未绑定',
+		yesBing:'已绑定'
+
 	},
 	// 修改安全支付密码
 	safetyPayment:{
 		changePassword:"修改安全支付密码",
 		changePassword1:"定期修改密码让账号更加安全",
-		changePassword2:"*请确保安全密码与登录密码不同",
-		changePassword3:"*建议采用6位以上字母大小写数字混编组合",
+		changePassword2:"请确保安全密码与登录密码不同",
+		changePassword3:"建议采用6位以上字母大小写数字混编组合",
 		oldpswd:"旧密码：",
+		oldpswdPrompt:'请输入您的当前密码',
 		newpswd:"新密码：",
+		newpswdPrompt:"请输入您要修改的密码",
 		newpswdAgain:"重复新密码：",
+		newpswdAgainPrompt:"请确认您的新密码"
 	},
 	// 设置支付密码
 	safetySetPay:{
@@ -228,7 +234,7 @@ var CnLanguage = {
 	},
 	// 登陆密码设置
 	safetySetWPwd: {
-		title: '登录密码设置',
+		title: '修改登陆密码',
 		oldPwdText: '旧密码',
 		newPwdText: '新密码',
 		newPwdAgainText: '重复新密码'
@@ -245,7 +251,7 @@ var CnLanguage = {
 	},
 	// 日志
 	log:{
-		operatingLog:"操作日志",
+		operatingLog:"登陆日志", // 改文本
 		time:"时间",
 		types:"类型",
 		loginIP:"登录IP",
@@ -262,10 +268,10 @@ var CnLanguage = {
 		accountMyProfile:"我的资料",
 		accountsafetyManagement:"安全管理",
 		accountBinding:"账户绑定",
-		accountPatmentManagement:"安全支付密码管理",
-		accountLoginManagement:"登录密码管理",
+		accountPatmentManagement:"安全支付密码",
+		accountLoginManagement:"登录密码",
 		accountlog:"账户日志",
-		operatingLog:"操作日志",
+		operatingLog:"操作日志", 
 	},
 	// 公共文本
 	publicText:{
@@ -283,6 +289,7 @@ var CnLanguage = {
 		ok: '确认',
 		off: '取消',
 		get:"获取",
+		preservation:'保存',
 		goGame:"进入游戏"
 	},
 	// 量词

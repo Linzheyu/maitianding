@@ -48,7 +48,9 @@ var myFn = {
 			// 验证安全密码
 			verifySafetyPassword: '/api/checksafepwd',
 			// 验证邮箱验证码
-			verifySafetyMail: '/api/checkemailcode'
+			verifySafetyMail: '/api/checkemailcode',
+			// 验证转账地址
+			verifyAddress:'/api/validateTransionAddr'
 		},
 		/*会员邀请码*/
 		inviteCode:{
@@ -124,7 +126,7 @@ var myFn = {
 		    type: type, //GET
 		    // async:true,    //或false,是否异步
 		    data:data,
-		    timeout:5000,    //超时时间
+		    timeout:20000,    //超时时间
 		    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
 		    success: function(res, textStatus, XMLHttpRequest){
 		    	setTimeout(function(){

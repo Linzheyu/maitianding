@@ -1,50 +1,58 @@
 
 <template>
-        <div class="col-md-10 col-sm-12 blog-main" style="margin-bottom:100px;">
-          <div class="row accountInfo">
-            <div class="col-md-5 right-border">
-              <div class="row">
-                <div class="col-md-3 col-sm-3">
-                  <li class="headImg">
-                    <img src="../assets/images/back-img.png">
-                  </li>
+        <div class="col-lg-10 col-md-10 col-sm-12 blog-main" style="margin-bottom:100px;">
+            <div class="row accountInfo">
+                <div class="col-md-5 right-border">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-3 headImg" >
+                            <img src="../assets/images/back-img.png">
+                        </div>
+                        <div class="col-lg-8 userInfo">
+
+                            <p><span>{{ greetings }}，{{userInfo.username}}</span></p>
+
+                            <p><span>ID：</span>{{userInfo.username}}</p>
+
+                            <p><span>{{$t("AccountManagement.loginTime")}}：</span>{{userInfo.login_time}}</p>
+
+                            <p><span>{{$t("AccountManagement.login")}}：</span>{{userInfo.ip_addr}}</p>
+
+                            <p>
+                                <span>{{$t("AccountManagement.loginAddress")}}：</span>
+                                {{userInfo.login_addr}}
+                                <a @click="goLog" class="color-red" style="margin-left: 10px;">{{$t("AccountManagement.loadMore")}}</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-9 col-sm-9">
-                  <li class="userInfo">
-                    <p>{{ greetings }}，{{userInfo.username}}</p>
-                    <p>{{$t("AccountManagement.loginTime")}}：{{userInfo.login_time}}</p>
-                    <p>{{$t("AccountManagement.login")}}：{{userInfo.ip_addr}}</p>
-                    <p>{{$t("AccountManagement.loginAddress")}}：{{userInfo.login_addr}} 
-                    <span @click="goLog" class="color-red" style="margin-left: 10px;">{{$t("AccountManagement.loadMore")}}</span></p>
-                  </li>
+                <div class="col-md-2 col-sm-4 right-border left-border food-balance">
+                    <p>{{$t("AccountManagement.grainBalance")}}</p>
+                    <p class="margin-tb color-red food-number" >{{userInfo.total_foods}}</p>
+                    <router-link to="/game/shop"><button>{{$t("AccountManagement.exchange")}}</button></router-link>
                 </div>
-              </div>
+                <div class="col-md-3 col-sm-4 right-border left-border gold-balance">
+                    <p>{{$t("AccountManagement.goldBalance")}}</p>
+                    <p class="margin-tb color-red gold-number">{{userInfo.total_currency}}</p>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#recharge" data-whatever="@mdo">{{$t("AccountManagement.recharge")}}</button>
+                    <a data-toggle="modal" data-target="#extractCurrency" data-whatever="@mdo">{{$t("AccountManagement.currency")}}</a>
+                    <a data-toggle="modal" data-target="#transferAccounts" data-whatever="@mdo">{{$t("AccountManagement.transferAccounts")}}</a>
+                </div>
+                <div class="col-md-2 col-sm-4 left-border card-balance" style="border:none;">                      
+                    <p>{{$t("AccountManagement.constellationCard")}}</p>
+                    <p class="margin-tb color-red card-number">3</p>
+                    <button>{{$t("AccountManagement.check")}}</button>
+                </div>
             </div>
-            <div class="col-md-2 col-sm-4 right-border left-border">
-              <p>{{$t("AccountManagement.grainBalance")}}</p>
-              <p class="margin-tb color-red">{{userInfo.total_foods}}</p>
-              <router-link to="/game/shop"><button>{{$t("AccountManagement.exchange")}}</button></router-link>
-            </div>
-            <div class="col-md-3 col-sm-4 right-border left-border">
-              <p>{{$t("AccountManagement.goldBalance")}}</p>
-              <p class="margin-tb color-red">{{userInfo.total_currency}}</p>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recharge" data-whatever="@mdo">{{$t("AccountManagement.recharge")}}</button>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#extractCurrency" data-whatever="@mdo">{{$t("AccountManagement.currency")}}</button>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferAccounts" data-whatever="@mdo">{{$t("AccountManagement.transferAccounts")}}</button>
-            </div>
-            <div class="col-md-2 col-sm-4 left-border">                      
-              <p>{{$t("AccountManagement.constellationCard")}}</p>
-              <p class="margin-tb color-red">3</p>
-              <button>{{$t("AccountManagement.check")}}</button>
-            </div>
-          </div>
+
 
           <div class="row address">
-            <p>{{$t("AccountManagement.accountAddress")}} <span class="remarks">({{$t("AccountManagement.accountAddressUse")}})</span></p>
-            <div class="col-md-10 col-sm-10">
+            <div class="col-lg-12">
+                <p> <span class="remarks">{{$t("AccountManagement.accountAddress")}}</span>({{$t("AccountManagement.accountAddressUse")}})</p>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-10">
               <input class="input-left" type="text" v-model="userInfo.transion_addr" id="copyUrlinput" readonly="" />
             </div>
-            <div class="col-md-2 col-sm-2">
+            <div class="col-lg-1 col-md-2 col-sm-2">
               <button class="input-right" type="text" @click="copyUrl">{{$t("AccountManagement.copy")}}</button>
             </div>
           </div>
@@ -63,16 +71,16 @@
             <div class="content" v-if="tabs.select==1">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-4 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateTime")}}</p></div>
-                  <div class="col-md-4 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateType")}}</p></div>
-                  <div class="col-md-4 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateNum")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateTime")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateType")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateNum")}}</p></div>
                 </div>
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[0].list">
-                  <div class="col-md-4 col-sm-4"><p v-html="item.time">2017-4-7 15:59</p></div>
-                  <div class="col-md-4 col-sm-4"><p v-html="item.type">10</p></div>
-                  <div class="col-md-4 col-sm-4"><p v-html="item.qnt">10</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.time">2017-4-7 15:59</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.type">10</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.qnt">10</p></div>
                 </div>
               </div>
             </div>
@@ -101,32 +109,32 @@
             <div class="content" v-if="tabs.select==3">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-4 col-sm-4"><p>{{$t("AccountManagement.rechargeTime")}}</p></div>
-                  <div class="col-md-4 col-sm-4"><p>{{$t("AccountManagement.rechargeNum")}}</p></div>
-                  <div class="col-md-4 col-sm-4"><p>{{$t("AccountManagement.rechargeSource")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.rechargeTime")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.rechargeNum")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.rechargeSource")}}</p></div>
                 </div>
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[2].list">
-                  <div class="col-md-4 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
-                  <div class="col-md-4 col-sm-4"><p v-html="item.money">20</p></div>
-                  <div class="col-md-4 col-sm-4"><p v-html="item.re_type" v-if="item.re_type == 1">{{ $t("platform.type1") }}</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.money">20</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.re_type" v-if="item.re_type == 1">{{ $t("platform.type1") }}</p></div>
                 </div>
               </div>
             </div>
             <div class="content" v-if="tabs.select==4">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-4 col-sm-4"><p>{{$t("AccountManagement.currencyTime")}}</p></div>
-                  <div class="col-md-4 col-sm-4"><p>{{$t("AccountManagement.currencyNum")}}</p></div>
-                  <div class="col-md-4 col-sm-4"><p>{{$t("AccountManagement.currencyWhere")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.currencyTime")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.currencyNum")}}</p></div>
+                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.currencyWhere")}}</p></div>
                 </div>
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[3].list">
-                  <div class="col-md-4 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
-                  <div class="col-md-4 col-sm-4"><p v-html="item.rev_money">20</p></div>
-                  <div class="col-md-4 col-sm-4"><p v-html="item.re_type" v-if="re_type == 2">{{ $t("platform.type2") }}</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.rev_money">20</p></div>
+                  <div class="col-md-2 col-sm-4"><p v-html="item.re_type" v-if="re_type == 2">{{ $t("platform.type2") }}</p></div>
                 </div>
               </div>
             </div>
@@ -134,7 +142,7 @@
             <div class="content" v-if="tabs.select==5">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-3 col-sm-3"><p>{{$t("AccountManagement.transferTime")}}</p></div>
+                  <div class="col-md-2 col-sm-3"><p>{{$t("AccountManagement.transferTime")}}</p></div>
                   <div class="col-md-2 col-sm-3"><p>{{$t("AccountManagement.transferNum")}}</p></div>
                   <div class="col-md-3 col-sm-3"><p>{{$t("AccountManagement.transferWhere")}}</p></div>
                   <div class="col-md-3 col-sm-3"><p>{{$t("AccountManagement.transferReasonTable")}}</p></div>
@@ -142,7 +150,7 @@
               </div>
               <div class="row" v-for="item in tabs.tabsObj[4].list">
                 <div class="row border-t border-b">
-                  <div class="col-md-3 col-sm-3"><p v-html="item.time"></p></div>
+                  <div class="col-md-2 col-sm-3"><p v-html="item.time"></p></div>
                   <div class="col-md-2 col-sm-3"><p v-html="item.money">20</p></div>
                   <div class="col-md-3 col-sm-3"><p v-html="item.money_adress">dsnainiodsa@wewqdd.com</p></div>
                   <div class="col-md-3 col-sm-3"><p v-html="item.remark">原因</p></div>
@@ -153,7 +161,7 @@
             <div class="content" v-if="tabs.select==6">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-3 col-sm-2"><p>{{ $t("AccountManagement.ProfitGoldTime")}}</p></div>
+                  <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.ProfitGoldTime")}}</p></div>
                   <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.ProfitGoldType")}}</p></div>
                   <div class="col-md-3 col-sm-3 "><p>{{ $t("AccountManagement.ProfitGoldSource")}}</p></div>
                   <div class="col-md-4 col-sm-3"><p>{{ $t("AccountManagement.ProfitGoldRemarks")}}</p></div>
@@ -162,7 +170,7 @@
               </div>
               <div class="row" v-for="item in tabs.tabsObj[5].list">
                 <div class="row border-t border-b">
-                  <div class="col-md-3 col-sm-2"><p v-html="item.crt_time"></p></div>
+                  <div class="col-md-2 col-sm-2"><p v-html="item.crt_time"></p></div>
                   <div class="col-md-2 col-sm-2"><p v-if="item.get_type == 1">{{ $t("AccountManagement.GoldProfitLogType") }}</p></div>
                   <div class="col-md-3 col-sm-3 "><p v-html="item.email"></p></div>
                   <div class="col-md-4 col-sm-3 "><p v-html="item.remark"></p></div>
@@ -187,12 +195,12 @@
               </div>
             </div>
     </div>
+
     <!--======================== 充值弹出框 ========================-->
     <div class="modal fade" id="recharge" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">{{$t("AccountManagement.goldrecharge")}}</h4>
             </div>
             <div class="modal-body">
@@ -202,8 +210,8 @@
                       <input type="text" class="form-control" id="recipient-name">
                     </div>
                     <div class="form-group">
-                      <label for="recipient-name" class="control-label">{{$t("AccountManagement.rechargeWay")}}</label>
-                      <li class="receiveForum">{{$t("AccountManagement.EexchangePlatform")}}</li>
+                      <label for="recipient-name" class="control-label">{{$t("AccountManagement.rechargeWay")}}:</label>
+                      <button class="receiveForum">{{$t("AccountManagement.EexchangePlatform")}}</button>
                     </div>
                 </form>
             </div>
@@ -217,12 +225,12 @@
           </div>
         </div>
     </div>
+
     <!--======================== 提币弹出框 ========================-->
     <div class="modal fade" id="extractCurrency" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">{{$t("AccountManagement.goldCurrency")}}</h4>
             </div>
             <div class="modal-body">
@@ -231,13 +239,13 @@
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.pleaseEnterTheAmountOfgold")}}</label>
                       <input type="text" class="form-control" id="recipient-name">
                       <div class="row fee">
-                        <div class="col-md-6 col-sm-6"><p>{{$t("AccountManagement.fee")}}<i>{{$t("AccountManagement.amount")}}</i></p></div>
-                        <div class="col-md-6 col-sm-6"><p>{{$t("AccountManagement.Thenumberofaccounts")}}:<i>{{$t("AccountManagement.actualamount")}}</i></p></div>
+                        <div class="col-md-12 col-sm-6"><p>{{$t("AccountManagement.fee")}}<i>5</i>{{$t("classifier.number")}}</p></div>
+                        <div class="col-md-12 col-sm-6"><p>{{$t("AccountManagement.Thenumberofaccounts")}}:<i>10</i>{{$t("classifier.number")}}</p></div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.getAccount")}}</label>
-                      <li class="receiveForum">{{$t("AccountManagement.EexchangePlatform")}}</li>
+                      <p>{{ $t("platform.type2") }}(1234879@qeveworld.com)</p>
                     </div>
                 </form>
             </div>
@@ -257,14 +265,13 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">{{$t("AccountManagement.goldtransferAccounts")}}</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.beneficiary")}}</label>
-                      <input v-model="giveGold.address" type="text" class="form-control">
+                      <input v-model="giveGold.address" type="text" class="form-control addressInput">
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.enterTransferAmountOfgold")}}</label>
@@ -272,15 +279,15 @@
                     </div>
                      <div class="form-group">
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.transferReason")}}</label>
-                      <input v-model="giveGold.remark" type="text" class="form-control">
+                      <textarea v-model="giveGold.remark"  name="" id="" cols="30" rows="10"></textarea>
                     </div>
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                       <label for="recipient-name" class="control-label">{{ $t('publicText.importmailEamil') }}:</label>
                       <input type="text" class="form-control" v-model="code.emailCode" style="border-radius: 4px 0px 0px 4px;">
                       <span class="input-group-btn" style="vertical-align: bottom;">
                         <button style="color: #EC9530;border-color: #EC9530;background: rgba(0,0,0,.5);"  class="btn btn-default"  type="button" @click="getCode">{{ $t("login.verificationCode")}}</button>
                       </span>
-                    </div>
+                    </div> -->
                 </form>
             </div>
             <div class="modal-footer">
@@ -304,6 +311,60 @@
             </div>
         </div>-->
     </div>
+
+    <!--======================== 安全支付密码 ========================-->
+    <div class="modal fade" id="payPwdPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">安全支付密码</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="control-label">请输入安全支付密码</label>
+                      <input v-model="giveGold.pay" type="password" class="form-control payInput">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <div class="btn-box">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{$t("publicText.off")}}</button>
+                  <button @click="verifySafetyPassword"  type="button" class="btn btn-primary">{{$t("publicText.ok")}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!--======================== 邮箱验证码 ========================-->
+    <div class="modal fade" id="emailCodePopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">安全支付密码</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <p>我们已经向您绑定的安全邮箱发送了验证消息</p>
+                    <p>请将收到的验证信息填入到输入框中</p>
+                    <div class="input-group">
+                      <input type="text" class="form-control" v-model="code.emailCode">
+                      <!-- <span class="input-group-btn" style="vertical-align: bottom;">
+                        <button style="color: #EC9530;border-color: #EC9530;background: rgba(0,0,0,.5);"  class="btn btn-default"  type="button" @click="getCode">{{ $t("login.verificationCode")}}</button>
+                      </span> -->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <div class="btn-box">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{$t("publicText.off")}}</button>
+                  <button @click="verifySafetyMail"  type="button" class="btn btn-primary">{{$t("publicText.ok")}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
    
   
@@ -411,6 +472,7 @@ export default {
         self.activeTab(1);
       });
 
+      // $("#emailCodePopup").modal('toggle');
   },
   computed:{
       pages:function(){
@@ -462,16 +524,56 @@ export default {
 
     },
 
+    // 转账
     transferAccounts: function(){
+      if (this.giveGold.address) {
+        alert('转账地址不能为空');
+        return false;
+      }
+
+      if (this.giveGold.num) {
+        alert('转账金额不能为空');
+        return false;
+      }
+
+      if (this.giveGold.remark) {
+        alert('转账原因不能为空');
+        return false;
+      }
+      var data = {
+        address : this.giveGold.address,
+      }
+      myFn.myAjax('post', data, myFn.apiAddress.accountSafety.verifyAddress, function(res){
+          $("transferAccounts").modal('toggle');
+          $("payPwdPopup").modal('toggle');
+      })
+    },
+    verifySafetyPassword: function(){
+      if(this.giveGold.pay == ''){
+        alert('支付密码不能为空');
+      }else{
+        myFn.myAjax('post', {pwd:this.giveGold.pay}, myFn.apiAddress.accountSafety.verifySafetyPassword, function(res){
+            $("payPwdPopup").modal('toggle');
+            $("emailCodePopup").modal('toggle');
+        })
+      }
+    },
+
+    verifySafetyMail: function(){
+      if(this.code.emailCode){
+        alert('邮箱验证码不能为空');
+        return false;
+      }
       var self = this;
       var data = {
         address : this.giveGold.address,
         num : this.giveGold.num,
-        remark: this.giveGold.remark
+        remark: this.giveGold.remark,
+        code:this.code.emailCode
       }
-      myFn.myAjax('get', data, myFn.apiAddress.game.transferGold, function(res){
+      myFn.myAjax('post', data, myFn.apiAddress.game.transferGold, function(res){
           alert( self.$t("staticMsg.msg002") );
-          $('#transferAccounts').modal('toggle');
+          $('#emailCodePopup').modal('toggle');
           self.userInfo.total_currency = res.data.totalmoney;
           localStorage.userinfo = JSON.stringify(self.userInfo);
       })
@@ -567,88 +669,118 @@ export default {
     .color-red{
       color: #e01b1b;      
     }
+    .exchange-term{
+      background: #F5F5F5;
+    }
 
   /*=======================  main Start Part-1  ======================== */
-    .blog-main{
-      padding-left: 30;
-      padding-right: 0;
-    }
+    
     .accountInfo{
       width: 100%;
-      border: 1px solid #272523;
       border-radius: 3px;
-      background: #1F1C1B;
+      background: #fff;
       padding: 20px 0;
+      padding-bottom: 30px;
+      font-size: 0.9em;
     }
     .accountInfo > div{
-      padding: 20px 0;
-    }
-    .accountInfo button{
-      width: 55px;
-      background: none;
-      border: 1px solid #EC9530;
-      border-radius: 3px;
-    }
-    .headImg{
-      text-align: left;
-    }
-    .headImg img{
-      width: 100px;
-      height: 100px;
-      margin-left: 10px;
-      border-radius: 50%;
+        height: 130px;
+        border-right: 1px #ccc solid;
     }
     .userInfo p{
-      padding-left: 30px;
-      margin-top: 5px;
-      text-align: left;
+        font-weight: 100;
+        padding-left: 10px;
+        text-align: left;
+        margin-bottom: 7px;
     }
+    .userInfo p span{
+        font-weight: 700;
+        color: #436D80;
+        display: inline-block;
+        min-width: 75px;
+    }
+    .headImg{
+      border-radius: 3px;
+      padding-right: 0px;
+      padding-left: 0px;
+      text-align: right;
+    }
+    
+    .headImg img{
+        width: 85%;
+    }
+
+    .food-balance,.gold-balance,.card-balance{
+        color: #436D80;
+        font-weight: 700; 
+    }
+    .food-number,.gold-number,.card-number{
+        font-size:30px;
+        color: #33AFB1;
+        font-weight: 100;
+    }
+    .food-balance a button,.gold-balance button,.card-balance button{
+        width: 70px;
+        height: 30px;
+        background: #ccc;
+        border: none;
+        border-radius: 2px;
+        font-weight: 100; 
+    }
+    .gold-balance a{
+        margin-left: 10px;
+        vertical-align: sub;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
     .margin-tb{
       margin: 15px 0;
     }
     /*========================  main Start Part-2 ========================*/
     .address{
       width: 100%;
-      border: 1px solid #272523;
-      border-radius: 3px;
-      background: #1F1C1B;
+      border-top: 1px #ccc solid;
+      background: #fff;
       padding: 20px 15px;
       text-align: left;
-      margin-top: 25px;
     }
     .remarks{
-      color: #837D7A;
+      color: #436D80;
+      font-weight: 700;
     }
     .address > div {
       padding-left: 0;
     }
     .input-left,.input-right{
       width: 100%;
-      margin-top: 20px;
-      text-align: center;
-      background: transparent;
-      border:1px #EC9530 solid;
-      height: 30px;
-      border-radius: 3px;
+      border:1px #ccc solid;
+      height: 40px;
+      border-radius: 2px;
     }
     .input-left{
-      border:1px #837D7A solid
+        height: 40px;
+        padding-left: 20px;
+        border:1px #837D7A solid;
+        border:1px #ccc solid;
+        background: #F5F5F5;
     }
     /*========================  main Start Part-3 ========================*/
     .record{
       width: 100%;
-      border: 1px solid #272523;
+      margin-top: 15px;
       border-radius: 3px;
-      background: #1F1C1B;
+      background: #fff;
       padding:0;
       text-align: left;
-      margin-top: 25px;
     }
     .record-list{
       width: 100%;
       height: 42px;
+      font-size: 15px;
       margin-bottom: 0;
       padding-left: 0;
+      border-bottom: 1px #ccc solid;
     }
     .record-list li{
       width: 16%;
@@ -660,15 +792,16 @@ export default {
       height: 100%;
       line-height: 42px;
       display: inline-block;
-      color: #837D7A;
+      color: #436D80;
     }
     .on-active{
-      color: #EC9530!important;
-      border-bottom: 1px solid #EC9530;
+      font-weight: 700;
+      border-bottom: 2px solid #30ADB3;
     }
     .back-color{
-      background: #161413;
+      background: #fff;
     }
+
     .content{
       padding-bottom: 20px;
       text-align: center;
@@ -680,11 +813,11 @@ export default {
       padding: 0 30px; 
     }
     .content > .row > .row{
-      padding: 15px 0; 
-    }
-    .exchange-term{
-      color: #EC9530;
-      font-size: 16px;
+      margin: 15px 0;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 700;
+      font-size: 15px;
     }
     .pageList{
       margin: auto;
@@ -701,40 +834,83 @@ export default {
     }
     /* ======================== 弹出框基础样式 ======================== */
     .modal-dialog{
-      color: #EC9530;
-      margin-top: 5%;
+      width: 350px;
+      color: #436D80;
+      margin-top: 8%;
       text-align: left;
+    }
+    .modal-header{
+        width: 80%;
+        margin:auto;
+        margin-top: 10px;
+        border-bottom: 1px #ccc solid;
+    }
+    .modal-header h4{
+        color: #2BACB8 !important;
+        font-weight: 700;
     }
     .modal-dialog .modal-header{
       text-align: center;
-      background: #161413;
-      border-color: #090808;
+      background: #fff;
+      margin-bottom: 10px;
     }
     .modal-dialog .modal-header .close{
       color: #EC9530;
     }
     .modal-dialog .modal-content{
-      border: 1px solid #272523;
-      background: #1F1C1B;
+      background: #fff;
     }
     .modal-dialog .modal-body{
       padding-top: 0px;
-      border-top: 1px solid #2B2725;
+      width: 90%;
+      margin:auto;
+    }
+    #emailCodePopup p{
+      font-size: 13px;
+      margin: 15px 0px;
+    }
+    #emailCodePopup input{
+      width: 100%;
+      border-radius: 0px;
+    }
+    .modal-dialog .modal-body .form-group .payInput{
+      letter-spacing: 20px;
+      height: 50px;
+      font-size: 1.3em;
+    }
+    .modal-dialog .modal-body .form-group .addressInput{
+      color: #436D80;
+      font-size: 14px;
+      height: 30px;
+    }
+    .modal-dialog .modal-body .form-group textarea{
+      width: 100%;
+      height: 100px;
+      border:1px #ccc solid;
+      padding:10px;
     }
     .modal-dialog .modal-body .form-group{
-      margin-top: 15px;
-      padding: 10px 0;
+      margin-bottom: 0px;
+      padding-top: 10px;
     }
     .modal-dialog .modal-body .form-group .control-label{
       margin-bottom: 10px;
+      font-weight: 100;
+      font-size: 0.9em;
     }
     .modal-dialog .modal-body input{
-      color: #ccc;
+      height: 45px;
+      font-size: 30px;
+      color: #2BACB8;
       background: none;
-      border: 1px solid #EC9530;
+      border: 1px solid #ccc;
+      border-radius:0px;
+      box-shadow: none;
+      margin-bottom: 5px;
     }
     .modal-dialog .modal-footer{
-      text-align: center;
+      width: 95%;
+      text-align: right;
       border: none;
       padding-top: 0;
       padding-bottom: 30px; 
@@ -744,32 +920,49 @@ export default {
       margin: auto;
     }
     .modal-dialog .modal-footer .btn-box button{
-      background: none;
+      background: transparent;
       width: 80px;
       height: 34px;
-      border-color: #EC9530;
-      border-radius: 5px;
-      color: #EC9530;
+      border:none;
+      border-radius: 0px;
+      color: #2BACB8;
       text-align: center;
-      margin: 0 20px;
+    }
+    .modal-dialog .modal-footer .btn-box button:last-child{
+        color: #fff;
+        background: #2BACB8;
     }
     .modal-dialog .modal-footer .btn-box button:hover{
       color: #ccc;
     }
     /*========================  充值/提币 弹出框  ========================*/
     .fee{
-      padding-top: 30px;
-      text-align: center;
+      padding-top: 15px;
+      text-align: left;
+      font-size: 0.9em;
+    }
+    .fee p {
+        margin-bottom: 5px;
+    }
+    .fee i {
+        color: #2BACB8;
+        margin:0px 5px;
+        font-size: 15px;
     }
     .receiveForum{
-      width: auto;
+      width: 120px;
       height: 34px;
+      font-size: 0.9em;
+      display: block;
+      background: transparent;
+      text-align: center;
       color: #ccc;
-      background: #131111;
-      border-radius: 5px;
-      text-align: left;
+      border:1px #ccc solid;
+      border-radius: 2px;   
       line-height: 34px;
-      text-indent: 15px;
+    }
+    .modal-title{
+        font-size: 15px;
     }
     /*========================  触发弹出框的点击按钮  ========================*/
     .btn-primary{

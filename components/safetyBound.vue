@@ -3,19 +3,19 @@
 	<div class="col-md-10 col-sm-12 blog-main">
 				
 				<div class="row record">
-					<div class="back-color border-b">
-						<ul class="record-list">
-							<p class="part-title">{{$t("safetyBound.accountBinding")}}</p>
-						</ul>	
+					<div class="back-color">
+						<div class="record-list">
+							<p class="part-title"><i class="glyphicon glyphicon-resize-small"></i>{{$t("safetyBound.accountBinding")}}</p>
+						</div>	
 					</div>
 					<div class="content border-t">
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
-								<div class="row border-b padding-t-30 padding-b-30">
+								<div class="row platform-type">
 									<div class="col-md-3 col-sm-3 left">
-										<img src="#333"><span>{{$t("safetyBound.safeMailbox")}}</span>
+										<i class=""></i><span>{{$t("safetyBound.safeMailbox")}}</span>
 									</div>
-									<div class="col-md-7 col-sm-7 center">
+									<div class="col-md-7 col-sm-7 left">
 										<p>{{$t("safetyBound.safeMailboxDescription")}}</p>
 									</div>
 									<div class="col-md-2 col-sm-2 right">
@@ -29,11 +29,11 @@
 					<div class="content">
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
-								<div class="row border-t border-b padding-t-30 padding-b-30">
+								<div class="row border-t platform-type">
 									<div class="col-md-3 col-sm-3 left">
-										<img src="#333"><span>{{$t("safetyBound.run")}}</span>
+										<i class=""></i><span>{{$t("safetyBound.run")}}</span>
 									</div>
-									<div class="col-md-7 col-sm-7 center">
+									<div class="col-md-7 col-sm-7 left">
 										<p>{{$t("safetyBound.runDescription")}}</p>
 									</div>
 									<div class="col-md-2 col-sm-2 right">
@@ -46,11 +46,11 @@
 					<div class="content">
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
-								<div class="row border-t border-b padding-t-30 padding-b-30">
+								<div class="row border-t platform-type">
 									<div class="col-md-3 col-sm-3 left">
-										<img src="#333"><span>{{$t("safetyBound.ExchangePlatform")}}</span>
+										<i class=""></i><span>{{$t("safetyBound.ExchangePlatform")}}</span>
 									</div>
-									<div class="col-md-7 col-sm-7 center">
+									<div class="col-md-7 col-sm-7 left">
 										<p>{{$t("safetyBound.ExchangePlatformDescription")}}</p>
 									</div>
 									<div class="col-md-2 col-sm-2 right">
@@ -63,11 +63,11 @@
 					<div class="content">
 						<div class="row">
 							<div class="col-md-12 col-sm-12">
-								<div class="row border-t border-b padding-t-30 padding-b-30">
+								<div class="row border-t platform-type" style="border:none;">
 									<div class="col-md-3 col-sm-3 left">
-										<img src="#333"><span>{{$t("safetyBound.laserExchangePlatform")}}</span>
+										<i class=""></i><span>{{$t("safetyBound.laserExchangePlatform")}}</span>
 									</div>
-									<div class="col-md-7 col-sm-7 center">
+									<div class="col-md-7 col-sm-7 left">
 										<p>{{$t("safetyBound.laserExchangePlatformDescription")}}</p>
 									</div>
 									<div class="col-md-2 col-sm-2 right">
@@ -131,9 +131,9 @@ export default {
 		}
 		/*=======================  main Start Part-1  ======================== */
 		.blog-main{
-			padding-left: 30;
 			padding-right: 0;
 			margin-bottom: 60px;
+
 		}
 		.accountInfo{
 			width: 100%;
@@ -150,25 +150,34 @@ export default {
 		/*========================  main Start Part-3 & Part-2 ========================*/
 		.record{
 			width: 100%;
-			border: 1px solid #272523;
+			min-height: 550px;
 			border-radius: 3px;
-			background: #1F1C1B;
+			background: #fff;
 			padding:0;
 			text-align: left;
-			color: #EC9530;
+			color: #436672;
+		}
+		.platform-type{
+			width: 100%;
+			margin: auto;
+			height: 40px;
+			color: #23527c;	
+			line-height: 40px;
+			border-bottom: 1px #f3f3f3 solid;
 		}
 		.record-list{
-			width: 100%;
-			height: 42px;
-			margin-bottom: 0;
+			width: 92%;
+			margin: auto;
 			padding-left: 0;
+			margin-bottom: 30px;
+			border-bottom: 1px #ccc solid;
 		}
 		.on-active{
 			color: #EC9530!important;
 			border-bottom: 1px solid #EC9530;
 		}
 		.back-color{
-			background: #161413;
+			background: #fff;
 		}
 		.content{
 			text-align: center;
@@ -180,15 +189,17 @@ export default {
 			padding: 0 30px; 
 		}
 		.part-title{
-			font-size: 16px;
-			text-align: center;
-			padding-top: 7px;
+			width: 90px;
+			font-size: 15px;
+			text-align: left;
+			margin-bottom: 0px;
+			padding-top: 20px;
+			padding-bottom: 7px;
+			border-bottom: 3px #30ADB3 solid;
 		}
-		.padding-t-30{
-			padding-top: 30px;
-		}
-		.padding-b-30{
-			padding-bottom: 30px;
+		.part-title i{
+			color: #30ADB3;
+			margin-right: 10px;
 		}
 		.left{
 			text-align: left;
@@ -197,13 +208,6 @@ export default {
 			width: 60px;
 			height: 60px;
 			margin-right: 20px;
-		}
-		.center p{
-			margin-top: 20px;
-			color: #837D7A;
-		}
-		.right p{
-			margin-top: 20px;
 		}
 		.red{
 			color: red;

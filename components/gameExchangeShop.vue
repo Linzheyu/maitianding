@@ -4,23 +4,23 @@
       <!-- 导航 -->   
       <div class="container">
         <div class="box1">
-          <div class="row title border-b"><p>{{ $t("gameShop.exchangeTopTitle") }}</p></div>
-          <div class="row content border-t">
-            <div class="col-md-6 right-border  border-b"><p>{{ $t("gameShop.exchangeRatio") }}：{{proportion}}</p></div>
-            <div class="col-md-6 left-border  border-b"><p>{{ $t("gameShop.factorage") }}：{{counterFee}} {{ $t("classifier.number") }}</p></div>
+          <div class="row title"><p>{{ $t("gameShop.exchangeTopTitle") }}</p></div>
+          <div class="row content ">
+            <div class="col-md-5 col-md-offset-1  border-b"><p>{{ $t("gameShop.exchangeRatio") }}：{{proportion}}</p></div>
+            <div class="col-md-5  border-b"><p>{{ $t("gameShop.factorage") }}：{{counterFee}} {{ $t("classifier.number") }}</p></div>
           </div>
           <div class="row content">
-            <div class="col-md-6 right-border border-t border-b"><p>{{ $t("gameShop.usableFood") }}：<span v-html="userInfo.total_foods"></span></p></div>
-            <div class="col-md-6 left-border border-t border-b"><p>{{ $t("gameShop.expendFood") }}：{{expenditure}}</p></div>
+            <div class="col-md-5  col-md-offset-1  border-b"><p>{{ $t("gameShop.usableFood") }}：<span v-html="userInfo.total_foods"></span></p></div>
+            <div class="col-md-5  border-b"><p>{{ $t("gameShop.expendFood") }}：{{expenditure}}</p></div>
           </div>
           <div class="row content">
-            <div class="col-md-6 right-border border-t border-b">
-              <p>{{ $t("gameShop.exchangeNumber") }}：<input min="10" v-model="exchangeNum" @input="inputNum" type="number"></p>
+            <div class="col-md-5  col-md-offset-1  border-b">
+              <p style="margin-bottom:5px;">{{ $t("gameShop.exchangeNumber") }}：<input min="10" oninput="this.value=this.value.replace(/\D/g,'')" v-model="exchangeNum" @input="inputNum" type="number"></p>
             </div>
-            <div class="col-md-6 left-border border-t border-b"><p>{{ $t("gameShop.acquireGold") }}：{{getGold}}</p></div>
+            <div class="col-md-5  border-b"><p>{{ $t("gameShop.acquireGold") }}：{{getGold}}</p></div>
           </div>
           <div class="row sure-btn">
-            <div class="border-t">
+            <div class="">
               <button @click="submitExchange">{{ $t("gameShop.exchangeOk") }}</button>
             </div>
             
@@ -29,22 +29,22 @@
 
         <div class="box1">
           <div class="row title border-b"><p>{{ $t("gameShop.otherRecordTitle") }}</p></div>
-          <div class="row content border-t">
-            <div class="col-md-3 right-border border-b"><p>{{ $t("gameShop.otherRecordTime") }}</p></div>
-            <div class="col-md-3 right-border left-border border-b"><p>{{ $t("gameShop.otherRecordRatio") }}</p></div>
-            <div class="col-md-3 right-border left-border border-b"><p>{{ $t("gameShop.otherRecordNumber") }}</p></div>
-            <div class="col-md-3 left-border border-b"><p>{{ $t("gameShop.otherRecordGetGold") }}</p></div>
+          <div class="row content ">
+            <div class="col-md-3 list-head "><p>{{ $t("gameShop.otherRecordTime") }}</p></div>
+            <div class="col-md-3 list-head "><p>{{ $t("gameShop.otherRecordRatio") }}</p></div>
+            <div class="col-md-3 list-head "><p>{{ $t("gameShop.otherRecordNumber") }}</p></div>
+            <div class="col-md-3 list-head "><p>{{ $t("gameShop.otherRecordGetGold") }}</p></div>
           </div>
           <div class="row content" v-for="item in otherList">
-            <div class="border-t">
-              <div class="col-md-3 right-border border-b"><p v-html="item.time">2017-4-5</p></div>
-              <div class="col-md-3 right-border left-border border-b"><p v-html="item.sale_ratio">2：1</p></div>
-              <div class="col-md-3 right-border left-border border-b"><p v-html="item.rev_sale_count">300</p></div>
-              <div class="col-md-3 left-border border-b"><p v-html="item.money">150</p></div>
+            <div>
+              <div class="col-md-3  border-b"><p v-html="item.time">2017-4-5</p></div>
+              <div class="col-md-3  border-b"><p v-html="item.sale_ratio">2：1</p></div>
+              <div class="col-md-3  border-b"><p v-html="item.rev_sale_count">300</p></div>
+              <div class="col-md-3 border-b"><p v-html="item.money">150</p></div>
             </div>
           </div>
           <div class="row sure-btn">
-            <div class="border-t">
+            <div>
                 <ul class="pagination" >
                     <li v-show="current != 1" @click="current-- && goto(current)" ><a>{{ $t('page.previousPage') }}</a></li>
                     <li v-for="index in pages" @click="goto(index)" :class="{'active':current == index}" :key="index">
@@ -202,68 +202,67 @@ export default {
 <style scoped>
 
 .box1{
-  border: 1px solid #383432;
   border-radius: 3px;
   padding: 0 15px;
   margin-bottom: 40px;
 }
 .title{
   text-align: center;
-  background: #161413;
+  font-size: 1.1em;
+  font-weight: 700;
+  background: #fff;
   height: 48px;
   line-height: 48px;
-  border-radius: 3px;
+  border-radius: 3px 3px 0px 0px;
+}
+.list-head{
+  background: #F5F5F5;
+  margin-top:15px;
+  padding: 5px 0px;
+}
+.list-head p {
+  margin:5px 0px;
 }
 .content{
   padding: 10px 15px;
-  background: #1F1C1B;
+  background: #fff;
   padding-top: 0;
   padding-bottom: 0;
 }
-.col-md-6{
-  padding: 15px 0;
+.col-md-5{
+  padding: 10px 0;
+  background: #F5F5F5;
 }
-.col-md-3{
-  padding: 15px 0;
-}
-.right-border p{
-  border-right: 1px dashed #090808;
-  margin-bottom: 0px;
-}
-.left-border p{
-  border-left: 1px dashed #2B2725;
-   margin-bottom: 0px;
-}
+
 span{
   color: red;
 }
 input{
-  width: 60px;
-  height: 20px;
-  background: #1F1C1B;
-  border: 1px solid #EC9530;
-  border-radius: 3px;
+  width: 80px;
+  height: 25px;
+  background: #fff;
+  border:none;
+  border-radius: 1px;
   text-indent: 2px;
 }
 input:focus{
   border-color: #EC9530!important;
 }
-.border-t{
-  border-top: 1px solid #2B2725;
-}
+
 .border-b{
-  border-bottom: 1px solid #090808;
+  border-bottom: 1px solid #e9e9e9;
 }
 .sure-btn{
-  background: #1F1C1B;
+  background: #fff;
   height: 80px;
   padding: 0 15px;
 }
 button{
   width: 120px;
   height: 40px;
-  background: #1F1C1B;
-  border: 1px solid #EC9530;
+  background: #33AFB1;
+  color: #fff;
+  border:none;
   border-radius: 3px;
   margin-top: 20px;
 }

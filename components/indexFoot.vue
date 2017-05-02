@@ -1,11 +1,11 @@
 
 <template>
-  <div class="indexfoot">
+  <!-- <div class="indexfoot">
     <div class="bqxx">
         <p>www.maitianding.com</p>
         <p>Her-mest@qeverworld.com&nbsp&nbsp&nbsp&nbspcopyright 2017-4-2</p>
       </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

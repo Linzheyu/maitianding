@@ -2,38 +2,26 @@
 <template>
   <div class="index">
       <!-- 导航 -->
-      <div class="container">       
+      <div>       
           <nav class="navbar navbar-default">
               <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <!-- <a class="   .navbar-brand{
-  
-                    } logo" href="#" style="padding-top:0px;"> <img src="../assets/images/logo.png" alt=""></a>
-                    <span style="border-right: 1px solid rgb(255, 255, 255);margin: 10px 15px;display: inline-block;width: 1px;height: 30px;"></span> -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" style="margin-right: 50px;">
-                      <img style="width: 80%;margin:auto;" src="../assets/images/logo.png" alt="">
+
+                <!-- <div class="navbar-header">
+                    <a class="navbar-brand" style="margin-left: 20px;">
+                      <img style="width: 80%;margin:auto;" src="../assets/images/mtdLogo.png" alt="">
                     </a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                </div> -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+                    <!-- <ul class="nav navbar-nav">
                       <li><router-link to="/index" activeClass="activeNav">{{ $t("nav.home") }}</router-link></li>
                       <li><router-link to="/news"  activeClass="activeNav">{{ $t("nav.news") }}</router-link></li>
                       <li>
                         <router-link to="/notice"  activeClass="activeNav">{{ $t("nav.notice") }}</router-link></li>
-                        <!-- <a href="#"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publicmsg" data-whatever="@mdo">{{ $t("nav.notice") }}</button></a></li> -->
                       <li><router-link to="/aboutUs" activeClass="activeNav">{{ $t("nav.about") }}</router-link></li>
                       <li v-if="userinfo.email"><a @click="goGame">{{ $t("nav.game") }}</a></li>
-                    </ul>
+                    </ul> -->
                     <ul class="nav navbar-nav navbar-right">
-                      <li style="margin-top: 15px;margin-right: 20px; color: #fff" v-if="userinfo.email">
+                      <!-- <li style="margin-top: 15px;margin-right: 20px; color: #fff" v-if="userinfo.email">
                         {{ $t("publicText.welcomes") }}, {{userinfo.email }}
                       </li>
                       <li class="login" v-if="userinfo.email">
@@ -44,17 +32,17 @@
                       </li>
                       <li class="register" v-if="!userinfo.email">
                         <button style="background: red;color: #fff;border-color:red" type="button" class="btn" data-toggle="modal" data-target="#exampleModalRegister" data-whatever="@mdo">{{ $t("nav.register") }}</button>
-                      </li>
-                      <li class="dropdown">
+                      </li> -->
+                      <!-- <li class="dropdown">
                         <a style="padding-left: 10px" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $t("nav.language")  }}<span class="caret"></span></a>
                         <ul class="dropdown-menu" >
                             <li><a @click="cutLanguage('cn')">{{ $t("nav.Chinese")  }}</a></li>
                             <li><a @click="cutLanguage('en')">{{ $t("nav.English")  }}</a></li>
                           </ul>
-                      </li>
+                      </li> -->
                     </ul>
-                </div><!-- /.navbar-collapse -->
-              </div><!-- /.container-fluid -->
+                </div>
+              </div>
           </nav>
          
           <!-- Login -->
@@ -592,7 +580,6 @@ export default {
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  
   .activeNav{
     color: #fff !important;
   }
@@ -601,11 +588,15 @@ export default {
     font-size: 2em;
   }
   .navbar{
-      margin-top: 10px;
+      padding-top: 10px;
       border: none;
       background: transparent;
     }
-
+    .navbar-default {
+        position: absolute;
+        top: 1px;
+        z-index: 9
+    }
     .navbar-default .navbar-nav > li > a{
       margin-right: 5px;
       color: #c3c4c5;
