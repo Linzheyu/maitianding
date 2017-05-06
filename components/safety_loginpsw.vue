@@ -104,7 +104,7 @@ export default {
 		display: inline-block;
 		vertical-align: sub;
 		margin-right: 7px;
-		background-position: 21px 78px !important;
+		background-position: 55px 33px !important;
 	}
 	.on-active{
 		color: #EC9530!important;

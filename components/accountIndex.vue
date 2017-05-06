@@ -5,7 +5,7 @@
                 <div class="col-md-5 right-border">
                     <div class="row">
                         <div class="col-lg-4 col-md-3 col-sm-3 headImg" >
-                            <img src="../assets/images/back-img.png">
+                            <!-- <img src="../assets/images/back-img.png"> -->
                         </div>
                         <div class="col-lg-8 userInfo">
 
@@ -33,9 +33,9 @@
                 <div class="col-md-3 col-sm-4 right-border left-border gold-balance">
                     <p>{{$t("AccountManagement.goldBalance")}}</p>
                     <p class="margin-tb color-red gold-number">{{userInfo.total_currency}}</p>
-                    <button type="button" class="btn" data-toggle="modal" data-target="#recharge" data-whatever="@mdo">{{$t("AccountManagement.recharge")}}</button>
-                    <a data-toggle="modal" data-target="#extractCurrency" data-whatever="@mdo">{{$t("AccountManagement.currency")}}</a>
-                    <a data-toggle="modal" data-target="#transferAccounts" data-whatever="@mdo">{{$t("AccountManagement.transferAccounts")}}</a>
+                    <!-- <button type="button" class="btn" data-toggle="modal" data-target="#recharge" data-whatever="@mdo">{{$t("AccountManagement.recharge")}}</button> -->
+                    <button data-toggle="modal" data-target="#extractCurrency" data-whatever="@mdo">{{$t("AccountManagement.currency")}}</button>
+                    <button data-toggle="modal" data-target="#transferAccounts" data-whatever="@mdo">{{$t("AccountManagement.transferAccounts")}}</button>
                 </div>
                 <div class="col-md-2 col-sm-4 left-border card-balance" style="border:none;">                      
                     <p>{{$t("AccountManagement.constellationCard")}}</p>
@@ -71,14 +71,14 @@
             <div class="content" v-if="tabs.select==1">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-2 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateTime")}}</p></div>
+                  <div class="col-md-3 col-sm-6"><p>{{ $t("AccountManagement.foodTranslateTime")}}</p></div>
                   <div class="col-md-2 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateType")}}</p></div>
                   <div class="col-md-2 col-sm-4"><p>{{ $t("AccountManagement.foodTranslateNum")}}</p></div>
                 </div>
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[0].list">
-                  <div class="col-md-2 col-sm-4"><p v-html="item.time">2017-4-7 15:59</p></div>
+                  <div class="col-md-3 col-sm-4"><p v-html="item.time">2017-4-7 15:59</p></div>
                   <div class="col-md-2 col-sm-4"><p v-html="item.type">10</p></div>
                   <div class="col-md-2 col-sm-4"><p v-html="item.qnt">10</p></div>
                 </div>
@@ -87,9 +87,9 @@
             <div class="content" v-if="tabs.select==2">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.exchangeTime" )}}</p></div>
+                  <div class="col-md-3 col-sm-2"><p>{{ $t("AccountManagement.exchangeTime" )}}</p></div>
                   <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.exchangeGrainQuantity" )}}</p></div>
-                  <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.exchangeProportion" ) }}</p></div>
+                  <div class="col-md-1 col-sm-2"><p>{{ $t("AccountManagement.exchangeProportion" ) }}</p></div>
                   <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.exchangeRate" ) }}</p></div>
                   <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.convertTheGoldCoins" )}}</p></div>
                   <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.exchangeGetGold" )}}</p></div>
@@ -97,9 +97,9 @@
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[1].list">
-                  <div class="col-md-2 col-sm-2"><p v-html="item.time">2017-4-7 15:59</p></div>
+                  <div class="col-md-3 col-sm-2"><p v-html="item.time">2017-4-7 15:59</p></div>
                   <div class="col-md-2 col-sm-2"><p v-html="item.sale_count">20</p></div>
-                  <div class="col-md-2 col-sm-2"><p v-html="item.sale_ratio">20</p></div>
+                  <div class="col-md-1 col-sm-2"><p v-html="item.sale_ratio">20</p></div>
                   <div class="col-md-2 col-sm-2"><p v-html="item.ex_ratio">20</p></div>
                   <div class="col-md-2 col-sm-2"><p v-html="item.rev_sale_count">20</p></div>
                   <div class="col-md-2 col-sm-2"><p v-html="item.money">10</p></div>
@@ -109,14 +109,14 @@
             <div class="content" v-if="tabs.select==3">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.rechargeTime")}}</p></div>
+                  <div class="col-md-3 col-sm-4"><p>{{$t("AccountManagement.rechargeTime")}}</p></div>
                   <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.rechargeNum")}}</p></div>
                   <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.rechargeSource")}}</p></div>
                 </div>
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[2].list">
-                  <div class="col-md-2 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
+                  <div class="col-md-3 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
                   <div class="col-md-2 col-sm-4"><p v-html="item.money">20</p></div>
                   <div class="col-md-2 col-sm-4"><p v-html="item.re_type" v-if="item.re_type == 1">{{ $t("platform.type1") }}</p></div>
                 </div>
@@ -125,14 +125,14 @@
             <div class="content" v-if="tabs.select==4">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.currencyTime")}}</p></div>
+                  <div class="col-md-3 col-sm-4"><p>{{$t("AccountManagement.currencyTime")}}</p></div>
                   <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.currencyNum")}}</p></div>
                   <div class="col-md-2 col-sm-4"><p>{{$t("AccountManagement.currencyWhere")}}</p></div>
                 </div>
               </div>
               <div class="row">
                 <div class="row border-t border-b" v-for="item in tabs.tabsObj[3].list">
-                  <div class="col-md-2 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
+                  <div class="col-md-3 col-sm-4"><p v-html="item.crt_time">2017-4-7 15:59</p></div>
                   <div class="col-md-2 col-sm-4"><p v-html="item.rev_money">20</p></div>
                   <div class="col-md-2 col-sm-4"><p v-html="item.re_type" v-if="re_type == 2">{{ $t("platform.type2") }}</p></div>
                 </div>
@@ -142,7 +142,7 @@
             <div class="content" v-if="tabs.select==5">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-2 col-sm-3"><p>{{$t("AccountManagement.transferTime")}}</p></div>
+                  <div class="col-md-3 col-sm-3"><p>{{$t("AccountManagement.transferTime")}}</p></div>
                   <div class="col-md-2 col-sm-3"><p>{{$t("AccountManagement.transferNum")}}</p></div>
                   <div class="col-md-3 col-sm-3"><p>{{$t("AccountManagement.transferWhere")}}</p></div>
                   <div class="col-md-3 col-sm-3"><p>{{$t("AccountManagement.transferReasonTable")}}</p></div>
@@ -150,7 +150,7 @@
               </div>
               <div class="row" v-for="item in tabs.tabsObj[4].list">
                 <div class="row border-t border-b">
-                  <div class="col-md-2 col-sm-3"><p v-html="item.time"></p></div>
+                  <div class="col-md-3 col-sm-3"><p v-html="item.time"></p></div>
                   <div class="col-md-2 col-sm-3"><p v-html="item.money">20</p></div>
                   <div class="col-md-3 col-sm-3"><p v-html="item.money_adress">dsnainiodsa@wewqdd.com</p></div>
                   <div class="col-md-3 col-sm-3"><p v-html="item.remark">原因</p></div>
@@ -161,7 +161,7 @@
             <div class="content" v-if="tabs.select==6">
               <div class="row">
                 <div class="row border-b exchange-term">
-                  <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.ProfitGoldTime")}}</p></div>
+                  <div class="col-md-3 col-sm-2"><p>{{ $t("AccountManagement.ProfitGoldTime")}}</p></div>
                   <div class="col-md-2 col-sm-2"><p>{{ $t("AccountManagement.ProfitGoldType")}}</p></div>
                   <div class="col-md-3 col-sm-3 "><p>{{ $t("AccountManagement.ProfitGoldSource")}}</p></div>
                   <div class="col-md-4 col-sm-3"><p>{{ $t("AccountManagement.ProfitGoldRemarks")}}</p></div>
@@ -170,15 +170,16 @@
               </div>
               <div class="row" v-for="item in tabs.tabsObj[5].list">
                 <div class="row border-t border-b">
-                  <div class="col-md-2 col-sm-2"><p v-html="item.crt_time"></p></div>
-                  <div class="col-md-2 col-sm-2"><p v-if="item.get_type == 1">{{ $t("AccountManagement.GoldProfitLogType") }}</p></div>
+                  <div class="col-md-3 col-sm-2"><p v-html="item.time"></p></div>
+                  <!-- <div class="col-md-2 col-sm-2"><p v-if="item.get_type == 1">{{ $t("AccountManagement.GoldProfitLogType") }}</p></div> -->
+                  <div class="col-md-2 col-sm-2"><p v-html="item.get_type">{{ $t("AccountManagement.GoldProfitLogType") }}</p></div>
                   <div class="col-md-3 col-sm-3 "><p v-html="item.email"></p></div>
                   <div class="col-md-4 col-sm-3 "><p v-html="item.remark"></p></div>
                 </div>
               </div>
             </div>
 
-            <p style="text-align: center;padding:20px 0px;margin-right: 30px;" v-show="allpage<1">无更多数据</p>
+            <p style="text-align: center;padding:20px 0px;margin-right: 30px;" v-show="allpage<1">{{ $t("AccountManagement.pageNoData")}}</p>
 
             <!-- 分页 -->
             <div class="content" v-show="allpage.length>1">
@@ -237,22 +238,22 @@
                 <form>
                     <div class="form-group">
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.pleaseEnterTheAmountOfgold")}}</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <input @input="calculationCost" type="text" class="form-control" id="recipient-name" v-model="currency.num">
                       <div class="row fee">
-                        <div class="col-md-12 col-sm-6"><p>{{$t("AccountManagement.fee")}}<i>5</i>{{$t("classifier.number")}}</p></div>
-                        <div class="col-md-12 col-sm-6"><p>{{$t("AccountManagement.Thenumberofaccounts")}}:<i>10</i>{{$t("classifier.number")}}</p></div>
+                        <div class="col-md-12 col-sm-6"><p>{{ $t("AccountManagement.fee")}}(<span v-html="currency.feeProportion"></span>%:)<i v-html="currency.feeGoldNum">5</i>{{$t("classifier.number")}}</p></div>
+                        <div class="col-md-12 col-sm-6"><p>{{$t("AccountManagement.Thenumberofaccounts")}}:<i v-html="currency.actualQuantity">10</i>{{$t("classifier.number")}}</p></div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="control-label">{{$t("AccountManagement.getAccount")}}</label>
-                      <p>{{ $t("platform.type2") }}(1234879@qeveworld.com)</p>
+                      <p>{{ $t("platform.type2") }}(<span v-html="userInfo.email"></span>)</p>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
               <div class="btn-box">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{$t("publicText.off")}}</button>
-                  <button type="button" class="btn btn-primary">{{$t("publicText.ok")}}</button>
+                  <button type="button" @click="seedCurrency" class="btn btn-primary">{{$t("publicText.ok")}}</button>
               </div>
                 
               </div>
@@ -298,8 +299,8 @@
             </div>
           </div>
         </div>
-         <!-- 验证码 
-        <div class="Verification">
+          <!-- 验证码  -->
+       <!--  <div class="Verification">
             <h4 class="modal-title">{{ $t("login.verificationCode")}}</h4>
             <div class="code-box" @click="updateCode"><img :src="code.imgCode"></div>
             <div class="code-input-box">
@@ -309,7 +310,7 @@
               <button class="cancel-btn" @click="closeCode">{{ $t("publicText.off") }}</button>
               <button class="sure-btn" @click="submitCode">{{ $t("publicText.ok") }}</button>
             </div>
-        </div>-->
+        </div> -->
     </div>
 
     <!--======================== 安全支付密码 ========================-->
@@ -317,12 +318,12 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">安全支付密码</h4>
+                <h4 class="modal-title" id="exampleModalLabel">{{ $t("AccountManagement.payPwdPopupTitle") }}</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                      <label for="recipient-name" class="control-label">请输入安全支付密码</label>
+                      <label for="recipient-name" class="control-label">{{ $t("AccountManagement.payPwdPopupInputTitle") }}</label>
                       <input v-model="giveGold.pay" type="password" class="form-control payInput">
                     </div>
                 </form>
@@ -342,12 +343,12 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">安全支付密码</h4>
+                <h4 class="modal-title" id="exampleModalLabel">{{ $t("AccountManagement.emailCodeTitle") }}</h4>
             </div>
             <div class="modal-body">
                 <form>
-                    <p>我们已经向您绑定的安全邮箱发送了验证消息</p>
-                    <p>请将收到的验证信息填入到输入框中</p>
+                    <p>{{ $t("staticMsg.msg001") }}</p>
+                    <p>{{ $t("staticMsg.emailCodeTitle1") }}</p>
                     <div class="input-group">
                       <input type="text" class="form-control" v-model="code.emailCode">
                       <!-- <span class="input-group-btn" style="vertical-align: bottom;">
@@ -447,7 +448,15 @@ export default {
       allpage:0, 
       userInfo:{},
       // 问候语
-      greetings:'',  
+      greetings:'',
+
+      // 提币金额
+      currency:{
+        num:'',
+        feeProportion:20,
+        feeGoldNum:0,
+        actualQuantity:0
+      }
     }
   },
   created(){
@@ -455,6 +464,9 @@ export default {
     this.userInfo = JSON.parse(localStorage.userinfo);
   },
   mounted(){
+      
+      // this.currency.feeProportion = localStorage.turnOut;
+
       // 问候语
       var time = new Date().getHours();
       if(time <= 12){
@@ -498,6 +510,21 @@ export default {
         }
   },
   methods:{
+    // 计算提币需要手续费
+    calculationCost: function(){
+      this.currency.feeGoldNum = this.currency.num * this.currency.feeProportion / 100;
+      this.currency.actualQuantity = this.currency.num - this.currency.feeGoldNum;
+    },
+    // 提币
+    seedCurrency:function(){
+      var self = this;
+      myFn.myAjax('post',{money:this.currency.num,ptype:'1'}, myFn.apiAddress.gameRecord.currency, function(res){
+          self.userInfo.total_currency = self.userInfo.total_currency - this.currency.num 
+          myFn.setUserInfo("total_currency", self.userInfo.total_currency);
+          alert( self.$t("statiAccountManagementcMsg.coinSuccess") );
+          $("extractCurrency").modal('toggle');
+      })
+    },
     getCode: function(){
       // var self = this
       // if(this.code.emailCode == ''){
@@ -506,7 +533,7 @@ export default {
       // }
       // $('.Verification').fadeIn();
       myFn.myAjax('get',{email:this.userInfo.email}, myFn.apiAddress.code.getNoStatusCode, function(res){
-        alert( self.$t("staticMsg.msg001"));
+        alert( self.$t("staticMsg.msg001") );
       })
     },
     // 关闭静态验证码弹窗
@@ -526,42 +553,42 @@ export default {
 
     // 转账
     transferAccounts: function(){
-      if (this.giveGold.address) {
-        alert('转账地址不能为空');
+      if (this.giveGold.address == '') {
+        alert( self.$t("staticMsg.msg021") );
         return false;
       }
 
-      if (this.giveGold.num) {
-        alert('转账金额不能为空');
+      if (this.giveGold.num == '') {
+        alert( self.$t("staticMsg.msg022") );
         return false;
       }
 
-      if (this.giveGold.remark) {
-        alert('转账原因不能为空');
+      if (this.giveGold.remark == '') {
+        alert( self.$t("staticMsg.msg023") );
         return false;
       }
       var data = {
         address : this.giveGold.address,
       }
       myFn.myAjax('post', data, myFn.apiAddress.accountSafety.verifyAddress, function(res){
-          $("transferAccounts").modal('toggle');
-          $("payPwdPopup").modal('toggle');
+          $("#transferAccounts").modal('toggle');
+          $("#payPwdPopup").modal('toggle');
       })
     },
     verifySafetyPassword: function(){
       if(this.giveGold.pay == ''){
-        alert('支付密码不能为空');
+        alert( self.$t("staticMsg.msg017") );
       }else{
         myFn.myAjax('post', {pwd:this.giveGold.pay}, myFn.apiAddress.accountSafety.verifySafetyPassword, function(res){
-            $("payPwdPopup").modal('toggle');
-            $("emailCodePopup").modal('toggle');
+            $("#payPwdPopup").modal('toggle');
+            $("#emailCodePopup").modal('toggle');
         })
       }
     },
 
     verifySafetyMail: function(){
-      if(this.code.emailCode){
-        alert('邮箱验证码不能为空');
+      if(this.code.emailCode == ""){
+        alert( self.$t("staticMsg.msg145") );
         return false;
       }
       var self = this;

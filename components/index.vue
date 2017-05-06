@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group" style="margin-bottom: 0px;">
                           <div class="row agree">
-                            <p style="margin-bottom: 0px;"><a href="http://www.qeveworld.com/mail.php/Login">{{ $t("login.noEmail") }}</a></p>
+                            <p style="margin-bottom: 0px;"><a href="http://www.qeveworld.com/mail.php/Register/index">{{ $t("login.noEmail") }}</a></p>
                           </div>
                         </div>
                         <div class="input-group">
@@ -228,7 +228,7 @@
         </div>
 
         <div class="Verification">
-            <h4 class="modal-title">{{ $t("login.verificationCode")}}</h4>
+            <!-- <h4 class="modal-title">{{ $t("login.verificationCode")}}</h4> -->
             <div class="code-box" @click="updateCode"><img :src="codeImg"></div>
             <div class="code-input-box">
               <p @click="updateCode" style="color: rgb(10, 10, 255);padding-left: 28px;margin-top: 10px;margin-bottom:0px;">点击刷新</p>
@@ -294,7 +294,8 @@ export default {
           content:'',
           desc:''
         },
-        nuwsList:null,
+        nuwsObj:{},
+        communiqueObj:{},
         communique:{
           desc:'',
           content:''
@@ -336,12 +337,14 @@ export default {
         self.indexContent.aboutAs.desc = res.data.desc;
     });
     myFn.myAjax('get', {page:1,pagenumber:6}, myFn.apiAddress.index.nuwList, function(res){
-        self.indexContent.nuwsList = res.data.list;
+        // self.indexContent.nuwsList = res.data.list;
+        self.indexContent.nuwsObj = res.data;
     });
-    myFn.myAjax('get', {}, myFn.apiAddress.index.communique, function(res){
-        self.indexContent.communique.title  = res.data.title;
-        self.indexContent.communique.desc  = res.data.desc;
-        self.indexContent.communique.content  = res.data.content;
+    myFn.myAjax('get', {page:1,pagenumber:6}, myFn.apiAddress.index.communique, function(res){
+        self.indexContent.communiqueObj = res.data;
+        // self.indexContent.communique.title  = res.data.title;
+        // self.indexContent.communique.desc  = res.data.desc;
+        // self.indexContent.communique.content  = res.data.content;
     
     });
 
@@ -371,6 +374,7 @@ export default {
         email: self.login.email + '@qeveworld.com',
       }
       myFn.myAjax('get', data, myFn.apiAddress.code.getMailCode, function(res){
+        alert("已发验证码到您的邮箱");
         $('.Verification').fadeOut(350);
       })
     },
@@ -388,23 +392,23 @@ export default {
 
       // 表单验证
       if(self.invitationCode == ''){
-        alert(self.$t("statusMsg.msg105"));
+        alert(self.$t("staticMsg.msg105"));
         return false;
       }
       if(self.login.email == ''){
-        alert(self.$t("statusMsg.msg106"));
+        alert(self.$t("staticMsg.msg016"));
         return false;
       }
       if(self.login.emailCode == ''){
-        alert(self.$t("statusMsg.msg145"));
+        alert(self.$t("staticMsg.msg145"));
         return false;
       }
       if(self.pswd  == ''){
-        alert(self.$t("statusMsg.msg110"));
+        alert(self.$t("staticMsg.msg117"));
         return false;
       }
       if(self.repswd  == ''){
-        alert(self.$t("statusMsg.msg112"));
+        alert(self.$t("staticMsg.msg112"));
         return false;
       }
 
@@ -481,17 +485,19 @@ export default {
     /* 登陆 */
     loginSubmit: function(){
       var self = this;
+      // 账号不能为空
       if(self.login.email == ''){
-        alert(self.$t("statusMsg.msg106"));
+        alert(self.$t("staticMsg.msg016"));
         return false;
       }
+      // 密码不能为空
       if(self.login.password == ''){
-        alert(self.$t("statusMsg.msg110"));
+        alert(self.$t("staticMsg.msg117"));
         return false;
       }
-      console.log(self.login.emailCode)
+      // 邮箱验证码不能为空
       if(self.login.emailCode == ''){
-        alert(self.$t("statusMsg.msg145"));
+        alert(self.$t("staticMsg.msg145"));
         return false;
       }
       var data  = {
@@ -510,6 +516,8 @@ export default {
           // 是否输入支付密码没有则弹出输入
           if(self.userinfo.pay_pwd == null || self.userinfo.pay_pwd == ''){
             $('#setPaymentpPassword').modal('toggle');
+          }else{
+            self.$router.push({path:'/game/index'});
           }
         })
       })
@@ -552,7 +560,12 @@ export default {
 
     // 设置支付密码
     submitPay:function(){
+
         var self = this;
+        if(this.PayPassword == ''){
+            alert(self.$t("staticMsg.msg017"));
+            return false;
+        }
         var data = {
           password: this.PayPassword,
         }
@@ -561,6 +574,7 @@ export default {
           myFn.setUserInfo('pay_pwd', self.payPassword);
           alert( self.$t("staticMsg.msg010") );
           $('#setPaymentpPassword').modal('toggle');
+          self.$router.push({path:'/game/index'});
         })
     },
 
@@ -639,7 +653,7 @@ export default {
      */
     .modal-dialog{
       width: 450px;
-      margin-top: 8%;
+      margin-top: 5%;
       position: absolute;
       left:0; right:0; top:0; bottom:0;
     }
@@ -658,44 +672,48 @@ export default {
       float: right;
     }
     .accountInputlast button{
-      background: #151312 !important;
+      background: #F5F5F5 !important;
       float: right;
       border-left: 1px #3f3f3f solid !important;
     }
     .form-control{
       margin: 10px 0;
       height: 44px;
-      color: #fff;
-      background: #151312;
+      color: #000;
+      background: #F5F5F5;
       border: none;
       box-shadow: none;
     }
     .input-group-btn:last-child > .btn{
       height: 44px;
+      opacity: 1;
       margin-top: 10px;
-      background: #424242;;
-      color: #fff;
-      opacity: .65;
+      background: #149DA5;
+      color: #000;
       border-radius: none;
       border: none;
     }
+    #getCode{
+      color: #fff;
+    }
     .modal-content{
       border-radius: 0;
-      background: #1f1c1b;
-      color: #ec9532;
+      background: #fff;
+      color: #000;
+      border-radius: 5px;
     }
     .modal-body{
       padding: 15px 35px;
     }
     .modal-header{
-      border-bottom: 2px solid #3e3c3c;
+      border-bottom: none;
     }
     .modal-footer{
       padding: 25px 35px;
-      border-top: 2px solid #3e3c3c;
+      border-top: none;
     }
     .modal-header .close{
-      color: #fff;
+      color: #000;
       opacity: .5;
     }
     .forgetPSWD{
@@ -707,7 +725,7 @@ export default {
       margin-bottom: 0;
     }
     .forgetPSWD a {
-      color: #696969;
+      color: #F31B1B;
     }
     .forgetPSWD span{
       color: #777;
@@ -719,7 +737,7 @@ export default {
       color: #777;
     }
     .register-tip span{
-      color: #ec9532;
+      color: #27A5AB;
       margin-left: 10px;
     }
     .register-tip span:hover{
@@ -728,7 +746,7 @@ export default {
     .agree{
       text-align: right;
       padding: 5px 15px;
-      color: #ccc;
+      color: #000;
     }
     .agree input{
       vertical-align: middle;
@@ -745,7 +763,7 @@ export default {
       left: 50%;
       top: 50%;
       z-index: 9999;
-      background: #1f1c1b;
+      background: #fff;
       box-shadow: 3px 3px 10px #1a1515;
       display: none;
     }
@@ -755,15 +773,15 @@ export default {
     }
     .Verification input{
       border:none !important;
-      background:#151312;
+      background:#F5F5F5;
       color: #555;
     }
     .btn-register{
       margin: auto;
       width: 100%;
-      background: #363534;
+      background: #149DA5;
       height: 44px;
-      color: #151312;
+      color: #fff;
     }
     .btn-register:hover{
       color: #fff;
@@ -792,7 +810,7 @@ export default {
     }
     .code-input-box input{
       width: 80%;
-      color: #fff;
+      color: #000;
       margin-left: 10%;
       margin-top: 15px;
       height: 44px;
@@ -815,11 +833,12 @@ export default {
       background: transparent;
     }
     .btn-box button{
+      color: #fff;
       width: 40%;
       height: 40px;
       border: none;
       border-radius: 2px;
-      background: #363534;
+      background: #149DA5;
       margin-top: 15px;
     }
     .cancel-btn{

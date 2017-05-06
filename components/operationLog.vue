@@ -33,7 +33,7 @@
 					</div>
 				</div>
 			</div>
-			<p style="text-align: center;padding:20px 0px;margin-right: 30px;" v-show="allpage<1">无更多数据</p>
+			<p style="text-align: center;padding:20px 0px;margin-right: 30px;" v-show="allpage<1">{{$t("AccountManagement.pageNoData")}}</p>
 			<div class="content" v-show="allpage>1">
               <div class="row sure-btn">
                 <div class="border-t">
@@ -183,7 +183,6 @@ export default {
 		color: #436672;
 	}
 	.part-title{
-		width: 150px;
 		font-size: 15px;
 		text-align: left;
 		margin-bottom: 0px;
@@ -204,7 +203,7 @@ export default {
 		display: inline-block;
 		vertical-align: sub;
 		margin-right: 7px;
-		background-position: 21px 78px !important;
+		background-position: 86px 138px !important;
 	}
 	.on-active{
 		color: #EC9530!important;

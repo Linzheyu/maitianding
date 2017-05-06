@@ -13,9 +13,9 @@
 					<div class="col-md-12 col-sm-12 content-left">
 
 						<div class="group">
-							<label for="#">我的头像：</label>
-							<img :src="headimg" />
-							<button id="openFile">修改</button>
+							<label for="#">{{ $t("accountMyProfile.MyProfile") }}：</label>
+							<img style="width: 80px;height: 90px;" :src="userInfo.picture" />
+							<button id="openFile">{{ $t("accountMyProfile.modify") }}</button>
 							<input id="headerImg" type="file" style="display: none;" @change="actImg"/>
 						</div>
 						<div class="group">
@@ -82,7 +82,7 @@ export default {
   		fromdata.append('imgfile', document.getElementById('headerImg').files[0]);
   		$.ajax({
 		    url: myFn.apiAddress.memberInfo.setInfo,
-		    type: 'post', //GET
+		    type: 'POST', //GET
 		    // async:true,    //或false,是否异步
 		    data:fromdata,
 		    timeout:5000,    //超时时间
@@ -150,7 +150,7 @@ export default {
 			display: inline-block;
 			vertical-align: sub;
 			margin-right: 7px;
-			background-position: 21px 78px !important;
+			background-position: 54px 249px !important;
 		} 
 		.part-title{
 			display: inline-block;

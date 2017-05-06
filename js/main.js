@@ -114,7 +114,15 @@ var myFn = {
 			// 粮食收益记录
 			myfoodincome: '/api/myfoodincome',
 			// 我的游戏币收益记录 
-			myGoldincome:'/api/myearningsmoney'
+			myGoldincome:'/api/myearningsmoney',
+			// 提币记录
+			currency:'/api/withdrawcurr'
+		},
+		binding:{
+			// 获取邮箱验证码
+			getMeailCode: "/api/checkbound",
+			// 绑定极光平台
+			binding4: "/api/boundinfo"
 		}
 	},
 
@@ -123,7 +131,7 @@ var myFn = {
 		self.showLoding();
 		$.ajax({
 		    url: url ,
-		    type: type, //GET
+		    type: 'post', //GET
 		    // async:true,    //或false,是否异步
 		    data:data,
 		    timeout:20000,    //超时时间
@@ -136,69 +144,53 @@ var myFn = {
 		    	if(res.status == 0){
 			        sucFn(res);
 		    	}else if(res.status == -1){
-		    		if(localStorage.userinfo == 'undefined'){
-		    			alert(window.vm.$t("staticMsg.msg012"));
-		    		}else{
+		    		if(localStorage.userinfo != 'undefined'){
 			    		localStorage.clear();
-			    		location.href = location.href;
+		    			window.vm.$router.push({path:'/index'});
 		    		}
 		    	}else if(res.status == -2){
-		    		localStorage.clear()
+		    		localStorage.clear();
+		    		window.vm.$router.push({path:'/index'});
 		    	}else{
-		    		alert(res.msg);
-		    		return false;
-			    	switch(res.status){
-			    		case 101: alert( window.vm.$t("statusMsg.msg101") ); break;
-			    		case 103: alert( window.vm.$t("statusMsg.msg103") ); break;
-			    		case 105: alert( window.vm.$t("statusMsg.msg105") ); break;
-			    		case 106: alert( window.vm.$t("statusMsg.msg106") ); break;
-			    		case 107: alert( window.vm.$t("statusMsg.msg107") ); break;
-			    		case 108: alert( window.vm.$t("statusMsg.msg108") ); break;
-			    		case 109: alert( window.vm.$t("statusMsg.msg109") ); break;
-			    		case 110: alert( window.vm.$t("statusMsg.msg110") ); break;
-			    		case 111: alert( window.vm.$t("statusMsg.msg111") ); break;
-			    		case 112: alert( window.vm.$t("statusMsg.msg112") ); break;
-			    		case 113: alert( window.vm.$t("statusMsg.msg113") ); break;
-			    		case 114: alert( window.vm.$t("statusMsg.msg114") ); break;
-			    		case 115: alert( window.vm.$t("statusMsg.msg115") ); break;
-			    		case 116: alert( window.vm.$t("statusMsg.msg116") ); break;
-			    		case 118: alert( window.vm.$t("statusMsg.msg118") ); break;
-			    		case 120: alert( window.vm.$t("statusMsg.msg120") ); break;
-			    		case 124: alert( window.vm.$t("statusMsg.msg124") ); break;
-			    		case 125: alert( window.vm.$t("statusMsg.msg125") ); break;
-			    		case 126: alert( window.vm.$t("statusMsg.msg126") ); break;
-			    		case 127: alert( window.vm.$t("statusMsg.msg127") ); break;
-			    		case 128: alert( window.vm.$t("statusMsg.msg128") ); break;
-			    		case 129: alert( window.vm.$t("statusMsg.msg129") ); break;
-			    		case 130: alert( window.vm.$t("statusMsg.msg130") ); break;
-			    		case 132: alert( window.vm.$t("statusMsg.msg132") ); break;
-			    		case 133: alert( window.vm.$t("statusMsg.msg133") ); break;
-			    		case 134: alert( window.vm.$t("statusMsg.msg134") ); break;
-			    		case 135: alert( window.vm.$t("statusMsg.msg135") ); break;
-			    		case 136: alert( window.vm.$t("statusMsg.msg136") ); break;
-			    		case 137: alert( window.vm.$t("statusMsg.msg137") ); break;
-			    		case 138: alert( window.vm.$t("statusMsg.msg138") ); break;
-			    		case 139: alert( window.vm.$t("statusMsg.msg139") ); break;
-			    		case 140: alert( window.vm.$t("statusMsg.msg140") ); break;
-			    		case 142: alert( window.vm.$t("statusMsg.msg142") ); break;
-			    		case 144: alert( window.vm.$t("statusMsg.msg144") ); break;
-			    		case 145: alert( window.vm.$t("statusMsg.msg145") ); break;
-			    		case 146: alert( window.vm.$t("statusMsg.msg146") ); break;
-			    		case 147: alert( window.vm.$t("statusMsg.msg147") ); break;
-			    		case 148: alert( window.vm.$t("statusMsg.msg148") ); break;
-			    		case 149: alert( window.vm.$t("statusMsg.msg149") ); break;
-			    		case 150: alert( window.vm.$t("statusMsg.msg150") ); break;
-			    		case 151: alert( window.vm.$t("statusMsg.msg151") ); break;
-			    		case 152: alert( window.vm.$t("statusMsg.msg152") ); break;
-			    		case 153: alert( window.vm.$t("statusMsg.msg153") ); break;
-			    		case 154: alert( window.vm.$t("statusMsg.msg154") ); break;
-			    		case 157: alert( window.vm.$t("statusMsg.msg157") ); break;
-			    		case 158: alert( window.vm.$t("statusMsg.msg158") ); break;
-			    		case 159: alert( window.vm.$t("statusMsg.msg159") ); break;
-			    		case 160: alert( window.vm.$t("statusMsg.msg160") ); break;
-			    		case 166: alert( window.vm.$t("statusMsg.msg166") ); break;
-			    		case 171: alert( window.vm.$t("statusMsg.msg171") ); break;
-			    		case 174: alert( window.vm.$t("statusMsg.msg174") ); break;
+			    	switch(parseInt(res.status)){
+			    		case 10001: alert( window.vm.$t("statusMsg_Java.msg10001"));break;
+						case 10002: alert( window.vm.$t("statusMsg_Java.msg10002"));break;
+						case 10003: alert( window.vm.$t("statusMsg_Java.msg10003"));break;
+						case 10004: alert( window.vm.$t("statusMsg_Java.msg10004"));break;
+						case 10005: alert( window.vm.$t("statusMsg_Java.msg10005"));break;
+						case 10006: alert( window.vm.$t("statusMsg_Java.msg10006"));break;
+						case 10009: alert( window.vm.$t("statusMsg_Java.msg10009"));break;
+						case 10010: alert( window.vm.$t("statusMsg_Java.msg10010"));break;
+						case 10011: alert( window.vm.$t("statusMsg_Java.msg10011"));break;
+						case 10012: alert( window.vm.$t("statusMsg_Java.msg10012"));break;
+						case 10016: alert( window.vm.$t("statusMsg_Java.msg10016"));break;
+						case 10017: alert( window.vm.$t("statusMsg_Java.msg10017"));break;
+						case 10018: alert( window.vm.$t("statusMsg_Java.msg10018"));break;
+						case 10019: alert( window.vm.$t("statusMsg_Java.msg10019"));break;
+						case 10020: alert( window.vm.$t("statusMsg_Java.msg10020"));break;
+						case 10021: alert( window.vm.$t("statusMsg_Java.msg10021"));break;
+						case 10022: alert( window.vm.$t("statusMsg_Java.msg10022"));break;
+						case 10023: alert( window.vm.$t("statusMsg_Java.msg10023"));break;
+						case 10024: alert( window.vm.$t("statusMsg_Java.msg10024"));break;
+						case 10025: alert( window.vm.$t("statusMsg_Java.msg10025"));break;
+						case 10026: alert( window.vm.$t("statusMsg_Java.msg10026"));break;
+						case 10027: alert( window.vm.$t("statusMsg_Java.msg10027"));break;
+						case 10028: alert( window.vm.$t("statusMsg_Java.msg10028"));break;
+						case 10029: alert( window.vm.$t("statusMsg_Java.msg10029"));break;
+						case 10030: alert( window.vm.$t("statusMsg_Java.msg10030"));break;
+						case 10031: alert( window.vm.$t("statusMsg_Java.msg10031"));break;
+						case 10032: alert( window.vm.$t("statusMsg_Java.msg10032"));break;
+						case 10033: alert( window.vm.$t("statusMsg_Java.msg10033"));break;
+						case 10034: alert( window.vm.$t("statusMsg_Java.msg10034"));break;
+						case 10038: alert( window.vm.$t("statusMsg_Java.msg10038"));break;
+						case 10039: alert( window.vm.$t("statusMsg_Java.msg10039"));break;
+						case 10040: alert( window.vm.$t("statusMsg_Java.msg10040"));break;
+						case 10041: alert( window.vm.$t("statusMsg_Java.msg10041"));break;
+						case 10042: alert( window.vm.$t("statusMsg_Java.msg10042"));break;
+						case 10014:;
+						case 10043: alert( window.vm.$t("statusMsg_Java.msg10043"));break;
+						case 10047: alert( window.vm.$t("statusMsg_Java.msg10047"));break;
+						case 10048: alert( window.vm.$t("statusMsg_Java.msg10048"));break;
 			    		default:  alert(window.vm.$t("staticMsg.msg013") + res.status + window.vm.$t("staticMsg.msg014"));
 			    	}
 		    		
@@ -212,99 +204,6 @@ var myFn = {
 		})
 	},
 
-	// myAjax: function (type, data, url, sucFn) {	
-	// 	var self = this;
-	// 	self.showLoding();
-	// 	$.ajax({
-	// 	    url: 'http://112.74.162.250' + url ,
-	// 	    type: type, //GET
-	// 	    // async:true,    //或false,是否异步
-	// 	    data:data,
-	// 	    timeout:5000,    //超时时间
-	// 	    dataType:'jsonp',    //返回的数据格式：json/xml/html/script/jsonp/text
-	// 	    jsonp: "jsonpcallback",
- //            jsonpCallback:"jsonpcallback",
-	// 	    success: function(res, textStatus, XMLHttpRequest){
-	// 	    	setTimeout(function(){
-	// 		    	self.hiddenLoding();
-	// 	    	},200)
-
-	// 	    	if(res.status == 0){
-	// 		        sucFn(res);
-	// 	    	}else if(res.status == -1){
-	// 	    		if(localStorage.userinfo == 'undefined'){
-	// 	    			alert(window.vm.$t("staticMsg.msg012"));
-	// 	    		}else{
-	// 		    		localStorage.clear();
-	// 		    		location.href = location.href;
-	// 	    		}
-	// 	    	}else if(res.status == -2){
-	// 	    		localStorage.clear()
-	// 	    	}else{
-	// 		    	switch(res.status){
-	// 		    		case 101: alert( window.vm.$t("statusMsg.msg101") ); break;
-	// 		    		case 103: alert( window.vm.$t("statusMsg.msg103") ); break;
-	// 		    		case 105: alert( window.vm.$t("statusMsg.msg105") ); break;
-	// 		    		case 106: alert( window.vm.$t("statusMsg.msg106") ); break;
-	// 		    		case 107: alert( window.vm.$t("statusMsg.msg107") ); break;
-	// 		    		case 108: alert( window.vm.$t("statusMsg.msg108") ); break;
-	// 		    		case 109: alert( window.vm.$t("statusMsg.msg109") ); break;
-	// 		    		case 110: alert( window.vm.$t("statusMsg.msg110") ); break;
-	// 		    		case 111: alert( window.vm.$t("statusMsg.msg111") ); break;
-	// 		    		case 112: alert( window.vm.$t("statusMsg.msg112") ); break;
-	// 		    		case 113: alert( window.vm.$t("statusMsg.msg113") ); break;
-	// 		    		case 114: alert( window.vm.$t("statusMsg.msg114") ); break;
-	// 		    		case 115: alert( window.vm.$t("statusMsg.msg115") ); break;
-	// 		    		case 116: alert( window.vm.$t("statusMsg.msg116") ); break;
-	// 		    		case 118: alert( window.vm.$t("statusMsg.msg118") ); break;
-	// 		    		case 120: alert( window.vm.$t("statusMsg.msg120") ); break;
-	// 		    		case 124: alert( window.vm.$t("statusMsg.msg124") ); break;
-	// 		    		case 125: alert( window.vm.$t("statusMsg.msg125") ); break;
-	// 		    		case 126: alert( window.vm.$t("statusMsg.msg126") ); break;
-	// 		    		case 127: alert( window.vm.$t("statusMsg.msg127") ); break;
-	// 		    		case 128: alert( window.vm.$t("statusMsg.msg128") ); break;
-	// 		    		case 129: alert( window.vm.$t("statusMsg.msg129") ); break;
-	// 		    		case 130: alert( window.vm.$t("statusMsg.msg130") ); break;
-	// 		    		case 132: alert( window.vm.$t("statusMsg.msg132") ); break;
-	// 		    		case 133: alert( window.vm.$t("statusMsg.msg133") ); break;
-	// 		    		case 134: alert( window.vm.$t("statusMsg.msg134") ); break;
-	// 		    		case 135: alert( window.vm.$t("statusMsg.msg135") ); break;
-	// 		    		case 136: alert( window.vm.$t("statusMsg.msg136") ); break;
-	// 		    		case 137: alert( window.vm.$t("statusMsg.msg137") ); break;
-	// 		    		case 138: alert( window.vm.$t("statusMsg.msg138") ); break;
-	// 		    		case 139: alert( window.vm.$t("statusMsg.msg139") ); break;
-	// 		    		case 140: alert( window.vm.$t("statusMsg.msg140") ); break;
-	// 		    		case 142: alert( window.vm.$t("statusMsg.msg142") ); break;
-	// 		    		case 144: alert( window.vm.$t("statusMsg.msg144") ); break;
-	// 		    		case 145: alert( window.vm.$t("statusMsg.msg145") ); break;
-	// 		    		case 146: alert( window.vm.$t("statusMsg.msg146") ); break;
-	// 		    		case 147: alert( window.vm.$t("statusMsg.msg147") ); break;
-	// 		    		case 148: alert( window.vm.$t("statusMsg.msg148") ); break;
-	// 		    		case 149: alert( window.vm.$t("statusMsg.msg149") ); break;
-	// 		    		case 150: alert( window.vm.$t("statusMsg.msg150") ); break;
-	// 		    		case 151: alert( window.vm.$t("statusMsg.msg151") ); break;
-	// 		    		case 152: alert( window.vm.$t("statusMsg.msg152") ); break;
-	// 		    		case 153: alert( window.vm.$t("statusMsg.msg153") ); break;
-	// 		    		case 154: alert( window.vm.$t("statusMsg.msg154") ); break;
-	// 		    		case 157: alert( window.vm.$t("statusMsg.msg157") ); break;
-	// 		    		case 158: alert( window.vm.$t("statusMsg.msg158") ); break;
-	// 		    		case 159: alert( window.vm.$t("statusMsg.msg159") ); break;
-	// 		    		case 160: alert( window.vm.$t("statusMsg.msg160") ); break;
-	// 		    		case 166: alert( window.vm.$t("statusMsg.msg166") ); break;
-	// 		    		case 171: alert( window.vm.$t("statusMsg.msg171") ); break;
-	// 		    		case 174: alert( window.vm.$t("statusMsg.msg174") ); break;
-	// 		    		default:  alert(window.vm.$t("staticMsg.msg013") + res.status + window.vm.$t("staticMsg.msg014"));
-	// 		    	}
-		    		
-	// 	    	}
-
-	// 	    },
-	// 	    error:function(){
-	// 	    	alert(window.vm.$t("staticMsg.msg015"));
-	// 	    	self.hiddenLoding();
-	// 	    }
-	// 	})
-	// },
 	showLoding:function(){
 		jQuery("body").css('overflow','hidden');
 		jQuery(".bonfire-pageloader-icon").removeClass('bonfire-pageloader-icon-hide');

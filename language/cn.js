@@ -14,6 +14,12 @@ var CnLanguage = {
 		column: '栏目',
 		language:'语言'
 	},
+	gameNav:{
+		gameCore: "游戏中心",
+		exchange: "兑换商店",
+		welfare: "公益中心",
+		AccountCenter: "账户中心"
+	},
 	// 分页
 	page:{
 		previousPage:'上一页',
@@ -34,6 +40,51 @@ var CnLanguage = {
 		noEmail: '还没有happyfarm邮箱?',
 		verificationAccount:'验证登录账号'
 	},
+	// 游戏内文本
+	gameIndex:{
+		seed:"种子",
+		price: "售价",
+		gold:"金币",
+		foodstuff:"粮食",
+		specifications:"规格",
+		copeWith:"应付",
+		paymentText:"支付",
+		task:"今日任务",
+		myWareHouse:"我的仓库",
+		bulletin:"游戏公告",
+		canon:"游戏宝典",
+		food:"粮食",
+		exchange:"兑换",
+		extract:"提币",
+		recharge:"充值",
+		payment:"支付",
+		inviteFriends:"邀请好友",
+		inviteFriendsText:"使用下面的链接邀请好友注册并参与游戏!即可获得好友投资额除以您的投资额剩余5%的直推收益",
+		copy:"复制",
+		record:'游戏记录',
+		sowingTime:'播种时间',
+		sowNull:"种子数量",
+		user:"用户",
+		investmentAmount:"投资数量",
+		investmentTime:'投资时间',
+		accelerateTime:"加速时间",
+		accelerateType:"类型",
+		accelerateProportion:"加速比",
+		accelerateProfit:"时间收益",
+		accelerateFoodstuff:"粮食",
+		seedingRecord:"播种记录",
+		invitationRecord:"邀请记录",
+		acceleratedRecording:"加速记录",
+		payTitle:"支付购买",
+		payContent:"输入支付密码后点击获取获取您的邮箱验证码",
+		payPassword:"支付密码",
+		emailCode:"邮箱验证码",
+		sowingTime:"播种时间",
+		sowingAmount:"播种数额",
+		earnedIncome: "已获收益",
+		accelerationTimes:"加速次数",
+		pagePrompt:"别点啦已经在当前页了"
+	},
 	// 兑换
 	gameShop:{
 		exchangeTopTitle: "兑换粮食金币",
@@ -50,47 +101,12 @@ var CnLanguage = {
 		otherRecordNumber:"兑换数",
 		otherRecordGetGold:"获得游戏币数"
 	},
-	// 公益申请
-	loveBenefit:{
-		progress1: "填写基本信息",
-		progress2: "等待平台审核",
-		progress3: "获得公益粮食基金",
-		spokesperson: "填写公益大使信息",
-		spokespersonAccount: "申请账号",
-		spokespersonName: "您的姓名",
-		spokespersonTell: "联系电话",
-		certificateType: "选择证件类型",
-		certificateType1:"类型1",
-		certificateType2:"类型2",
-		certificateType3:"类型3",
-		certificatePicture: "证件照",
-		front:"正面",
-		reversSide:"反面",
-		handPicture:"手持照片",
-		donorInformation:"捐赠人信息",
-		donorAccount:"申请账号",
-		donorName: "您的姓名",
-		donorTell: "联系电话",
-		cause:"收捐口号/原因",
-		needMoney:"所需金额",
-		describe:"描述",
-		explanatory: "平台会根据所需将相应的金额换算成粮食授权给公益大使",
-		unit:"元",
-		relatedPhotos:"相关照片",
-		clause:"我保证以上信息真实有效,若有任何虚假行为自愿承担一切后果!",
-		submit:"提交"
-	},
-	// 公益提交审核
-	loveBenefitAudit:{
-		audit:'审核中',
-		auditText:'恭喜您提交成功啦~平台正在对您的信息进行审核哦'
-	},
 	// 账户中心
 	AccountManagement:{
 		loginTime:"登录时间",
 		login:"登录IP",
 		loginAddress:"登录地址",
-		loadMore:"查看更多",
+		loadMore:"更多",
 		grainBalance :"粮食余额",
 		goldBalance:"金币余额",
 		constellationCard:"星座卡片",
@@ -120,7 +136,7 @@ var CnLanguage = {
 		exchangeGrainQuantity:"兑换粮食数",
 		convertTheGoldCoins:"粮食总支出数",
 		exchangeTime:"兑换时间",
-		exchangeProportion:"兑换比率",
+		exchangeProportion:"比率",
 		exchangeRate:"手续费率",
 		exchangeGetGold:"兑换所获金币数",
 		previousPage:"上一页",
@@ -134,7 +150,7 @@ var CnLanguage = {
 		currencyNum:'提币数量',
 		currencyWhere:'提币去向',
 		pleaseEnterTheAmountOfgold:"请输入提币金额:",
-		fee:"手续费(5%):",
+		fee:"手续费",
 		amount:"5个",
 		Thenumberofaccounts:"实到账户数",
 		actualamount:"90个",
@@ -149,46 +165,21 @@ var CnLanguage = {
 		ProfitGoldSource:'来源账户',
 		ProfitGoldRemarks:'备注',
 		Profitmotion:"运动时间收益",
-		GoldProfitLogType:"转账收益" // 后添加单词
-
-	},
-	// 星座
-	accountCard:{
-		accumulatedthenumber:"本周星座奖池已累计粮食数",
-		Mybeast:"我的星座兽",
-		Myconstellationcard:"我的星座卡片",
-		Constellationprizepool:"集齐12星座合成“星座兽”可瓜分星座奖池",
-		constellationBeast:"星座兽",
-		constellationBeast1:"星座兽1",
-		constellationBeast2:"星座兽2",
-		constellationBeast3:"星座兽3",
-		constellationBeast4:"星座兽4",
-		constellationBeast5:"星座兽5",
-		constellationBeast6:"星座兽6",
-		constellationBeast7:"星座兽7",
-		constellationBeast8:"星座兽8",
-		constellationBeast9:"星座兽9",
-		constellationBeast10:"星座兽10",
-		constellationBeast11:"星座兽11",
-		constellationBeast12:"星座兽12",
-		synthesis:"合成",
-		prompt:"每周日24:00系统会将星座池中的粮食瓜分给拥有“星座兽”的用户，拥有的星座兽越多瓜分的越多哦！",
-
-	},
-	// 我的公益
-	accountBenefit:{
-		myPublicwelfare:"我的公益",
-		review:"审核中",
-		passed:"已通过",
-		notPassed:"未通过",
-		over:"已结束",
-		applicationTime:"申请时间",
-		Applyforpublicbenefits:"申请公益额",
-		cancelApplication:"取消申请",
+		GoldProfitLogType:"转账收益", // 后添加单词
+		pageNoData:"无更多数据",
+		payPwdPopupTitle:"安全支付密码",
+		payPwdPopupInputTitle:"请输入安全支付密码",
+		emailCodeTitle:"邮箱验证码",
+		emailCodeTitle1:"请将收到的验证信息填入到输入框中",
+		coinSuccess:"提币成功",
+		sendEmailCode:"已发送邮件验证码",
+		bindingSuccess:"绑定成功"
 	},
 	// 我的资料
 	accountMyProfile:{
 		MyProfile:"我的资料",
+		myHeadImg:"我的头像",
+		modify:"修改",
 		vipAccount:"会员账号：",
 		name:"昵称：",
 		sex:"性别：",
@@ -209,8 +200,9 @@ var CnLanguage = {
 		laserExchangePlatform:"极光兑换平台",
 		laserExchangePlatformDescription:"账号游戏币提现",
 		noBing:'未绑定',
-		yesBing:'已绑定'
-
+		yesBing:'已绑定',
+		Bing4:"绑定极光兑换平台",
+		codePrompt:"请输入邮箱验证码"
 	},
 	// 修改安全支付密码
 	safetyPayment:{
@@ -257,7 +249,7 @@ var CnLanguage = {
 		loginIP:"登录IP",
 		Address:"地址",
 		typesList:"登录账号",
-		quirt:"退出账号",
+		quirt:"退出",
 	},
 	// 账户管理
 	sider:{
@@ -290,11 +282,14 @@ var CnLanguage = {
 		off: '取消',
 		get:"获取",
 		preservation:'保存',
-		goGame:"进入游戏"
+		goGame:"进入游戏",
+		indexTitle:"和朋友一起来麦田圈享受收获的乐趣吧"
 	},
 	// 量词
 	classifier:{
-		number:'个'
+		number:'个',
+		week:'周',
+		second:"次"
 	},
 	// 前端静态提示语
 	staticMsg:{
@@ -313,65 +308,58 @@ var CnLanguage = {
 		msg013: "系统错误,错误码",
 		msg014: "请联系管理员",
 		msg015: "网络异常请稍后再试",
+		msg016: "邮箱账号不能为空",
+		msg017: "支付密码不能为空",
+		msg018: "购买数量不能为空",
+		msg019: "您的金币余额不足",
+		msg020: "播种成功",
+		msg021: "转账地址不能为空",
+		msg022: "转账金额不能为空",
+		msg023: "转账原因不能为空",
 
+		msg117: "密码不能为空",
+		msg145: "邮箱验证码不能为空",
+		msg105: "邀请码不能为空",
+		msg112: "重复密码不能为空",
 	},
-	// 服务器状态码
-	statusMsg:{
-		 msg101:"账号或密码不正确",
-	   	 msg103:"请输入注册邮箱和密码",
-	   	 msg105:"邀请码不能为空",
-	   	 msg106:"邮箱不能为空",
-	   	 msg107:"邮箱格式不正确",
-	   	 msg108:"邮箱已被注册",
-	   	 msg109:"验证码不能为空",
-	   	 msg110:"密码不能为空",
-	   	 msg111:"密码格式不正确",
-	   	 msg112:"重复密码不能为空",
-	   	 msg113:"两次输入密码不同",
-	   	 msg114:"邀请码不存在或已被使用",
-	   	 msg115:"邀请码已过期",
-	   	 msg116:"验证码已经失效",
-	   	 msg118:"验证码不正确",
-	   	 msg120:"账号或密码不正确",
-	   	 msg124:"支付密码不能和登陆密码相同",
-	   	 msg125:"请先验证支付密码",
-	   	 msg126:"旧密码不能为空",
-	   	 msg127:"新密码不能为空",
-	   	 msg128:"新密码格式不正确",
-	   	 msg129:"修改密码不能和原密码相同",
-	   	 msg130:"旧密码错误",
-	   	 msg132:"邀请码不存在",
-	   	 msg133:'邀请码已经被使用',
-	   	 msg134:"邀请码已过期",
-	   	 msg135:"昵称不能为空",
-	   	 msg136:"性别不能为空",
-	   	 msg137:"上传失败请重新上传",
-	   	 msg138:"修改失败请重新修改",
-	   	 msg139:"粮食数量不能为空",
-	   	 msg140:"兑换数量不能小于10",
-	   	 msg142:"粮食不足",
-	   	 msg144:"支付密码不正确",
-	   	 msg145:"邮箱验证码不能为空",
-	   	 msg146:"邮箱验证码不正确",
-	   	 msg147:"转账地址不能为空",
-	   	 msg148:"转账金额不能为空",
-	   	 msg149:"最长不可超过200个字符",
-	   	 msg150:"转账地址不正确",
-	   	 msg151:"不能给自己转账",
-	   	 msg152:"游戏币不足",
-	   	 msg153:"暂无数据",
-	   	 msg154:"您与该用户无上级关系无法转账",
-	   	 msg157:"请输入购买种子倍数",
-	   	 msg158:"选择播种种子规格",
-	   	 msg159:"请输入正确的粮食数量",
-	   	 msg160:"您无法再次购买该规格种子",
-	   	 msg166:"该地不属于您",
-	   	 msg171:"粮食不足",
-	   	 msg174:"还未集齐12星座的星座卡片"
+	// Java服务器状态码
+	statusMsg_Java:{
+		msg10001:"账户金币不足",
+		msg10002:"账户金币转出失败",
+		msg10003:"金币转入对方账户失败",
+		msg10004:"购买数量已超出限制", 
+		msg10005:"本次购买种子额小于总投资额",
+		msg10006:"游戏币余额不足",
+		msg10009:"用户申请的邀请码个数已经超过",
+		msg10010:"粮食余额不足",
+		msg10012:"上级在投种子总额为0",
+		msg10016:"安全密码错误",
+		msg10017:"邮箱验证码错误",
+		msg10018:"邀请码不存在",
+		msg10019:"邀请码已经被使用",
+		msg10020:"密码与确认密码不一致",
+		msg10021:"邮箱已存在",
+		msg10022:"用户名已存在",
+		msg10023:"输入非法静态验证码",
+		msg10024:"静态验证码错误",
+		msg10025:"旧密码错误",
+		msg10026:"密码与确认密码不一致",
+		msg10027:"支付密码不能与登录密码一致",
+		msg10028:"支付密码错误",
+		msg10029:"重复支付密码错误",
+		msg10030:"邮件地址不能为空",
+		msg10031:"密码不能为空",
+		msg10032:"收款方账户地址有误",
+		msg10033:"不能给自己转账",
+		msg10034:"您与该用户无上级关系无法转账",
+		msg10038:"转账金额格式错误，请输入正整数或小数",
+		msg10039:"支付密码不得小于6位",
+		msg10041:"插入信息失败",
+		msg10042:"修改信息失败",
+		msg10043:"账号或密码错误",
+		msg10047:'只支持png或jpg格式的图片',
+		msg10048:'请选择要购买的种子数量或规格'
 	},
-
-
-	// 新添加单词
 	resetPwd:{
 		resetPwdButtom:"密码重置成功"
 	},

@@ -104,11 +104,12 @@ export default new Router({
         },
         {
           path:"benefit/audit",
-          component: gameLoveBenefitAudit
+          component: gameLoveBenefitAudit,
         },
         {
           path:"account",
           component: gameAccountSide,
+          redirect: 'account/index',
           children:[{
             path:"index",
             components:{

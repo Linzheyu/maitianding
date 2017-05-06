@@ -22,27 +22,29 @@
               <span v-show=" allpageRecord > 6 " id="recordAllpage"></span>
           </div>
           <input id="InvitationUrl" value="2a28a98ee1c2b74c4d3fd27f61b3e65107" readonly="" />
-          <canvas id="canvas" width="1140" height="647"></canvas>
+          <canvas id="canvas" width="1180" height="679"></canvas>
       </div>
   </div>
 </template>
 
 <script>
-// import {init} from '../js/gameMain.js';
-var FARMBG_PATH          = require('../assets/gameImg/farmbg.png')  // 游戏背景
+var FARMBG_PATH          = require('../assets/gameImg/farmbg.png')    // 游戏背景
+var FARMBG_PATH2          = require('../assets/gameImg/farmbg2.png')  // 树
+
+
+
 var INFOBOX_PATH         = require('../assets/gameImg/infobox.png') // 用户信息底图
 var INFOGOLDICON         = require('../assets/gameImg/goldIcon.png') // 用户信息金币图标
 var INFOFOODICON         = require('../assets/gameImg/foodIcon.png') // 用户信息食物图标
-// 进度条
-var OVERALLSCHEDULE_PATH = require('../assets/gameImg/overallSchedule.png') // 总进度
-var CURRENTPROGRESS_PATH = require('../assets/gameImg/currentProgress.png') // 当前进度
-var SECTION_PATH         = require('../assets/gameImg/section.png')    // 进度条区间分割
+
 // 商店&任务&公告
 var SHOPIMG_PATH         = require('../assets/gameImg/shop.png')    // 商店
 var TASKIMG_PATH         = require('../assets/gameImg/task.png')   // 任务
+var TASKIMG_TITLEBG_PATH = require('../assets/gameImg/taskTitleBg.png')
 var NOTICEIMG_PATH       = require('../assets/gameImg/notice.png')  // 公告
 // 土地
 var LANDMG_PATH          = require('../assets/gameImg/land.png')         // 未种植土地
+
 var LANDMG_PATH1          = require('../assets/gameImg/landstatus/1.png')  // 已经种植状态
 var LANDMG_PATH2          = require('../assets/gameImg/landstatus/2.png') 
 var LANDMG_PATH3          = require('../assets/gameImg/landstatus/3.png') 
@@ -82,11 +84,11 @@ var LANDMG_PATH36         = require('../assets/gameImg/landstatus/36.png')
 var LANDMG_PATH37         = require('../assets/gameImg/landstatus/37.png') 
 var LANDMG_PATH38         = require('../assets/gameImg/landstatus/38.png') 
 var LANDMG_PATH39         = require('../assets/gameImg/landstatus/39.png') 
-var LANDMG_PATH40         = require('../assets/gameImg/landstatus/40.png') 
+var LANDMG_PATH40         = require('../assets/gameImg/landstatus/40.png')
+var LOTUS_PATH      = require('../assets/gameImg/lotus.png')   // 莲花
 var EXTENSIONL_PATH      = require('../assets/gameImg/extensionL.png')   // 上一块
 var EXTENSIONR_PATH      = require('../assets/gameImg/extensionR.png')   // 下一块
 var EXTENSION_PATH      = require('../assets/gameImg/extension.png')   // 扩建
-var EXTENSION_PATH1      = require('../assets/gameImg/extension1.png')   // 扩建
 // 游戏宝典
 var CANONIMG_PATH        = require('../assets/gameImg/canon.png')    // 游戏宝典
 // 底部游戏记录
@@ -96,11 +98,9 @@ var RECORD_PATH          = require('../assets/gameImg/record.png')     // 记录
 // 弹框关闭按钮
 var CLOSEPOPU_PATH       = require('../assets/gameImg/popupClose.png')   // 弹窗关闭
 var POPUPSHOPBG_PATH     = require('../assets/gameImg/popushop.png')   // 商店弹框背景
-var POPUP_HAS_TITLE_PATH = require('../assets/gameImg/popupBg.png')  // 商店弹框背景
 // 游戏商店弹出面层
 var POPUPPAYBG_PATH      =  require("../assets/gameImg/payPassBg.png") //支付密码弹出层
-var POPUPPYESPAY_PATH    =  require("../assets/gameImg/yespay.png")     // 确认支付按钮
-var POPUPPNOPAY_PATH     =  require("../assets/gameImg/nopay.png")    // 取消支付按钮
+var POPUPPYESPAY_PATH    =  require("../assets/gameImg/payPassBg.png")     // 确认支付按钮
 // 分割线
 var DIVISION_PATH         = require('../assets/gameImg/cuttingLine.png') //分割线
 // 商店
@@ -108,24 +108,21 @@ var POPUPBG_FOODICON_PATH =  require("../assets/gameImg/food.png")  // 食物图
 var ADD_PATH              =  require("../assets/gameImg/add.png")   // 添加
 var REDUCE_PATH           =  require("../assets/gameImg/reduce.png") // 减去
 var POPUPBG_PAYMENT_PATH  =  require("../assets/gameImg/payment.png")// 支付
+
 // 我的仓库
+var POPUP_WAREHOUSE_BG = require("../assets/gameImg/warehousebg.png");
 var POPUPBG_GOLD_PATH       =  require("../assets/gameImg/gold.png")  // 金币图标
-var POPUPBG_RECHARGE_BUTTON =  require("../assets/gameImg/recharge.png")  // 充值按钮
-var POPUPBG_EXTRACT_BUTTON  =  require("../assets/gameImg/extract.png") // 提币按钮
-var POPUPBG_TRANSFER_BUTTON =  require("../assets/gameImg/transfer.png")  // 转账按钮
-var POPUPBG_EXCHANGE_BUTTON =  require("../assets/gameImg/exchange.png")  // 兑换按钮
 // 邀请好友
-var POPUPBG_COPYLINK_BUTTON =  require("../assets/gameImg/copylink.png")  // 兑换按钮
+var POPUPBG_BG =  require("../assets/gameImg/inviteFriends.png")  // 邀请好友弹框背景
 // 播种记录
-var POPUPBUTTON_SOWING_ACTIVE_PATH     = require('../assets/gameImg/sowing_active.png')     // 播种记录
-var POPUPBUTTON_SOWING_PATH            = require('../assets/gameImg/sowing.png')    
-var POPUPBUTTON_INVITE_ACTIVE_PATH     = require('../assets/gameImg/invite_active.png')     // 邀请记录
-var POPUPBUTTON_INVITE_PATH            = require('../assets/gameImg/invite.png')
+var POPUPBUTTON_SOWING_BG = require('../assets/gameImg/sowingBg.png')
+var POPUPBUTTON_SOWING_ACTIVE_PATH     = require('../assets/gameImg/accelerate_active.png')     // 播种记录
+var POPUPBUTTON_SOWING_PATH            = require('../assets/gameImg/accelerate.png')    
+var POPUPBUTTON_INVITE_ACTIVE_PATH     = require('../assets/gameImg/accelerate_active.png')     // 邀请记录
+var POPUPBUTTON_INVITE_PATH            = require('../assets/gameImg/accelerate.png')
 var POPUPBUTTON_ACCELERATE_ACTIVE_PATH = require('../assets/gameImg/accelerate_active.png') // 加速记录
 var POPUPBUTTON_ACCELERATE_PATH        = require('../assets/gameImg/accelerate.png')
-// page
-var POPUPBUTTON_PAGE_LEFT_PATH = require('../assets/gameImg/pageLeft.png');
-var POPUPBUTTON_PAGE_RIGHT_PATH = require('../assets/gameImg/pageRight.png');
+
 var POPUP_NOTICEBG = require('../assets/gameImg/noticenImg.png') // 公告背景
 // 装饰
 var DECORATE_BENCH = require('../assets/gameImg/bench.png'); // 板凳
@@ -154,63 +151,67 @@ export default {
             gameFood:'',
             gameSeed:'',
             progress:{
-          time:'',
-          Progressbar:"",
-        },
+                time:'',
+                Progressbar:"",
+            },
             land:{
-          // 总页数
-          page:1,
-          // 每页显示条数
-          pageNum:11,
-          // 当前页数
-          currentPage:1,
-          statusImg:[
-            LANDMG_PATH1,
-            LANDMG_PATH2,
-            LANDMG_PATH3,
-            LANDMG_PATH4,
-            LANDMG_PATH5,
-            LANDMG_PATH6,
-            LANDMG_PATH7,
-            LANDMG_PATH8,
-            LANDMG_PATH9,
-            LANDMG_PATH10,
-            LANDMG_PATH11,
-            LANDMG_PATH12,
-            LANDMG_PATH13,
-            LANDMG_PATH14,
-            LANDMG_PATH15,
-            LANDMG_PATH16,
-            LANDMG_PATH17,
-            LANDMG_PATH18,
-            LANDMG_PATH19,
-            LANDMG_PATH20,
-            LANDMG_PATH21,
-            LANDMG_PATH22,
-            LANDMG_PATH23,
-            LANDMG_PATH24,
-            LANDMG_PATH25,
-            LANDMG_PATH26,
-            LANDMG_PATH27,
-            LANDMG_PATH28,
-            LANDMG_PATH29,
-            LANDMG_PATH30,
-            LANDMG_PATH31,
-            LANDMG_PATH32,
-            LANDMG_PATH33,
-            LANDMG_PATH34,
-            LANDMG_PATH35,
-            LANDMG_PATH36,
-            LANDMG_PATH37,
-            LANDMG_PATH38,
-            LANDMG_PATH39,
-            LANDMG_PATH40,
-            ],
-          list:[], 
-          // 需要渲染的土地对象
-          exampleObj:null,
-          // 鼠标移入时土地的详细信息框
-          landStatusBox: null,
+                // 总页数
+                page:1,
+                // 每页显示条数
+                pageNum:20,
+                // 当前页数
+                currentPage:1,
+
+                statusImg:[
+                    LANDMG_PATH1,
+                    LANDMG_PATH2,
+                    LANDMG_PATH3,
+                    LANDMG_PATH4,
+                    LANDMG_PATH5,
+                    LANDMG_PATH6,
+                    LANDMG_PATH7,
+                    LANDMG_PATH8,
+                    LANDMG_PATH9,
+                    LANDMG_PATH10,
+                    LANDMG_PATH11,
+                    LANDMG_PATH12,
+                    LANDMG_PATH13,
+                    LANDMG_PATH14,
+                    LANDMG_PATH15,
+                    LANDMG_PATH16,
+                    LANDMG_PATH17,
+                    LANDMG_PATH18,
+                    LANDMG_PATH19,
+                    LANDMG_PATH20,
+                    LANDMG_PATH21,
+                    LANDMG_PATH22,
+                    LANDMG_PATH23,
+                    LANDMG_PATH24,
+                    LANDMG_PATH25,
+                    LANDMG_PATH26,
+                    LANDMG_PATH27,
+                    LANDMG_PATH28,
+                    LANDMG_PATH29,
+                    LANDMG_PATH30,
+                    LANDMG_PATH31,
+                    LANDMG_PATH32,
+                    LANDMG_PATH33,
+                    LANDMG_PATH34,
+                    LANDMG_PATH35,
+                    LANDMG_PATH36,
+                    LANDMG_PATH37,
+                    LANDMG_PATH38,
+                    LANDMG_PATH39,
+                    LANDMG_PATH40,
+                ],
+                // 等待生成为对象的土地数据列表
+                list:[], 
+                // 包含所有已经生成为对象的土地对象列表盒子
+                exampleObj:null,
+                // 每页中需要显示土地列表
+                thisExampleList:null,
+                // 鼠标移入时土地的详细信息框
+                landStatusBox: null,
             },
         // 左右切换按钮
         toggleButton: null
@@ -252,6 +253,7 @@ export default {
         localStorage.foodGame = res.data.data.food_to_game;
         localStorage.gameFood = res.data.data.game_to_food;
         localStorage.fee      = res.data.data.game_fee;
+        localStorage.turnOut = res.data.data.game_out_charge
         self.init();
     });
   },
@@ -280,24 +282,32 @@ export default {
         var self = this;
         // 创建舞台背景
         var stageBg = new createjs.Bitmap(FARMBG_PATH);
-        this.stage.addChild(stageBg);
+        // 树
+        var stageBg2 = new createjs.Bitmap(FARMBG_PATH2);
+        stageBg2.y = 38;
+        var lotus = new createjs.Bitmap(LOTUS_PATH);
+        lotus.x = 600;
+        lotus.y = 525;
+        this.stage.addChild(stageBg,stageBg2,lotus);
         // 显示用户信息
         this.showUserInfo();
-        // 显示进度条
-        // this.showProgress();
         // 显示右上角功能区
         this.shop_Task_NoticenImg();
+        // 默认土地列表
+        this.defaultLand();
         // 获取已种植土地列表
         myFn.myAjax('get', {}, myFn.apiAddress.game.getLandList, function(res){
             if(res.data.list.length != 0){
               self.gameObj.land.list = res.data.list;
             }
             self.showLand(1);
-            // 显示我的仓库&邀请好友&游戏记录
-            self.showMyInformation();
             // 左右切换土地按钮
             self.gameObj.toggleButton = self.showToggleLand();
         })
+
+        // 显示我的仓库&邀请好友&游戏记录
+
+        self.showMyInformation();
         // 显示游戏宝典
         this.showCourse();
     },
@@ -317,46 +327,28 @@ export default {
         var userInfoBox = creatViewObj([userInfoBg, userHeadImg, userName, infoGoldIcon, infoGoldNum, infoFoodIcon, infoFoodNum], 10, -5);
         this.stage.addChild(userInfoBox);
     },
-    // 创建进度条
-    showProgress: function () {
-        // 时间进度文本
-        this.gameObj.progress.time = creatTextObj('', '15px Arial', 'red', 230, -5);
-        this.gameObj.progress.time.text = '还未播种';
-        var timePrompt = creatTextObj('距离完成时间:', '15px Arial', 'red', 120, -5);
-        // 进度条总长度
-        var overallSchedule = creatImgObj(OVERALLSCHEDULE_PATH, 0, 20);
-        // 当前进度矩形
-        var drawRoundRect1 = new createjs.Graphics().beginStroke("#5bd522").beginFill("#5bd522").drawRoundRect (-535, 21, 535, 8, 4);
-        this.gameObj.progress.Progressbar = new createjs.Shape(drawRoundRect1);
-        // 分割区间图
-        var section = creatImgObj(SECTION_PATH, 15, 20);
-        // 所有元素添加到进度条盒子，并设置遮罩层
-        var progress = creatViewObj([timePrompt, this.gameObj.progress.time,overallSchedule, this.gameObj.progress.Progressbar, section], 300, 30);
-        var mask = new createjs.Shape();
-        mask.graphics.beginFill("#000000");
-        mask.graphics.drawRoundRect( 0, 20, 600, 43, 4);
-        mask.x = 300;
-        mask.y = 0;
-        progress.mask = mask;
-        // 添加到舞台中
-        this.stage.addChild(progress);
-    },
     // 商店&任务&公告
     shop_Task_NoticenImg: function () {
         var shopPopup = '';
         var self = this;
         // 创建商店图标,点击弹出商店
         var shopImg = creatImgObj(SHOPIMG_PATH, 0, 0);
+        shopImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        shopImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
         shopImg.addEventListener("click", function() {
           self.gameShopPopup();
         });
         // 创建任务图标,点击弹出任务
         var taskImg = creatImgObj(TASKIMG_PATH, 67, 0);
+        taskImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        taskImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
         taskImg.addEventListener("click", function() {
           self.gameShowTaskPopup();
         });
         // 创建公告图标,点击弹出公告
         var noticenImg = creatImgObj(NOTICEIMG_PATH, 135, 0);
+        noticenImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        noticenImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
         noticenImg.addEventListener("click", function() {
             self.gameNoticenPopup();
         });
@@ -371,41 +363,50 @@ export default {
          * 计算当前播种额度并设置选项卡
          */
         var total_investment = self.userInfo.total_investment;
+
         $('.standarButton').removeClass('active');
-        if(total_investment >= 500){
+        if(total_investment > 300){
           $(".standarButton").eq(0).attr('disabled', 'true');
           $(".standarButton").eq(0).addClass('notClick');
         }
-        if(total_investment >= 1000 ){
+        if(total_investment > 500 ){
           $(".standarButton").eq(1).attr('disabled', 'true');
           $(".standarButton").eq(1).addClass('notClick');
         }
-        if(total_investment >= 2000){
+        if(total_investment > 1000){
           $(".standarButton").eq(2).attr('disabled', 'true');
           $(".standarButton").eq(2).addClass('notClick');
         }
-        if(total_investment < 500){
+
+        if(total_investment < 300){
           $(".standarButton").eq(0).addClass('active');
-        }
-        if(total_investment >= 500  && total_investment < 1000){
+        }else if(total_investment >= 300  && total_investment < 600){
           $(".standarButton").eq(1).addClass('active');
-        }else if(total_investment >= 1000 && total_investment < 2000){
+        }else if(total_investment >= 600 && total_investment < 1100){
           $(".standarButton").eq(2).addClass('active');
-        }else if(total_investment >= 2000){
+        }else if(total_investment >= 1100){
           $(".standarButton").eq(3).addClass('active');
         }
+
+
+
         var shopPopup = new popup(self.stage);
         // 创建商店弹框背景
         var popupBg = creatImgObj(POPUPSHOPBG_PATH, 0, 0);
+        popupBg.addEventListener("mouseover", function(){});
+        popupBg.addEventListener("mouseout", function(){});
         
         // 创建商店左侧内容并加入盒子中
-        var shopTitle = creatTextObj("商店", "20px Arial", "#ec9530", 270, 15);
-        var BottomFrame = new createjs.Shape(new createjs.Graphics().beginStroke("#714223").beginFill("#161413").drawRect(20, 20, 160, 200));
+        // var shopTitle = creatTextObj("商店", "20px Arial", "#ec9530", 270, 15);
+        var BottomFrame = new createjs.Shape(new createjs.Graphics().beginFill("#fff").drawRoundRect(20, 20,150, 150, 20));
+        var textBox = new createjs.Shape(new createjs.Graphics().beginFill("#cf9a54").drawRoundRect(20, 190,150, 45, 23));
         var shopleftBox = creatViewObj([
             BottomFrame,
-            creatImgObj(POPUPBG_FOODICON_PATH, 40, 60),
-            creatTextObj("种子", "17px Arial", "#ec9530", 83, 235)
-        ], 10, 30)
+            creatImgObj(POPUPBG_FOODICON_PATH, 40, 40),
+            textBox,
+            creatTextObj( self.$t( "gameIndex.seed" ) , "17px Arial", "#904900", 80, 205)
+        ], 40, 60);
+
         /**
          * 创建商店右侧部分共四部分
          * 1.售价和比例
@@ -415,17 +416,19 @@ export default {
          */
         
         // 1.第一部分售、比例、分割线创建后添加到盒子中
-        var unitPrice = creatTextObj("售价：1金币", "17px Arial", "#ec9530", 0, 0);
+        var unitPrice = creatTextObj( self.$t("gameIndex.price") + "：1" + self.$t("gameIndex.gold"), "17px Arial", "#ca1616", 0, 0);
         var proportionArray = localStorage.gameFood.split(':');
-        var proportion = creatTextObj("(" + proportionArray[0] + "金币 : " + proportionArray[1] + "粮食)", "16px Arial", "red", 110, 0);
+        var proportion = creatTextObj("(" + proportionArray[0] +  self.$t("gameIndex.gold") + " : " + proportionArray[1] + self.$t("gameIndex.foodstuff") + ")", "16px Arial", "red", 110, 0);
         var shopDivision = creatImgObj(DIVISION_PATH, 0, 30);
-        shopDivision.scaleX = 0.6
-        var priceBox = creatViewObj([unitPrice, proportion, shopDivision], 210, 55);
+        shopDivision.scaleX = 0.9
+        var priceBox = creatViewObj([unitPrice, proportion, shopDivision], 250, 80);
+
+
         // 2.第二部分创建规格选项卡调整位子
         // 显示隐藏的规格按钮div
         // 添加分割线并添加到盒子中
         // 添加规格切换事件
-        var standardText = creatTextObj("规格：", "18px Arial", "#ec9530", 0, 0);
+        var standardText = creatTextObj( self.$t("gameIndex.specifications") + "：", "18px Arial", "#804900", 0, 0);
         var standard100 = new createjs.DOMElement(document.getElementById("standard100"));
         var standard500 = new createjs.DOMElement(document.getElementById("standard500"));
         standard500.x = 75;
@@ -433,11 +436,11 @@ export default {
         standard1000.x = 150;
         var standard2000 = new createjs.DOMElement(document.getElementById("standard2000"));
         standard2000.x = 225;
-        var standardNumBox = creatViewObj([standard100, standard500, standard1000, standard2000], 0, 37);
+        var standardNumBox = creatViewObj([standard100, standard500, standard1000, standard2000], 0, 33);
         var standardDivision = creatImgObj(DIVISION_PATH, 0, 80);
-        standardDivision.scaleX = 0.6;
+        standardDivision.scaleX = 0.9;
         document.getElementById('standarBox').style.display = 'block';        
-        var standardBox = creatViewObj([standardText, standardNumBox, standardDivision], 210, 100);
+        var standardBox = creatViewObj([standardText, standardNumBox, standardDivision], 250, 130);
         $('.standarButton').click(function() {
             $('.standarButton').removeClass('active');
             $(this).addClass('active');
@@ -445,63 +448,96 @@ export default {
             money.text = calculationMoney(2);
             numInput.keyup();
         })
+
+        
         // 3.第三部分设置倍数添加左右调整倍数事件
         // 按照游戏制度计算当前可买倍数
         // 添加左右按钮事件条调整数量
-        var selectedStandar = $('.active').val();
+        var selectedStandar = $('input.active').val();
         var numInput = $("#number");
         var total = calculationMoney(1);
         numInput.keyup(function(){
            getBuyNum($(this));
         })
+
         // 计算可购买数量
         function getBuyNum(el){
-            if( selectedStandar == 100 && el.val() > (500-total_investment)/100){
-                el.val((500-total_investment)/100);
-            }else if(selectedStandar == 500 && el.val() > Math.ceil((1000-total_investment)/500)){
-               el.val(Math.ceil((1000-total_investment)/500));
-            }else if(selectedStandar == 1000 && el.val() > Math.ceil((2000-total_investment)/1000)){
-              el.val(Math.ceil((2000-total_investment)/1000));
+
+            if(el.val() == 0 ){
+                el.val(1);
             }
+
+            if( selectedStandar == 100){
+
+                if(el.val() < total_investment/100){
+
+                  el.val(total_investment/100);
+                
+                }
+                
+                if(el.val() > 5){
+                  el.val(5);
+                }
+
+            }else if(selectedStandar == 500){
+
+                if( el.val() < Math.ceil(total_investment/500) ){
+                    el.val(Math.ceil(total_investment/500));
+                }
+
+                if(el.val() > 2){
+                   el.val(2)
+                }
+
+            }else if(selectedStandar == 1000){
+
+                if( el.val() < Math.ceil(total_investment/1000) ){
+                    el.val(Math.ceil(total_investment/1000));
+                }
+
+                if(el.val() > 2){
+                  el.val(2)
+                }
+            }
+
             money.text = calculationMoney(2);
         }
         // 调整数量
         var reduceNum = creatImgObj(REDUCE_PATH, 0, 13);
-        var addNum = creatImgObj(ADD_PATH, 75, 14);
+        var addNum = creatImgObj(ADD_PATH, 93, 13);
         var number = new createjs.DOMElement(document.getElementById("number"));
         // 调整数量事件
         reduceNum.addEventListener("click", function() {
-            if (parseInt(numInput.val()) <= 1 || numInput.val() == '') {
-                numInput.val(1);
-            } else {
-                numInput.val(parseInt(numInput.val()) - 1);
-            }
-            money.text = calculationMoney(2);
-        })
-        addNum.addEventListener("click", function() {
-            if(numInput.val() == ''){
-                numInput.val(0);
-            }
-            numInput.val(parseInt(numInput.val()) + 1);
+
+            numInput.val(parseInt(numInput.val()) - 1);
             getBuyNum(numInput);
         })
-        number.x = 30;
-        number.y = 10;
-        var adjustmentBox = creatViewObj([addNum, reduceNum, number], 210, 185);
+        addNum.addEventListener("click", function() {
+
+            numInput.val(parseInt(numInput.val()) + 1);
+            getBuyNum(numInput);
+
+        })
+        number.x = 35;
+        number.y = 12;
+        var adjustmentBox = creatViewObj([addNum, reduceNum, number], 250, 215);
         // 4.第四部分应付价格和支付按钮
         // 支付按钮添加点击事件弹出支付密码框
-        var money = creatTextObj("应付：" + total + " 金币", "20px Arial", "#ec9530", 210, 240);
-        var payButton = creatImgObj(POPUPBG_PAYMENT_PATH, 242, 280);
+        var money = creatTextObj( self.$t("gameIndex.copeWith") + "：" + total + self.$t("gameIndex.gold"), "20px Arial", "#fb0a00", 250, 275);
+        getBuyNum(numInput);
+        var payText = creatTextObj( self.$t("gameIndex.paymentText") , "20px Arial", "#fff", 330, 322);
+        var payButton = creatImgObj(POPUPBG_PAYMENT_PATH, 242, 310);
         // 弹出支付框
         payButton.addEventListener("click", function() {
+
             self.gameShowPayPopup(numInput.val(), selectedStandar,calculationMoney(1));
         })
-        shopPopup.addOtherElements([popupBg, shopTitle, shopleftBox, priceBox, standardBox, adjustmentBox, money, payButton]);
+        shopPopup.addOtherElements([popupBg, shopleftBox, priceBox, standardBox, adjustmentBox, money, payButton, payText]);
         shopPopup.callBackClose = function() {
             document.getElementById("standarBox").style.display = "none";
         }
-        shopPopup.setBoxSeat(283, 150);
-        shopPopup.setCloseButtonSeat(545, -20);
+        shopPopup.setBoxSeat(283, 120);
+        shopPopup.setCloseButtonSeat(600, -20);
         shopPopup.showPopup();
         // 计算支付金币数量
         // 传递1返回数值，传递2返回拼接字符串, 传递3返回购买粮食数量
@@ -509,7 +545,7 @@ export default {
             if (type == 1) {
                 return numInput.val() * selectedStandar / proportionArray[0] / proportionArray[1];
             } else if (type == 2) {
-                return "应付:" + (numInput.val() * selectedStandar / proportionArray[0] / proportionArray[1]) + " 金币";
+                return self.$t("gameIndex.copeWith") + (numInput.val() * selectedStandar / proportionArray[0] / proportionArray[1]) + self.$t("gameIndex.gold");
             } else if(type == 3){
                 return numInput.val() * selectedStandar;
             }
@@ -524,20 +560,21 @@ export default {
       
       // 接受购买数量并进行表单验证
       if(multiple == ''){
-        alert('购买数量不能为空');
+        alert( self.$t("staticMsg.msg018") );
         return false;
       }else if(multiple == 0){
-        alert('购买数量不能为0');
+        alert( self.$t("staticMsg.msg018") );
         return false;
       }
       if(self.userInfo.total_currency < num){
-        alert('您的金币余额不足');
+        alert( self.$t("staticMsg.msg019") );
         return false;
       }
       // 创建支付框弹出对象并设置背景
       var payPassview = new popup(self.stage);
       // 添加移入移出时间防止事件穿透bug
       var payPassBg       = creatImgObj(POPUPPAYBG_PATH, 0, 0);
+
       payPassBg.addEventListener("mouseover", function(){});
       payPassBg.addEventListener("mouseout", function(){});
       // 隐藏商店element元素显示支付框element元素
@@ -545,40 +582,56 @@ export default {
       document.getElementById("passwordTextBox").style.display = "block";
       // 创建表单布局
       // 支付密码部分
-      var explain         = creatTextObj("*输入支付密码后点击获取获取您的邮箱验证码", "14px Arial", "red", -40, -20);
-      var payTitle        = creatTextObj("支付购买", "18px Arial", "#ec9530", 245, 25);
+      var explain         = creatTextObj("*" + self.$t("gameIndex.payContent"), "14px Arial", "red", -15, -20);
+
+        var payTitle = creatTextObj( self.$t("gameIndex.payTitle"), "23px Arial", "#6B4012", 265, 18 );
+        payTitle.shadow = new createjs.Shadow("#fff", 0, 1, 0);
+
       var pswTxetEl1 = document.getElementById("passwordText1");
-      var passwordText1Lable         = creatTextObj("支付密码:", "14px Arial", "#ec9530", -37, 30);
+      var passwordText1Lable         = creatTextObj( self.$t("gameIndex.payPassword"), "14px Arial", "#ec9530", -17, 30);
       var passwordText1   = new createjs.DOMElement(pswTxetEl1);
       passwordText1.y = 21;
-      passwordText1.x = 35;
+      passwordText1.x = 55;
       // 创建表单布局
       // 邮件验证码部分
       var mailCodeDom = document.getElementById('mailCode');
       var mailCode   = new createjs.DOMElement(mailCodeDom);
       mailCode.y = 80;
-      mailCode.x = 35;
-      var mailCodeLable = creatTextObj("邮箱验证码:", "14px Arial", "#ec9530", -50, 90);
+      mailCode.x = 55;
+      var mailCodeLable = creatTextObj( self.$t("gameIndex.emailCode") , "14px Arial", "#ec9530", -27, 90);
       var getCodeButtonEL = document.getElementById('getMailCode');
       var getCodeButton = new createjs.DOMElement(getCodeButtonEL);
       getCodeButton.y = 80;
-      getCodeButton.x = 190;
+      getCodeButton.x = 210;
       // 添加点击事件验证支付密码表单并发送邮件
       getCodeButtonEL.addEventListener("click" , function(){
            if(pswTxetEl1.value == ''){
-              alert('支付密码不能为空')
+              alert( self.$t("staticMsg.msg017") );
+              return false;
            }else{
               myFn.myAjax('get',{pwd:pswTxetEl1.value}, myFn.apiAddress.accountSafety.verifySafetyPassword, function(res){
-                alert("验证码已发送至您的邮箱请查收");
+                alert( self.$t("staticMsg.msg001") );
               })
            }
       })
       // 添加所有已创建好元素到盒子中 
       var passwordTextBox = creatViewObj([explain,passwordText1,passwordText1Lable,mailCode,mailCodeLable,getCodeButton], 180, 100);
       // 确认购买提交静态验证码判断是否正确
-      var yesPayButton = creatImgObj(POPUPPYESPAY_PATH, 240, 250);
+        var yesPayBtnBg = new createjs.Shape(new createjs.Graphics().beginStroke("#fff").beginFill("#A6DC0A").drawRoundRect(0, 0,120, 30, 15));
+        var yesPayBtnText = creatTextObj( self.$t("gameIndex.payment"), "13px Arial", "#fff", 45, 10);
+        var yesPayButton = creatViewObj([yesPayBtnBg, yesPayBtnText], 250, 225);
       
       yesPayButton.addEventListener("click", function() {
+            if(pswTxetEl1.value == ''){
+                alert( self.$t("staticMsg.msg017") );
+                return false;
+            }
+
+            if(mailCodeDom.value == ''){
+                alert( self.$t("staticMsg.msg145") );
+                return false;
+            }
+
           // 验证邮箱验证码
           myFn.myAjax('get',{emailcode:mailCodeDom.value}, myFn.apiAddress.accountSafety.verifySafetyMail, function(res){
             // 播种
@@ -594,10 +647,10 @@ export default {
 
               myFn.myAjax('get',{id:res.data.list[0].id}, myFn.apiAddress.game.getflmessage, function(msg){
                   self.gameObj.land.list.push(msg.data.list);
-                  self.showLand();
-                  alert('播种成功');
+                  self.AdditionalLand();
+                  alert( self.$t("staticMsg.msg020") );
 
-                  if(self.gameObj.land.list.length % self.gameObj.land.pageNum == 1 && self.gameObj.land.list.length >= self.gameObj.land.pageNum){
+                  if(self.gameObj.land.list.length % self.gameObj.land.pageNum == 0 && self.gameObj.land.list.length >= self.gameObj.land.pageNum){
                     self.gameObj.toggleButton.right.alpha = 1;
                   }
                   payPassview.closePopup();
@@ -632,7 +685,7 @@ export default {
           document.getElementById("passwordTextBox").style.display = "none"
       }
       payPassview.setBoxSeat(283, 150);
-      payPassview.setCloseButtonSeat(545, -20);
+      payPassview.setCloseButtonSeat(595, 10);
       payPassview.showPopup();
     },
     gameShowTaskPopup:function(){
@@ -640,13 +693,18 @@ export default {
       var noticPopup = new popup(this.stage);
       // 弹出框背景,标题设置
       var noticeBg = new creatImgObj(POPUP_NOTICEBG, 0 ,0);
-      var noticTitle = new creatTextObj('任务', '20px Arial', '#e8b71b', 230, 20);
+      var noticTitleBg = new creatImgObj( TASKIMG_TITLEBG_PATH, 0, 0);
+      var noticTitle = new creatTextObj( this.$t("gameIndex.task") , '23px Arial', '#6B4012', 70, 18);
+      noticTitle.shadow = new createjs.Shadow("#fff", 0, 1, 0);
+
+      var noticeTitleView = new creatViewObj([noticTitleBg, noticTitle], 170, -30);
+      
       var textList = [];
-      textList.push(creatViewObj([creatTextObj('一、运动5000步', '15px Arial', '#ccc', 0, 0)], 30, 0));
-      var noticList = creatViewObj(textList, 0, 80);
-      noticPopup.addOtherElements([noticeBg, noticTitle, noticList]);
+      textList.push(creatViewObj([creatTextObj('一、运动5000步', '20px Arial', '#ec9530', 0, 0)], 0, 0));
+      var noticList = creatViewObj(textList, 40, 60);
+      noticPopup.addOtherElements([noticeBg, noticeTitleView, noticList]);
       noticPopup.setBoxSeat(320, 150);
-      noticPopup.setCloseButtonSeat(490, -20);
+      noticPopup.setCloseButtonSeat(540, -20);
       noticPopup.showPopup();
       // myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.game.course, function(res){
       //   var textList = [];
@@ -661,106 +719,234 @@ export default {
       // }) 
     },
     gameNoticenPopup: function(){
-      var noticPopup = new popup(this.stage);
-      var noticeBg = new creatImgObj(POPUP_NOTICEBG, 0 ,0);
-      var noticTitle = new creatTextObj('公告', '20px Arial', '#e8b71b', 230, 20);
+        var noticPopup = new popup(this.stage);
+        var noticeBg = new creatImgObj(POPUP_NOTICEBG, 0 ,0);
+
+        var noticTitleBg = new creatImgObj( TASKIMG_TITLEBG_PATH, 0, 0);
+        var noticTitle = new creatTextObj(this.$t("gameIndex.bulletin"), '23px Arial', '#6B4012', 70, 18);
+        noticTitle.shadow = new createjs.Shadow("#fff", 0, 1, 0);
+        var noticeTitleView = new creatViewObj([noticTitleBg, noticTitle], 170, -30);
       
       myFn.myAjax('get', {page:1,pagenumber:3}, myFn.apiAddress.game.notice, function(res){
         var textList = [];
         for(var i=0; i<res.data.list.length; i++){
-          textList.push(creatViewObj([creatTextObj(res.data.list[i].time, '16px Arial', '#e8b71b', 0, 0),creatTextObj(res.data.list[i].bulletin, '15px Arial', '#ccc', 0, 25)], 30, 0+i*55));
+          textList.push(creatViewObj([
+                creatTextObj(res.data.list[i].time, '20px Arial', '#ec9530', 0, 0),
+                creatTextObj(res.data.list[i].bulletin, '15px Arial', '#ec9530', 0, 35)
+                ], 40, 0+i*85));
         }
-        var noticList = creatViewObj(textList, 0, 80);
-        noticPopup.addOtherElements([noticeBg, noticTitle, noticList]);
+        var noticList = creatViewObj(textList, 0, 60);
+        noticPopup.addOtherElements([noticeBg, noticeTitleView, noticList]);
         noticPopup.setBoxSeat(320, 150);
-        noticPopup.setCloseButtonSeat(490, -20);
+        noticPopup.setCloseButtonSeat(540, -20);
         noticPopup.showPopup();
       });
     },
-    /*
-     * 显示土地并返回土地
-     * 返回一个包含add方法的土地盒子
-     * add方法用来添加土地
-     * 参数 1.页码，2.每页显示数量
-     */
-      showLand: function(){
+    // 需要显示的页数
+    showLand:function(page){
+        var length  = 0;
         var self = this;
-        // 创建默认的土地列表
-        var defaultList = [];
-        
-        for(var i=0; i<12; i++){
-          if(i<4){
-            defaultList.push(creatImgObj(LANDMG_PATH, i*87 , i*43));
-          }else if(i<8){
-            defaultList.push(creatImgObj(LANDMG_PATH, (i-4)*87 - 90 , (i-4)*43 + 45));
-          }else if(i<11){
-            defaultList.push(creatImgObj(LANDMG_PATH, (i-8)*87 - 180 , (i-8)*43 + 90));
-          }
-        }
-        var defaultLandView = creatViewObj(defaultList, 0, 0);
-        // 每一快地可种植数量(每页可显示数量);
-        self.gameObj.land.pageNum = defaultLandView.children.length;
-        // 总页数
-        self.gameObj.land.page = Math.ceil(self.gameObj.land.list.length / defaultLandView.children.length);
-        // 已种植土地列表渲染
-        self.gameObj.land.exampleObj = creatViewObj(self.landSeat(self.gameObj.land.currentPage), -8, -57);
-        defaultLandView.addEventListener("mouseover", function(e){
-            // 计算当前查看区域在数组中的下标
-            var index = defaultLandView .children.indexOf(e.target);
-            // 计算翻页当前位子加上每页显示数量
-            var index = index + self.gameObj.land.pageNum*(self.gameObj.land.currentPage-1)
-            if(index < self.gameObj.land.list.length && lastPopup == ''){
-              self.showLandStatus(index, e.target.x, e.target.y);
+        // 如果列表不为空代表不是第一次初始化可以不全部生成
+        if(this.gameObj.land.exampleObj != null){
+
+            this.gameObj.land.thisExampleList.children = [];
+            if(page * this.gameObj.land.pageNum < this.gameObj.land.exampleObj.length){
+                length = page * this.gameObj.land.pageNum;
+            }else{
+                length = this.gameObj.land.exampleObj.length -  ((page-1) * this.gameObj.land.pageNum);
+                length = (page-1) * this.gameObj.land.pageNum + length
             }
-        });
-        defaultLandView.addEventListener("mouseout", function(e){
-          if(self.gameObj.land.landStatusBox != null && lastPopup === self.gameObj.land.landStatusBox){
-            self.gameObj.land.landStatusBox.closePopup();
-          }
-        });
-        // 扩建土地
-        var extensionVime = creatViewObj([creatImgObj(EXTENSION_PATH1, 3 * 87 - 180 , 3 * 43 + 90)], 0, 0);
-        var extension = creatImgObj(EXTENSION_PATH, 3 * 87 - 130 , 3 * 43 + 70);
-        extensionVime.addChild(extension);
-        extension.addEventListener("click", function(){
-          self.gameShopPopup();
-        })
-        var landView = creatViewObj([defaultLandView, self.gameObj.land.exampleObj, extensionVime], 480, 310);
-        this.stage.addChild(landView);
-        // console.log(self.gameObj.land.exampleObj.children  = self.landSeat(2));
-    },
-    // 计算已播种显示位子
-    // 参数1.当前需要显示页码
-    landSeat:function(currentPage){
-      var self = this;
-      var growList = [];
-      // 显示数量
-      var landlenth = 0;
-      if (currentPage < this.gameObj.land.page) {
-        landlenth = this.gameObj.land.pageNum;
-      }else{
-        landlenth = this.gameObj.land.list.length - this.gameObj.land.pageNum * (currentPage-1);
-      }
-      for(var i=0; i < landlenth; i++){
-        if(i<4){
-          growList.push(creatImgObj(this.gameObj.land.statusImg[parseInt(this.gameObj.land.list[((currentPage-1)*self.gameObj.land.pageNum) + i].week)], i*89 , i*43));
-        }else if(i<8){
-          growList.push(creatImgObj(this.gameObj.land.statusImg[parseInt(this.gameObj.land.list[((currentPage-1)*self.gameObj.land.pageNum) + i].week)], (i-4)*89 - 90 , (i-4)*43 + 45));
-        }else if(i<11){
-          growList.push(creatImgObj(this.gameObj.land.statusImg[parseInt(this.gameObj.land.list[((currentPage-1)*self.gameObj.land.pageNum) + i].week)], (i-8)*89 - 180 , (i-8)*43 + 90));
+
+            for(var i = (page-1) * this.gameObj.land.pageNum; i < length ; i++){
+                this.gameObj.land.thisExampleList.addChild(this.gameObj.land.exampleObj[i]);
+            }
+        }else{
+            this.landList();
+            this.gameObj.land.thisExampleList = creatViewObj([],435,295);
+            this.gameObj.land.list.length >= this.gameObj.land.pageNum ? length = this.gameObj.land.pageNum : length = this.gameObj.land.list.length+1; 
+            for(var i=0; i < length ; i++){
+                 this.gameObj.land.thisExampleList.addChild(this.gameObj.land.exampleObj[i])
+            }
+            
+            this.gameObj.land.page = Math.ceil(this.gameObj.land.exampleObj.length/this.gameObj.land.pageNum);
+
         }
-      }
-      return growList;
+
+        this.stage.addChild(this.gameObj.land.thisExampleList);
     },
+    // 生成后的土地对象列表
+    landList: function(){
+        var landList = [];
+        var week = 0;
+        // 未计算位子对象
+        var noSeat = null;
+        // 计算后的
+        var yesSeat = null;
+        // 是否显示扩建
+        var yesExtension = false;
+        for(var i = 0; i < this.gameObj.land.list.length; i++){
+
+            week = this.gameObj.land.list[i].week;
+            // 没经过位子计算的土地对象
+            noSeat  = this.createLand(week, i);
+            // 经过计算后的土地对象
+            yesSeat = this.landIndexSeat( i % this.gameObj.land.pageNum, noSeat);
+
+            landList.push(yesSeat);
+        }
+        // 数据添加完毕后添加扩建标示土地
+        noSeat  = this.createLand(-1);
+        yesSeat = this.landIndexSeat( (this.gameObj.land.list.length) % this.gameObj.land.pageNum, noSeat);
+        landList.push(yesSeat);
+        this.gameObj.land.exampleObj = landList;
+    },
+    // 默认土地
+    defaultLand:function(){
+        var defaultLandBox = creatViewObj([],435,295);
+        for(var i=0; i<this.gameObj.land.pageNum; i++){
+            var defaultLand = creatImgObj(LANDMG_PATH, 0, 0);
+            defaultLand = this.landIndexSeat(i, defaultLand);
+            defaultLandBox.addChild(defaultLand);
+        }
+            this.stage.addChild(defaultLandBox);
+        // alert(this.gameObj.land.pageNum);
+    },
+    // 创建单个土地对象
+    // 1.周数，如果为-1代表扩建
+    createLand: function(status, index){
+
+        var landStatus = null;
+        var self = this;
+        if(status != -1){
+            landStatus = creatImgObj(this.gameObj.land.statusImg[status], 10, 3);
+        }else{
+            landStatus = creatImgObj(EXTENSION_PATH, 20, -35);
+            var self = this;
+            landStatus.addEventListener("click" , function(){
+                self.gameShopPopup();
+            })
+        }
+
+        var defaultLand = creatImgObj(LANDMG_PATH, 0, 0);
+        var landObj = creatViewObj([
+                defaultLand,
+                landStatus
+            ],0,0);
+
+            defaultLand.addEventListener("mouseover", function(e){
+                if(index != undefined && lastPopup == ''){
+                    self.showLandStatus(index, 10, 10);
+                }
+            });
+            defaultLand.addEventListener("mouseout", function(e){
+                if(index != undefined && lastPopup === self.gameObj.land.landStatusBox){
+                    lastPopup.closePopup();
+                }
+            });
+        
+
+        return landObj;
+    },
+
+    // 计算土地位子
+    landIndexSeat: function(item, obj){
+        var x = 0;
+        var y = 0;
+
+        x = (item - parseInt(item/4)* 4) * -60;
+        y = (item - parseInt(item/4)* 4) * 31;
+
+        x = x + parseInt(item/4) * 55
+        y = y + parseInt(item/4) * 30;
+
+
+        obj.x = x;
+        obj.y = y;
+
+        return obj;
+    },
+    // 向列表追加一块地
+    AdditionalLand:function(){
+
+        var week = 0;
+        // 未计算位子对象
+        var noSeat = null;
+        // 计算后的
+        var yesSeat = null;
+
+        week = this.gameObj.land.list[this.gameObj.land.list.length - 1].week;
+        noSeat  = this.createLand(week);
+        yesSeat = this.landIndexSeat( (this.gameObj.land.list.length - 1) % this.gameObj.land.pageNum, noSeat);
+        this.gameObj.land.exampleObj[this.gameObj.land.exampleObj.length-1] = yesSeat;
+
+        noSeat  = this.createLand(-1);
+        yesSeat = this.landIndexSeat( (this.gameObj.land.list.length) % this.gameObj.land.pageNum, noSeat);
+        this.gameObj.land.exampleObj.push(yesSeat);
+
+        // 重新计算页码
+        this.gameObj.land.page = Math.ceil(this.gameObj.land.exampleObj.length/this.gameObj.land.pageNum);
+
+        this.showLand(this.gameObj.land.currentPage);
+    },
+
+    /*
+     * 显示土地
+     * 添加移入淡入淡效果
+     * 添加点击切换事件
+     * 返回左右切换按键对象
+     */
+    showToggleLand: function(){
+        var self = this;
+        // 左右土地切换图片
+        var leftLandmg = creatImgObj(EXTENSIONL_PATH, 140, 380);
+        var rightLandmg = creatImgObj(EXTENSIONR_PATH, 820, 380);
+        leftLandmg.alpha = 0;
+
+        if(self.gameObj.land.list.length >= self.gameObj.land.pageNum){
+            rightLandmg.alpha = 1;
+        }else{
+            rightLandmg.alpha = 0;
+        }
+        // 上一块切换事件
+        leftLandmg.addEventListener("click", function(){
+
+            if(1 < self.gameObj.land.currentPage){
+                self.gameObj.land.currentPage--;
+                self.showLand(self.gameObj.land.currentPage);
+            }
+            if(1 == self.gameObj.land.currentPage){
+                leftLandmg.alpha = 0;
+            }
+            rightLandmg.alpha = 1;
+
+        });
+        // 下一块块切换事件
+        rightLandmg.addEventListener("click", function(){
+
+            if(self.gameObj.land.page >= self.gameObj.land.currentPage){
+                self.gameObj.land.currentPage++;
+                self.showLand(self.gameObj.land.currentPage);
+            }
+            if(self.gameObj.land.page == self.gameObj.land.currentPage){
+                rightLandmg.alpha = 0;
+            }
+            leftLandmg.alpha = 1;
+
+        });
+
+        this.stage.addChild(leftLandmg, rightLandmg); 
+        return {left:leftLandmg,right:rightLandmg}
+    },
+
     // 提供当前所需要显示详情信息的土地下表.
     // 显示数组中对应的详细信息
     showLandStatus:function(index, x, y){
       var self = this;
       var landStatusBg = new createjs.Shape(new createjs.Graphics().beginStroke("#714223").beginFill("#ccc").drawRect(0, 0, 300, 100));
-      var statusText1 = creatTextObj("播种时间：" + this.gameObj.land.list[index].crt_time, "15px Arial", "black", 7, 10);
-      var statusText2 = creatTextObj("播种数额：" + this.gameObj.land.list[index].qnt, "15px Arial", "black", 7, 31);
-      var statusText3 = creatTextObj("已获收益：" + this.gameObj.land.list[index].income, "15px Arial", "black", 7, 53);
-      var statusText4 = creatTextObj("加速次数：" + this.gameObj.land.list[index].speed_cnt + "次(" + this.gameObj.land.list[index].speed_week + "周)", "15px Arial", "black", 7, 75);
+      var statusText1 = creatTextObj( self.$t("gameIndex.sowingTime")   + "：" + this.gameObj.land.list[index].crt_time, "15px Arial", "black", 7, 10);
+      var statusText2 = creatTextObj( self.$t("gameIndex.sowingAmount") + "：" + this.gameObj.land.list[index].qnt, "15px Arial", "black", 7, 31);
+      var statusText3 = creatTextObj( self.$t("gameIndex.earnedIncome") + "：" + this.gameObj.land.list[index].income, "15px Arial", "black", 7, 53);
+      var statusText4 = creatTextObj( self.$t("gameIndex.accelerationTimes") + "：" + this.gameObj.land.list[index].speed_cnt + self.$t("classifier.second") + "(" + this.gameObj.land.list[index].speed_week + self.$t("classifier.week") + ")", "15px Arial", "black", 7, 75);
       var landStatusBox = creatViewObj([landStatusBg,statusText1,statusText2,statusText3,statusText4],0,0);
       
       var landStatus = new popup(self.stage);
@@ -770,71 +956,40 @@ export default {
       landStatus.showPopup();
       this.gameObj.land.landStatusBox = landStatus
     },
-    /*
-     * 显示土地
-     * 添加移入淡入淡效果
-     * 添加点击切换事件
-     * 返回左右切换按键对象
-     */
-    showToggleLand: function(){
-        var self = this;
-      
-        // 左右土地切换图片
-        var leftLandmg = creatImgObj(EXTENSIONL_PATH, 170, 350);
-        var rightLandmg = creatImgObj(EXTENSIONR_PATH, 920, 380);
-        leftLandmg.alpha = 0;
-        if(self.gameObj.land.list.length > 11){
-            rightLandmg.alpha = 1;
-        }else{
-            rightLandmg.alpha = 0;
-        }
-        // 上一块切换事件
-        leftLandmg.addEventListener("click", function(){
-            if(1 < self.gameObj.land.currentPage){
-                self.gameObj.land.currentPage--;
-                self.gameObj.land.exampleObj.children = self.landSeat(self.gameObj.land.currentPage);
-            }
-            if(1 == self.gameObj.land.currentPage){
-                leftLandmg.alpha = 0;
-            }
-            rightLandmg.alpha = 1;
-        });
-        // 下一块块切换事件
-        rightLandmg.addEventListener("click", function(){
-            if(self.gameObj.land.page > self.gameObj.land.currentPage){
-                self.gameObj.land.currentPage++;
-                self.gameObj.land.exampleObj.children = self.landSeat(self.gameObj.land.currentPage);
-            }
-            if(self.gameObj.land.page == self.gameObj.land.currentPage){
-                rightLandmg.alpha = 0;
-            }
-            leftLandmg.alpha = 1;
-                htLandmg.isShow();
-        });
-
-        this.stage.addChild(leftLandmg, rightLandmg); 
-        return {left:leftLandmg,right:rightLandmg}
-    },
  
     // 创建游戏宝典
     showCourse: function () {
-      var self = this;
+        var self = this;
         var canonImg = creatImgObj(CANONIMG_PATH, 0, 0);
-        var course = creatViewObj([canonImg], 40, 560);
+        var course = creatViewObj([canonImg], 40, 600);
+
+        canonImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        canonImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
+
         canonImg.addEventListener("click", function() {
+
             var noticPopup = new popup(self.stage);
             var noticeBg = new creatImgObj(POPUP_NOTICEBG, 0 ,0);
-            var noticTitle = new creatTextObj('游戏宝典', '20px Arial', '#e8b71b', 210, 20);
-            myFn.myAjax('get', {page:1,pagenumber:5}, myFn.apiAddress.game.course, function(res){
-              var textList = [];
-              for(var i=0; i<res.data.list.length; i++){
-                textList.push(creatViewObj([creatTextObj(res.data.list[i].question, '16px Arial', '#e8b71b', 0, 0),creatTextObj(res.data.list[i].answer, '15px Arial', '#ccc', 0, 25)], 30, 0+i*55));
-              }
-              var noticList = creatViewObj(textList, 0, 80);
-              noticPopup.addOtherElements([noticeBg, noticTitle, noticList]);
-              noticPopup.setBoxSeat(320, 150);
-              noticPopup.setCloseButtonSeat(490, -20);
-              noticPopup.showPopup();
+
+            var noticTitleBg = new creatImgObj( TASKIMG_TITLEBG_PATH, 0, 0);
+            var noticTitle = new creatTextObj( self.$t("gameIndex.canon"), '23px Arial', '#6B4012', 70, 18);
+            noticTitle.shadow = new createjs.Shadow("#fff", 0, 1, 0);
+            var noticeTitleView = new creatViewObj([noticTitleBg, noticTitle], 170, -30);
+
+
+            myFn.myAjax('get', {page:1,pagenumber:3}, myFn.apiAddress.game.course, function(res){
+                var textList = [];
+                for(var i=0; i<res.data.list.length; i++){
+                    textList.push(creatViewObj([
+                            creatTextObj(res.data.list[i].question, '20px Arial', '#ec9530', 0, 0),
+                            creatTextObj(res.data.list[i].answer, '15px Arial', '#ec9530', 0, 35)
+                        ], 40, 0+i*85));
+                }
+                var noticList = creatViewObj(textList, 0, 60);
+                noticPopup.addOtherElements([noticeBg, noticeTitleView, noticList]);
+                noticPopup.setBoxSeat(320, 150);
+                noticPopup.setCloseButtonSeat(540, -20);
+                noticPopup.showPopup();
             }) 
         })
         this.stage.addChild(course);
@@ -843,74 +998,120 @@ export default {
     showMyInformation: function () {
 
         var self = this;
-        var recordPopup = new popup(self.stage);
-
         // 我的仓库
-        var myWarehouseImg = creatImgObj(MYWAREHOUSE_PATH, 370, 350);
+        var myWarehouseImg = creatImgObj(MYWAREHOUSE_PATH, 370, 383);
         myWarehouseImg.shadow = new createjs.Shadow("#000000", 4, 5, 10);
+        myWarehouseImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        myWarehouseImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
+
         myWarehouseImg.addEventListener("click", function() {
-            var popupBg = creatImgObj(POPUPSHOPBG_PATH, 0, 0);
-            var popup_exchange = creatImgObj(POPUPBG_EXCHANGE_BUTTON, 55, 270);
+            
+            var popupBg = creatImgObj(POPUP_WAREHOUSE_BG, 0, 0);
+            var wareHouse = creatTextObj( self.$t("gameIndex.myWareHouse"), "23px Arial", "#6B4012", 270, 20);
+            wareHouse.shadow = new createjs.Shadow("#fff", 0, 1, 0);
+
+            var BottomFrame = new createjs.Shape(new createjs.Graphics().beginFill("#A37132").drawRoundRect(20, 20,180, 150, 20));
+
+            var exchangeBtnBg = new createjs.Shape(new createjs.Graphics().beginStroke("#fff").beginFill("#A6DC0A").drawRoundRect(0, 0,100, 28, 15));
+            var exchangeBtnText = creatTextObj( self.$t("gameIndex.exchange"), "13px Arial", "#fff", 38, 10);
+            var popup_exchange = creatViewObj([exchangeBtnBg, exchangeBtnText], 60, 225);
             // 跳转兑换页面
             popup_exchange.addEventListener("click", function(){
               self.$router.push('shop')
             })
-            var BottomFrame = new createjs.Shape(new createjs.Graphics().beginStroke("#714223").beginFill("#161413").drawRect(20, 20, 160, 200));
+
+            // 粮食数量文本
+            var foodNumText =  creatTextObj( self.$t("gameIndex.food") + ': ' + self.gameObj.goodFood, "18px Arial", "#A37132", 110, 190);
+            foodNumText.lineHeight = 20;
+            foodNumText.lineWidth = 450;
+            foodNumText.textAlign = "center";
+
             var shopleftBox = creatViewObj([
                 BottomFrame,
-                creatImgObj(POPUPBG_FOODICON_PATH, 40, 60),
-                creatTextObj("粮食:" + self.gameObj.goodFood, "17px Arial", "#ec9530", 37, 235),
+                creatImgObj(POPUPBG_FOODICON_PATH, 50, 40),
+                foodNumText,
                 popup_exchange
-            ], 60, 10)
-            var popup_recharge = creatImgObj(POPUPBG_RECHARGE_BUTTON, 0, 0);
-            var popup_extract = creatImgObj(POPUPBG_EXTRACT_BUTTON, 100, 0);
+            ], 60, 80)
+
+
+            var goldNumText = creatTextObj(self.$t("gameIndex.gold") + ": " + self.gameObj.gameGold.text, "18px Arial", "#A37132", 115, 190);
+            goldNumText.lineHeight = 20;
+            goldNumText.lineWidth = 450;
+            goldNumText.textAlign = "center";
+
+            var BottomFrameRight = new createjs.Shape(new createjs.Graphics().beginFill("#A37132").drawRoundRect(20, 20,180, 150, 20));
+            var shopRightBox = creatViewObj([
+                BottomFrameRight,
+                creatImgObj(POPUPBG_GOLD_PATH, 50, 35),
+                goldNumText
+            ], 350, 80)
+
+
+
             // 提币
+            var extractBtnBg = new createjs.Shape(new createjs.Graphics().beginStroke("#fff").beginFill("#A6DC0A").drawRoundRect(0, 0,90, 28, 15));
+            var extractBtnText = creatTextObj( self.$t("gameIndex.extract"), "13px Arial", "#fff", 33, 10);
+            var popup_extract = creatViewObj([extractBtnBg, extractBtnText], 50, 0);
             popup_extract.addEventListener("click", function(){
               self.$router.push({path:"account/index"});
             })
+
             // 转账
-            var popup_transfer = creatImgObj(POPUPBG_TRANSFER_BUTTON, 200, 0);
-             popup_transfer.addEventListener("click", function(){
-              self.$router.push({path:"account/index"});
+            var transferBtnBg = new createjs.Shape(new createjs.Graphics().beginStroke("#fff").beginFill("#A6DC0A").drawRoundRect(0, 0,90, 28, 15));
+            var transferBtnText = creatTextObj( self.$t("gameIndex.extract"), "13px Arial", "#fff", 33, 10);
+            var popup_transfer = creatViewObj([transferBtnBg, transferBtnText], 150, 0);
+            popup_transfer.addEventListener("click", function(){
+                self.$router.push({path:"account/index"});
             })
-            var popup_button_box = creatViewObj([popup_recharge, popup_extract, popup_transfer], 270, 280);
-            var BottomFrameRight = new createjs.Shape(new createjs.Graphics().beginStroke("#714223").beginFill("#161413").drawRect(20, 20, 160, 200));
-            var shopRightBox = creatViewObj([
-                BottomFrameRight,
-                creatImgObj(POPUPBG_GOLD_PATH, 40, 60),
-                creatTextObj("金币:" + self.gameObj.gameGold.text, "17px Arial", "#ec9530", 50, 235)
-            ], 310, 10)
+
+            // 充值
+            var rechargeBtnBg = new createjs.Shape(new createjs.Graphics().beginStroke("#fff").beginFill("#A6DC0A").drawRoundRect(0, 0,190, 28, 15));
+            var rechargeBtnText = creatTextObj( self.$t("gameIndex.recharge"), "13px Arial", "#fff", 80, 10);
+            var popup_recharge = creatViewObj([rechargeBtnBg, rechargeBtnText], 50, 40);
+            popup_recharge.addEventListener("click", function(){
+                self.$router.push({path:"account/index"});
+            })
+
+            var popup_button_box = creatViewObj([popup_extract, popup_transfer, popup_recharge], 315, 305);
+
             var myWarehousePopup = new popup(self.stage);
-            myWarehousePopup.addOtherElements([popupBg, shopleftBox, shopRightBox, popup_button_box]);
-            myWarehousePopup.setBoxSeat(283, 150);
-            myWarehousePopup.setCloseButtonSeat(545, -20);
+            myWarehousePopup.addOtherElements([popupBg, wareHouse, shopleftBox, shopRightBox, popup_button_box]);
+            myWarehousePopup.setBoxSeat(283, 120);
+            myWarehousePopup.setCloseButtonSeat(600, 5);
             myWarehousePopup.showPopup();
         })
 
 
         // 邀请好友弹出层
-        var InvitationImg = creatImgObj(INVITATION_PATH, 468, 350);
+        var InvitationImg = creatImgObj(INVITATION_PATH, 468, 380);
+        InvitationImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        InvitationImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
         InvitationImg.shadow = new createjs.Shadow("#000000", 4, 5, 10);
         InvitationImg.addEventListener("click", function() {
+
             var codeInput = document.getElementById('InvitationUrl');
             myFn.myAjax('get', {}, myFn.apiAddress.inviteCode.create, function(res){
                 codeInput.value = res.data;
             })
+
             var InvitationPopup =  new popup(self.stage);
-            var invitationPoputBg = creatImgObj(POPUP_HAS_TITLE_PATH);
-            var InvitationTitle = creatTextObj("邀请好友", "17px Arial", "#ec9530", 250, 25);
-            var InvitationContent = creatTextObj("使用下面的链接邀请好友注册并参与游戏!即可获得好友投资额除以您的投资额剩余5%的直推收益", "13px Arial", "#ec9530", 63, 110);
+            var invitationPoputBg = creatImgObj(POPUPBG_BG);
+            var InvitationTitle = creatTextObj( self.$t("gameIndex.inviteFriends"), "23px Arial", "#6B4012", 240, 18 );
+            InvitationTitle.shadow = new createjs.Shadow("#fff", 0, 1, 0);
+
+            var InvitationContent = creatTextObj( self.$t("gameIndex.inviteFriendsText"), "13px Arial", "#ec9530", 63, 85);
             InvitationContent.lineHeight = 20;
             InvitationContent.lineWidth = 450;
             document.getElementById('InvitationUrl').style.display = "block";
             var InvitationUrl = new createjs.DOMElement(codeInput);
             InvitationUrl.x = 90;
-            InvitationUrl.y = 180;
-            // var Warn_isCopy = creatTextObj("复制成功", "17px Arial", "#ec9530", 250, 240);
-          
-            // 点击复制链接
-            var copylink = creatImgObj(POPUPBG_COPYLINK_BUTTON, 240, 275);
-            copylink.addEventListener("click", function(){
+            InvitationUrl.y = 140;
+
+            var copylinkBtnBg = new createjs.Shape(new createjs.Graphics().beginStroke("#fff").beginFill("#A6DC0A").drawRoundRect(0, 0,153, 35, 15));
+            var copylinkBtnText = creatTextObj( self.$t("gameIndex.copy"), "15px Arial", "#fff", 60, 11);
+            var popup_copylinkBtnBg = creatViewObj([copylinkBtnBg, copylinkBtnText], 210, 300);
+
+            popup_copylinkBtnBg.addEventListener("click", function(){
                 var Url2=document.getElementById("InvitationUrl");
                 Url2.select(); // 选择对象
                 document.execCommand("Copy"); // 执行浏览器复制命令
@@ -920,39 +1121,52 @@ export default {
             })
         })
           
-        InvitationPopup.addOtherElements([invitationPoputBg, InvitationTitle, InvitationContent, InvitationUrl, copylink.png]);
+        InvitationPopup.addOtherElements([invitationPoputBg, InvitationTitle, InvitationContent, InvitationUrl, popup_copylinkBtnBg]);
         InvitationPopup.callBackClose = function() {
             document.getElementById("InvitationUrl").style.display = "none";
         }
             InvitationPopup.setBoxSeat(283, 150);
-            InvitationPopup.setCloseButtonSeat(545, -20);
+            InvitationPopup.setCloseButtonSeat(545, 0);
             InvitationPopup.showPopup();
         })
 
 
         // 游戏记录
-        var recordImg = creatImgObj(RECORD_PATH, 550, 358);
+        var recordImg = creatImgObj(RECORD_PATH, 550, 388);
+        recordImg.addEventListener("mouseover", function(e){ e.target.alpha = 0.5});
+        recordImg.addEventListener("mouseout", function(e){ e.target.alpha = 1 });
         recordImg.shadow = new createjs.Shadow("#000000", 4, 5, 10);
         recordImg.addEventListener("click", function() {
+            var recordPopup = new popup(self.stage);
+            var noticTitleBg = new creatImgObj( TASKIMG_TITLEBG_PATH, 0, 0);
+            var noticTitle = new creatTextObj( self.$t("gameIndex.record"), '23px Arial', '#6B4012', 250, 18);
+            noticTitle.shadow = new createjs.Shadow("#fff", 0, 1, 0);
 
-            var recordPoputBg = creatImgObj(POPUP_HAS_TITLE_PATH);
+            var recordPoputBg = creatImgObj(POPUPBUTTON_SOWING_BG);
+            var recordPoputbigBg = new createjs.Shape(new createjs.Graphics().beginFill("#F5EADF").drawRoundRect(30, 110,530, 280, 5));
             recordPoputBg.addEventListener("mouseover", function(){});
             recordPoputBg.addEventListener("mouseout", function(){});
 
+            // 分割横线
+            var division = new createjs.Shape(new createjs.Graphics().beginFill("#c8b29d").drawRoundRect(50, 27,450, 2, 0));
+
+
             // 播种记录
-            var planting_record_button = creatImgObj(POPUPBUTTON_SOWING_PATH, -117, 0);
-            var planting_record_active_button = creatImgObj(POPUPBUTTON_SOWING_ACTIVE_PATH, -117, 0);
+            var planting_record_button = creatImgObj(POPUPBUTTON_SOWING_PATH, 50, 80);
+            var planting_record_active_button = creatImgObj(POPUPBUTTON_SOWING_ACTIVE_PATH, 50, 80);
+            var plantingText = creatTextObj(self.$t("gameIndex.seedingRecord"), "16px Arial", "#c87923", 60, 90);
             // 每行数据数组
-            var planting_record_content_row = creatViewObj([], 0, 70);
+            var planting_record_content_row = creatViewObj([], 20, 40);
             var planting_record_content = creatViewObj([
                         // 表格头
                         creatViewObj([
-                        creatTextObj("播种时间", "17px Arial", "#ec9530", 120, 25),
-                        creatTextObj("种子数量", "17px Arial", "#ec9530", 380, 25)
+                        creatTextObj(self.$t("gameIndex.sowingTime"), "17px Arial", "#c87923", 120, 0),
+                        creatTextObj(self.$t("gameIndex.sowNull"), "17px Arial", "#c87923", 380, 0),
+                        division
                     ], 0, 0),
                         // 表格内容行
                     planting_record_content_row
-                ], 0, 0);
+                ], 20, 130);
         
                 planting_record_content.alpha = 1;
                 planting_record_button.addEventListener("click", function(){
@@ -971,7 +1185,10 @@ export default {
                     var textList = [];
 
                     for(var i=0; i<res.data.list.length; i++){
-                        textList.push(creatViewObj([creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 60, 0),creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 400, 0),creatImgObj(DIVISION_PATH, 30, 30)], 0, 0+i*55));
+                        textList.push(creatViewObj([
+                            creatTextObj(res.data.list[i].time, "17px Arial", "#c87923", 60, 0),
+                            creatTextObj(res.data.list[i].qnt, "17px Arial", "#c87923", 380, 0),
+                        ],0, 0+i*45));
                     }
                     // 播种记录总页数
                     self.record[0].allpage = res.data.totalpage;
@@ -982,22 +1199,26 @@ export default {
             }
             mySeedFn(1);
 
+            // 分割横线
+            var division1 = new createjs.Shape(new createjs.Graphics().beginFill("#c8b29d").drawRoundRect(50, 27,450, 2, 0));
 
             // 邀请记录
-            var invite_record_button = creatImgObj(POPUPBUTTON_INVITE_PATH, -116, 36);
-            var invite_record_active_button = creatImgObj(POPUPBUTTON_INVITE_ACTIVE_PATH, -116, 36);
+            var invite_record_button = creatImgObj(POPUPBUTTON_INVITE_PATH, 140, 80);
+            var invite_record_active_button = creatImgObj(POPUPBUTTON_INVITE_ACTIVE_PATH, 140, 80);
+            var invite_recordText = creatTextObj(self.$t("gameIndex.invitationRecord"), "16px Arial", "#c87923", 150, 90);
             // 每行数据数组
-            var invite_record_content_row = creatViewObj([], 0, 70);
+            var invite_record_content_row = creatViewObj([], -30, 40);
             var invite_record_content = creatViewObj([
                 // 表格头
                 creatViewObj([
-                    creatTextObj("用户", "17px Arial", "#ec9530", 95, 25),
-                    creatTextObj("投资数量", "17px Arial", "#ec9530", 250, 25),
-                    creatTextObj("投资时间", "17px Arial", "#ec9530", 400, 25)
+                    creatTextObj(self.$t("gameIndex.user"), "17px Arial", "#c87923", 95, 0),
+                    creatTextObj(self.$t("gameIndex.investmentAmount"), "17px Arial", "#c87923", 250, 0),
+                    creatTextObj(self.$t("gameIndex.investmentTime"), "17px Arial", "#c87923", 400, 0),
+                    division1
                 ], 0, 0),
                 // 表格内容行
                 invite_record_content_row
-            ])
+            ], 20, 130)
         
             invite_record_button.addEventListener("click", function(){
                 self.activeRecord = 1;
@@ -1013,11 +1234,10 @@ export default {
                     var textList = [];
                     for(var i=0; i<res.data.list.length; i++){
                         textList.push(creatViewObj([
-                            creatTextObj(res.data.list[i].username, "17px Arial", "#ec9530", 50, 0),
-                            creatTextObj(res.data.list[i].num, "17px Arial", "#ec9530", 270, 0),
-                            creatTextObj(res.data.list[i].crt_time, "17px Arial", "#ec9530", 370, 0),
-                            creatImgObj(DIVISION_PATH, 30, 30)
-                        ], 0, 0+i*55));
+                            creatTextObj(res.data.list[i].username, "17px Arial", "#c87923", 60, 0),
+                            creatTextObj(res.data.list[i].num, "17px Arial", "#c87923", 290, 0),
+                            creatTextObj(res.data.list[i].crt_time, "17px Arial", "#c87923", 380, 0),
+                        ], 0, 0+i*45));
                     }
 
                     // 邀请记录总页数
@@ -1028,24 +1248,27 @@ export default {
             }
             myInviteFn(2);
 
-
+            // 分割横线
+            var division2 = new createjs.Shape(new createjs.Graphics().beginFill("#c8b29d").drawRoundRect(50, 27,470, 2, 0));
             // 加速记录
-            var speed_record_button = creatImgObj(POPUPBUTTON_ACCELERATE_PATH, -116, 72);
-            var speed_record_active_button = creatImgObj(POPUPBUTTON_ACCELERATE_ACTIVE_PATH, -116, 72);
+            var speed_record_button = creatImgObj(POPUPBUTTON_ACCELERATE_PATH, 230, 80);
+            var speed_record_active_button = creatImgObj(POPUPBUTTON_ACCELERATE_ACTIVE_PATH, 230, 80);
+            var speed_recordText = creatTextObj(self.$t("gameIndex.acceleratedRecording"), "16px Arial", "#c87923", 240, 90);
             // 每行数据组
-            var speed_record_content_row = creatViewObj([], 0, 70);
+            var speed_record_content_row = creatViewObj([], 0, 40);
             var speed_record_content = creatViewObj([
                 // 表格头
                 creatViewObj([
-                    creatTextObj("加速时间", "17px Arial", "#ec9530", 80, 25),
-                    creatTextObj("类型", "17px Arial", "#ec9530", 210, 25),
-                    creatTextObj("加速比", "17px Arial", "#ec9530", 275, 25),
-                    creatTextObj("时间收益", "17px Arial", "#ec9530", 350, 25),
-                    creatTextObj("粮食收益", "17px Arial", "#ec9530", 450, 25)
+                    creatTextObj(self.$t("gameIndex.accelerateTime"), "17px Arial", "#c87923", 80, 0),
+                    creatTextObj(self.$t("gameIndex.accelerateType"), "17px Arial", "#c87923", 210, 0),
+                    creatTextObj(self.$t("gameIndex.accelerateProportion"), "17px Arial", "#c87923", 275, 0),
+                    creatTextObj(self.$t("gameIndex.accelerateProfit"), "17px Arial", "#c87923", 350, 0),
+                    creatTextObj(self.$t("gameIndex.accelerateFoodstuff"), "17px Arial", "#c87923", 450, 0),
+                    division2
                 ], 0, 0),
                 // 表格内容行
                 speed_record_content_row
-            ])
+            ],21, 130)
 
             speed_record_button.addEventListener("click", function(){
                 self.activeRecord = 2;
@@ -1062,14 +1285,12 @@ export default {
                     var textList = [];
                     for(var i=0; i<res.data.list.length; i++){
                         textList.push(creatViewObj([
-                            // creatTextObj("2016/15/28 15:32", "17px Arial", "#ec9530", 50, 0),
-                            creatTextObj(res.data.list[i].time, "17px Arial", "#ec9530", 40, 0),
-                            creatTextObj(res.data.list[i].type, "17px Arial", "#ec9530", 210, 0),
-                            creatTextObj(res.data.list[i].rate, "17px Arial", "#ec9530", 280, 0),
-                            creatTextObj(res.data.list[i].speedday, "17px Arial", "#ec9530", 370, 0),
-                            creatTextObj(res.data.list[i].qnt, "17px Arial", "#ec9530", 460, 0),
-                            creatImgObj(DIVISION_PATH, 30, 30)
-                        ], 0, 0+i*55));
+                            creatTextObj(res.data.list[i].time, "17px Arial", "#c87923", 40, 0),
+                            creatTextObj(res.data.list[i].type, "17px Arial", "#c87923", 210, 0),
+                            creatTextObj(res.data.list[i].rate, "17px Arial", "#c87923", 270, 0),
+                            creatTextObj(res.data.list[i].speedday, "17px Arial", "#c87923", 360, 0),
+                            creatTextObj(res.data.list[i].qnt, "17px Arial", "#c87923", 440, 0)
+                        ], 0, 0+i*45));
                     }
                     // 加速记录总页数
                     self.record[2].allpage = res.data.totalpage;
@@ -1103,7 +1324,7 @@ export default {
                 if(e.target.nodeName == "DIV"){
                     return false;
                 }else if(self.currentRecord == e.target.innerHTML){
-                    alert("别点啦已经在当前页了");
+                    alert( self.$t("gameIndex.pagePrompt"));
                     return false
                 }
                 
@@ -1138,7 +1359,7 @@ export default {
             }
             pageBox_El.style.display = 'block';
             var pageBox = new createjs.DOMElement(pageBox_El);
-            pageBox.y = 290;
+            pageBox.y = 360;
             pageBox.x = 285 - parseInt(pageBox_El.offsetWidth) / 2;
 
 
@@ -1148,26 +1369,32 @@ export default {
                 pageBox_El.style.display = 'none';
             }
 
-            recordPopup.addOtherElements([recordPoputBg, 
+            recordPopup.addOtherElements([
+                recordPoputBg, 
+                recordPoputbigBg,
+                noticTitle,
                 // 添加播种记录元素
                 planting_record_button,
                 planting_record_active_button, 
-                planting_record_content, 
+                planting_record_content,
+                plantingText,
                 // 添加播种邀请元素
                 invite_record_button,
                 invite_record_active_button, 
-                invite_record_content, 
+                invite_record_content,
+                invite_recordText, 
                 // 添加播种收益元素
                 speed_record_button, 
                 speed_record_active_button, 
                 speed_record_content,
+                speed_recordText,
                 // page
                 pageBox
             ]);
 
             recordPopup.showPopup();
             recordPopup.setBoxSeat(283, 150);
-            recordPopup.setCloseButtonSeat(545, -20);
+            recordPopup.setCloseButtonSeat(560, 10);
             
             // 切换显示隐藏
             function toggleRecord(){
@@ -1192,7 +1419,7 @@ export default {
         })
         
         // 创建点击图标
-        var decorateBanch = creatImgObj(DECORATE_BENCH, 363, 415);
+        var decorateBanch = creatImgObj(DECORATE_BENCH, 363, 448);
         var bottomButton = creatViewObj([myWarehouseImg, InvitationImg, recordImg, decorateBanch], 100, 195);
         // 添加底部图标
         this.stage.addChild(bottomButton);
@@ -1206,7 +1433,7 @@ function popup(stage) {
         if(lastPopup != ''){
             lastPopup = lastPopup.closePopup();
         }
-      
+
         // 创建弹出层中的默认元素对象
         this.elObjs = {};
         this.elObjs.closeButton = creatImgObj(CLOSEPOPU_PATH, 0, 0);
@@ -1245,6 +1472,7 @@ function popup(stage) {
         this.showPopup = function() {
           stage.addChild(this.elObjsBox);
         }
+        lastPopup.showPopup()
     }
 // 弹出框
   // 创建文字对象
@@ -1277,32 +1505,34 @@ function popup(stage) {
 <style scoped>
     .gameindex{
         text-align: left;
+        padding-bottom: 30px;
+    }
+    #canvas{
+        display: block;
     }
   .gameBox{
-    width:1200px;
-    height:705px;
-    border-radius: 8px;
+    width: 1180px;
+    border-radius: 11px;
     margin: auto;
     display: block;
-    margin-top: 100px;
-    background:url('../assets/gameImg/border.png');
-    padding: 29px 29px;
-    box-sizing: border-box;
     margin-top: 0px;
+    border: 3px #424242 solid;
+    box-sizing: content-box;
+    height: auto;
   }
   .notClick{
-    border-color: #4b4b4b !important;
-    color: #4b4b4b !important;
+    border-color: transparent !important;
+    color: #ad6f19 !important;
   }
   .standarButton, #number, .passwordText{
     width: 60px;
     height: 30px;
     font-size: 1.1em;
-    color: #7c7674;
+    color: #8e580d;
     border-color: inherit;
     border-style: solid;
     border-width: 0.9px;
-    background: #161413;
+    background: #cf9a54;
     border-radius: 3px;
   }
   .passwordText{
@@ -1316,23 +1546,26 @@ function popup(stage) {
     padding: 0px;
   }
   #number{
-    width: 40px;
+    width: 50px;
     border:none;
     color: #484848;
     padding-left: 10px;
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,.2);
   }
   .active{
-    color: #e8b71b !important;
+    color: #000 !important;
   }
   #InvitationUrl{
     width: 400px;
-    height: 40px;
     background: #161413;
     border: none;
     color: #e8b71b;
     padding: 10px 5px;
     display: none;
     font-size: 16px;
+    padding: 50px 10px;
+    background: #fff4e2;
+    text-align: center;
   }
   /* 分页 */
   .pageBox{
@@ -1351,7 +1584,7 @@ function popup(stage) {
     display: inline-block;
     text-align: center; 
     background: blue;
-    background: #242221;
+    background: #bab4b1;
     border-radius: 3px;
     cursor:pointer
   }

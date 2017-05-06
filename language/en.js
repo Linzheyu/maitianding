@@ -1,309 +1,310 @@
-var EnLanguage = {
-    // 导航
-nav:{
-home: 'home',
-news: 'news',
-notice: 'announcement',
-about: 'about us',
-game: 'game',
-login: 'login',
-register: 'register',
-Chinese: 'Chinese',
-English: 'English',
-column: 'column',
-language:'language'
-},
-// 分页
-page:{
-previousPage:'previous page',
-nextPage: 'next page'
-},
-// 登陆
-login:{
-loginTitle: 'login title',
-registerTitle: 'register title',
-verificationCode: 'verification',
-forget: 'forget password',
-enter: 'enter',
-nowRegister: 'register now',
-register:'register',
-noAccount: 'no account',
-haveAccount: 'already have account?',
-affirmClause: 'agreement',
-noEmail: 'no email?',
-verificationAccount:'verify account'
-},
-// 兑换
-gameShop:{
-exchangeTopTitle: "exchange coin",
-exchangeRatio:"exchange ratio",
-exchangeNumber:"exchange number",
-factorage:"factorage",
-usableFood:"usable food",
-expendFood:"expend food",
-acquireGold:"acquire gold",
-exchangeOk: "exchange",
-otherRecordTitle:"record",
-otherRecordTime:"Record Time",
-otherRecordRatio:"Record Ratio",
-otherRecordNumber:"Record Number",
-otherRecordGetGold:"Record Gold"
-},
-// 公益申请
-loveBenefit:{
-progress1: "fill information",
-progress2: "verification",
-progress3: "fund acquired",
-spokesperson: "spokes person",
-spokespersonAccount: "apply",
-spokespersonName: "name",
-spokespersonTell: "telephone",
-certificateType: "identity",
-certificateType1:"XX1",
-certificateType2:"XX2",
-certificateType3:"XX3",
-certificatePicture: "id photo",
-front:"front",
-reversSide:"reverse side",
-handPicture:"hold photo",
-donorInformation:"donor information",
-donorAccount:"apply",
-donorName: "name",
-donorTell: "contact number",
-cause:"cause",
-needMoney:"amount require",
-describe:"description",
-explanatory: "the platform will authorize proper amount of grain to charity ambassador according to gold exchange rate when needed",
-unit:"currency",
-relatedPhotos:"related photo",
-clause:"i assure the authenticity of the above information, and fully aware of the consequences which any false information are given",
-submit:"submit"
-},
-// 公益提交审核
-loveBenefitAudit:{
-audit:'verification in progress',
-auditText:'information submitted successfully, verification in progress'
-},
-// 账户中心
-AccountManagement:{
-loginTime:"login time",
-login:"login IP",
-loginAddress:"login address",
-loadMore:"more",
-grainBalance :"grain balance",
-goldBalance:"gold balance",
-constellationCard:"constellation card",
-exchange:"exchange",
-recharge:"recharge",
-currency:"currency",
-transferAccounts:"transfer accounts",
-check:"check",
-accountAddress:"account address",
-accountAddressUse:"address modification can be applied to money transfer, copy the following link to a friend when making payments",
-copy:"copy",
-foodBenefitRecord:"harvest record",
-foodTranslateTime:'harvest time',
-foodTranslateType:'harvest type',
-foodTranslateNum:'harvest number',
-exchangeRecords:"exchange records",
-rechargeRecord:"recharge Record",
-rechargeTime:'recharge Time',
-rechargeNum:'recharge Number',
-rechargeSource:'payment methods',
-tellerNote:"gold transfer records",
-transferRecords:"transfer records",
-transferTime:'transfer time',
-transferNum:'transfer amount',
-transferReasonTable:'transfer reason',
-transferWhere:'transfer destination',
-exchangeGrainQuantity:"exchange Grain Quantity",
-convertTheGoldCoins:"convert The Gold Coins",
-exchangeTime:"exchange Time",
-exchangeProportion:"exchange Proportion",
-exchangeRate:"exchange Proportion",
-exchangeGetGold:"exchange Gold",
-previousPage:"previous page",
-nextPage:"next page",
-goldrecharge:"gold recharge",
-pleaseEnterTheAmountOfMoney:"please Enter The Amount of Money:",
-rechargeWay:"recharge methods",
-EexchangePlatform:"exchange Platform",
-goldCurrency:"gold Currency",
-currencyTime:'currency Time',
-currencyNum:'currency Number',
-currencyWhere:'currency destination',
-pleaseEnterTheAmountOfgold:"please Enter The Amount of gold:",
-fee:"fee",
-amount:"amount",
-Thenumberofaccounts:"The number of accounts",
-actualamount:"actual amount",
-getAccount:"get Account:",
-goldtransferAccounts:"gold transfer Accounts",
-beneficiary:"beneficiary（please enter the address）:",
-enterTransferAmountOfgold:"please enter amount of gold to be transfer",
-transferReason:"transfer Reason:",
-ProfitGoldRecord:'Profit Record',
-ProfitGoldTime:'Profit date',
-ProfitGoldType:'Profit Type',
-ProfitGoldSource:'Profit  Source',
-ProfitGoldRemarks:'Profit Remarks',
-Profitmotion:"Profit motion"
-},
-// 星座
-accountCard:{
-accumulatedthenumber:"accumulated number of grain this week",
-Mybeast:"My beast",
-Myconstellationcard:"My constellation card",
-Constellationprizepool:"Constellation prize pool",
-constellationBeast:"constellation Beast",
-constellationBeast1:"constellation Beast 1",
-constellationBeast2:"constellation Beast 2",
-constellationBeast3:"constellation Beast 3",
-constellationBeast4:"constellation Beast 4",
-constellationBeast5:"constellation Beast 5",
-constellationBeast6:"constellation Beast 6",
-constellationBeast7:"constellation Beast 7",
-constellationBeast8:"constellation Beast 8",
-constellationBeast9:"constellation Beast 9",
-constellationBeast10:"constellation Beast 10",
-constellationBeast11:"constellation Beast 11",
-constellationBeast12:"constellation Beast 12",
-synthesis:"synthesis",
-prompt:"the system will divide proper amount of grain from the constellation prize pool to beast owers every sunday 24:00, for those who owns more beasts will get a bigger share.",
-
-},
-// 我的公益
-accountBenefit:{
-myPublicwelfare:"my Public welfare",
-review:"review",
-passed:"passed",
-notPassed:"failed",
-over:"finished",
-applicationTime:"application Time",
-Applyforpublicbenefits:"Apply for public benefits",
-cancelApplication:"cancel Application",
-},
-// 我的资料
-accountMyProfile:{
-MyProfile:"My Profile",
-vipAccount:"vip Account：",
-name:"nick name：",
-sex:"gender",
-men:"male",
-women:"female",
-accountAddress:"account Address：",
-modifyAvatar:"modify Avatar",
-},
-// 账号绑定
-safetyBound:{
-accountBinding:"account Binding",
-safeMailbox:"safe Mailbox",
-safeMailboxDescription:"for login, transfer, payment security authorization",
-run:"running",
-runDescription:"bind to get 2.5% benefit every week",
-ExchangePlatform:"Exchange Platform",
-ExchangePlatformDescription:"recharge game coin",
-laserExchangePlatform:"laser Exchange Platform",
-laserExchangePlatformDescription:"game coin for cash",
-},
-// 修改安全支付密码
-safetyPayment:{
-changePassword:"change Password",
-changePassword1:"change password regularly for account security",
-changePassword2:"*please make sure account password is different from login",
-changePassword3:"*digits with different case letters in 6 figures are highly recommended",
-oldpswd:"old password",
-newpswd:"new password",
-newpswdAgain:"re-enter new password",
-},
-// 设置支付密码
-safetySetPay:{
-title:"set payment password",
-prompt1:'enter SafePay password (for money transfer / gold currency in game)',
-prompt2:'*SafePay password should be different from login password',
-prompt3:'*for your account safety，digits with different case letters in 6 figures are highly recommended'
-},
-// 登陆密码设置
-safetySetWPwd: {
-title: 'login password',
-oldPwdText: 'old password',
-newPwdText: 'new password',
-newPwdAgainText: 're-enter new password'
-},
-// 修改安全支付密码
-payModifyPwd:{
-payModifyPwdTitle:'change SafePay password',
-payModifyPwdtxt1:'for account security，change password regularly',
-payModifyPwdtxt2:'*SafePay password should be different from login password',
-payModifyPwdtxt3:'*for your account safety，digits with different case letters in 6 figures are highly recommended',
-payOld:"old password",
-payNew:"new password",
-payRepeatnew:"re-enter new password"
-},
-// 日志
-log:{
-operatingLog:"log",
-time:"time",
-types:"types",
-loginIP:"login ip",
-Address:"address",
-typesList:"login account",
-quirt:"quit account",
-},
-// 账户管理
-sider:{
-accountManagement:"account Management",
-accountInfo:"account Info",
-accountMycard:"Mycard",
-accountMycommonweal:"welfare",
-accountMyProfile:"Profile",
-accountsafetyManagement:"safety Management",
-accountBinding:"account Binding",
-accountPatmentManagement:"Patment Management",
-accountLoginManagement:"Login Management",
-accountlog:"account log",
-operatingLog:"operating Log",
-},
-// 公共文本
-publicText:{
-stateCode:'please enter dynamic verification code',
-invitationCode: 'invitation Code',
-importmail:'enter email',
-importmailEamil:'enter verification code',
-importAccount:'enter account',
-importPassword: 'enter password',
-confirmPassword: 're-enter password',
-importCode:'enter verification code',
-nextStep: 'next step',
-welcomes: 'welcome',
-out: 'quit',
-ok: 'confirm',
-off: 'cancel',
-get:"loading in progress",
-goGame:"enter game"
-},
-// 量词
-classifier:{
-number:'unit'
-},
-// 前端静态提示语
-staticMsg:{
-msg001: "verification has been sent to your mailbox",
-msg002: "transfer success",
-msg003: "copy success",
-msg004: "enter number",
-msg005: "amount of exchange grain cannot be lower than 10",
-msg006: "exchange success",
-msg007: "account should not be empty",
-msg008: "register success",
-msg009: "accept agreement to proceed",
-msg010: "setting success",
-msg011: "modify success",
-
-},
-// 服务器状态码
-statusMsg:{
- msg101:"incorrect account or password",
+     var EnLanguage = {
+     // 导航
+     nav:{
+     home: 'home',
+     news: 'news',
+     notice: 'announcement',
+     about: 'about us',
+     game: 'game',
+     login: 'login',
+     register: 'register',
+     Chinese: 'Chinese',
+     English: 'English',
+     column: 'column',
+     language:'language'
+     },
+     // 分页
+     page:{
+     previousPage:'previous page',
+     nextPage: 'next page'
+     },
+     // 登陆
+     login:{
+     loginTitle: 'Login',
+     registerTitle: 'Register',
+     verificationCode: 'verification',
+     forget: 'forget password',
+     enter: 'enter',
+     nowRegister: 'register now',
+     register:'register',
+     noAccount: 'no account',
+     haveAccount: 'already have account?',
+     affirmClause: 'agreement',
+     noEmail: 'no email?',
+     verificationAccount:'verify account'
+     },
+     // 兑换
+     gameShop:{
+     exchangeTopTitle: "exchange coin",
+     exchangeRatio:"exchange ratio",
+     exchangeNumber:"exchange number",
+     factorage:"factorage",
+     usableFood:"usable food",
+     expendFood:"expend food",
+     acquireGold:"acquire gold",
+     exchangeOk: "exchange",
+     otherRecordTitle:"record",
+     otherRecordTime:"Record Time",
+     otherRecordRatio:"Record Ratio",
+     otherRecordNumber:"Record Number",
+     otherRecordGetGold:"Record Gold"
+     },
+     // 公益申请
+     loveBenefit:{
+     progress1: "fill information",
+     progress2: "verification",
+     progress3: "fund acquired",
+     spokesperson: "spokes person",
+     spokespersonAccount: "apply",
+     spokespersonName: "name",
+     spokespersonTell: "telephone",
+     certificateType: "identity",
+     certificateType1:"XX1",
+     certificateType2:"XX2",
+     certificateType3:"XX3",
+     certificatePicture: "id photo",
+     front:"front",
+     reversSide:"reverse side",
+     handPicture:"hold photo",
+     donorInformation:"donor information",
+     donorAccount:"apply",
+     donorName: "name",
+     donorTell: "contact number",
+     cause:"cause",
+     needMoney:"amount require",
+     describe:"description",
+     explanatory: "the platform will authorize proper amount of grain to charity ambassador according to gold exchange rate when needed",
+     unit:"currency",
+     relatedPhotos:"related photo",
+     clause:"i assure the authenticity of the above information, and fully aware of the consequences which any false information are given",
+     submit:"submit"
+     },
+     // 公益提交审核
+     loveBenefitAudit:{
+     audit:'verification in progress',
+     auditText:'information submitted successfully, verification in progress'
+     },
+     // 账户中心
+     AccountManagement:{
+     loginTime:"login time",
+     login:"login IP",
+     loginAddress:"login address",
+     loadMore:"more",
+     grainBalance :"grain balance",
+     goldBalance:"gold balance",
+     constellationCard:"constellation card",
+     exchange:"exchange",
+     recharge:"recharge",
+     currency:"currency",
+     transferAccounts:"transfer accounts",
+     check:"check",
+     accountAddress:"account address",
+     accountAddressUse:"address modification can be applied to money transfer, copy the following link to a friend when making payments",
+     copy:"copy",
+     foodBenefitRecord:"harvest record",
+     foodTranslateTime:'harvest time',
+     foodTranslateType:'harvest type',
+     foodTranslateNum:'harvest number',
+     exchangeRecords:"exchange records",
+     rechargeRecord:"recharge Record",
+     rechargeTime:'recharge Time',
+     rechargeNum:'recharge Number',
+     rechargeSource:'payment methods',
+     tellerNote:"gold transfer records",
+     transferRecords:"transfer records",
+     transferTime:'transfer time',
+     transferNum:'transfer amount',
+     transferReasonTable:'transfer reason',
+     transferWhere:'transfer destination',
+     exchangeGrainQuantity:"exchange Grain Quantity",
+     convertTheGoldCoins:"convert The Gold Coins",
+     exchangeTime:"exchange Time",
+     exchangeProportion:"exchange Proportion",
+     exchangeRate:"exchange Proportion",
+     exchangeGetGold:"exchange Gold",
+     previousPage:"previous page",
+     nextPage:"next page",
+     goldrecharge:"gold recharge",
+     pleaseEnterTheAmountOfMoney:"please Enter The Amount of Money:",
+     rechargeWay:"recharge methods",
+     EexchangePlatform:"exchange Platform",
+     goldCurrency:"gold Currency",
+     currencyTime:'currency Time',
+     currencyNum:'currency Number',
+     currencyWhere:'currency destination',
+     pleaseEnterTheAmountOfgold:"please Enter The Amount of gold:",
+     fee:"fee",
+     amount:"amount",
+     Thenumberofaccounts:"The number of accounts",
+     actualamount:"actual amount",
+     getAccount:"get Account:",
+     goldtransferAccounts:"gold transfer Accounts",
+     beneficiary:"beneficiary（please enter the address）:",
+     enterTransferAmountOfgold:"please enter amount of gold to be transfer",
+     transferReason:"transfer Reason:",
+     ProfitGoldRecord:'Profit Record',
+     ProfitGoldTime:'Profit date',
+     ProfitGoldType:'Profit Type',
+     ProfitGoldSource:'Profit  Source',
+     ProfitGoldRemarks:'Profit Remarks',
+     Profitmotion:"Profit motion"
+     },
+     // 星座
+     accountCard:{
+     accumulatedthenumber:"accumulated number of grain this week",
+     Mybeast:"My beast",
+     Myconstellationcard:"My constellation card",
+     Constellationprizepool:"Constellation prize pool",
+     constellationBeast:"constellation Beast",
+     constellationBeast1:"constellation Beast 1",
+     constellationBeast2:"constellation Beast 2",
+     constellationBeast3:"constellation Beast 3",
+     constellationBeast4:"constellation Beast 4",
+     constellationBeast5:"constellation Beast 5",
+     constellationBeast6:"constellation Beast 6",
+     constellationBeast7:"constellation Beast 7",
+     constellationBeast8:"constellation Beast 8",
+     constellationBeast9:"constellation Beast 9",
+     constellationBeast10:"constellation Beast 10",
+     constellationBeast11:"constellation Beast 11",
+     constellationBeast12:"constellation Beast 12",
+     synthesis:"synthesis",
+     prompt:"the system will divide proper amount of grain from the constellation prize pool to beast owers every sunday 24:00, for those who owns more beasts will get a bigger share.",
+     
+     },
+     // 我的公益
+     accountBenefit:{
+     myPublicwelfare:"my Public welfare",
+     review:"review",
+     passed:"passed",
+     notPassed:"failed",
+     over:"finished",
+     applicationTime:"application Time",
+     Applyforpublicbenefits:"Apply for public benefits",
+     cancelApplication:"cancel Application",
+     },
+     // 我的资料
+     accountMyProfile:{
+     MyProfile:"My Profile",
+     vipAccount:"vip Account：",
+     name:"nick name：",
+     sex:"gender",
+     men:"male",
+     women:"female",
+     accountAddress:"account Address：",
+     modifyAvatar:"modify Avatar",
+     },
+     // 账号绑定
+     safetyBound:{
+     accountBinding:"account Binding",
+     safeMailbox:"safe Mailbox",
+     safeMailboxDescription:"for login, transfer, payment security authorization",
+     run:"running",
+     runDescription:"bind to get 2.5% benefit every week",
+     ExchangePlatform:"Exchange Platform",
+     ExchangePlatformDescription:"recharge game coin",
+     laserExchangePlatform:"laser Exchange Platform",
+     laserExchangePlatformDescription:"game coin for cash",
+     },
+     // 修改安全支付密码
+     safetyPayment:{
+     changePassword:"change Password",
+     changePassword1:"change password regularly for account security",
+     changePassword2:"*please make sure account password is different from login",
+     changePassword3:"*digits with different case letters in 6 figures are highly recommended",
+     oldpswd:"old password",
+     newpswd:"new password",
+     newpswdAgain:"re-enter new password",
+     },
+     // 设置支付密码
+     safetySetPay:{
+     title:"set payment password",
+     prompt1:'enter SafePay password (for money transfer / gold currency in game)',
+     prompt2:'*SafePay password should be different from login password',
+     prompt3:'*for your account safety，digits with different case letters in 6 figures are highly recommended'
+     },
+     // 登陆密码设置
+     safetySetWPwd: {
+     title: 'login password',
+     oldPwdText: 'old password',
+     newPwdText: 'new password',
+     newPwdAgainText: 're-enter new password'
+     },
+     // 修改安全支付密码
+     payModifyPwd:{
+     payModifyPwdTitle:'change SafePay password',
+     payModifyPwdtxt1:'for account security，change password regularly',
+     payModifyPwdtxt2:'*SafePay password should be different from login password',
+     payModifyPwdtxt3:'*for your account safety，digits with different case letters in 6 figures are highly recommended',
+     payOld:"old password",
+     payNew:"new password",
+     payRepeatnew:"re-enter new password"
+     },
+     // 日志
+     log:{
+     operatingLog:"log",
+     time:"time",
+     types:"types",
+     loginIP:"login ip",
+     Address:"address",
+     typesList:"login account",
+     quirt:"Quit",
+     },
+     // 账户管理
+     sider:{
+     accountManagement:"account Management",
+     accountInfo:"account Info",
+     accountMycard:"Mycard",
+     accountMycommonweal:"welfare",
+     accountMyProfile:"Profile",
+     accountsafetyManagement:"safety Management",
+     accountBinding:"account Binding",
+     accountPatmentManagement:"Patment Management",
+     accountLoginManagement:"Login Management",
+     accountlog:"account log",
+     operatingLog:"operating Log",
+     },
+     // 公共文本
+     publicText:{
+     stateCode:'please enter dynamic verification code',
+     invitationCode: 'invitation Code',
+     importmail:'enter email',
+     importmailEamil:'enter verification code',
+     importAccount:'enter account',
+     importPassword: 'enter password',
+     confirmPassword: 're-enter password',
+     importCode:'enter verification code',
+     nextStep: 'next step',
+     welcomes: 'welcome',
+     out: 'quit',
+     ok: 'confirm',
+     off: 'cancel',
+     get:"loading in progress",
+     goGame:"enter game",
+     indexTitle:"Call your friends to run your own farm. Enjoy the harvest"
+     },
+     // 量词
+     classifier:{
+     number:'unit'
+     },
+     // 前端静态提示语
+     staticMsg:{
+     msg001: "verification has been sent to your mailbox",
+     msg002: "transfer success",
+     msg003: "copy success",
+     msg004: "enter number",
+     msg005: "amount of exchange grain cannot be lower than 10",
+     msg006: "exchange success",
+     msg007: "account should not be empty",
+     msg008: "register success",
+     msg009: "accept agreement to proceed",
+     msg010: "setting success",
+     msg011: "modify success",
+     
+     },
+     // 服务器状态码
+     statusMsg:{
+     msg101:"incorrect account or password",
      msg103:"enter registered email & password",
      msg105:"invitation code cannot be empty",
      msg106:"mailbox cannot not be empty",
@@ -353,7 +354,7 @@ statusMsg:{
      msg166:"transpass ",
      msg171:"insufficient grain",
      msg174:"not enough constellation cards "
-}
-}
-
-export { EnLanguage }
+     }
+     }
+     
+     export { EnLanguage }

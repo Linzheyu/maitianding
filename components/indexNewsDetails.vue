@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <img src="../assets/images/background-small.png" class="img-responsive" alt="Responsive image">   <!-- 主背景 -->
+        <!-- <img src="../assets/images/background-small.png" class="img-responsive" alt="Responsive image">   -->
     
         <div class="container padding-t">
           <div class="row">

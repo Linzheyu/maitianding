@@ -8,14 +8,14 @@
                 <div class="col-lg-4 logo">
                     <img src="../assets/images/mtdLogo.png" alt="">
                 </div>
-                <div class="col-lg-5"></div>
-                <div class="col-lg-3 info">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4 info">
                     <span v-html="userinfo.email"></span>
                     <!-- <a href="#" class="notice">
                         <i class=" glyphicon glyphicon-bell"></i>
                         <span class="badge">0</span>
                     </a> -->
-                    <a @click="outLogin" class="signOut">退出</a>
+                    <a @click="outLogin" class="signOut">{{ $t("log.quirt") }}</a>
                     <div class="btn-group toggle-language">
                       <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span v-show="selectLanguage==1">{{ $t("nav.Chinese")}}</span>
@@ -31,10 +31,10 @@
             </div>
             <ul class="game">
 <!--                 <li class="backButton"><router-link to="/index"><img src="../assets/icon/back.png"></router-link></li> -->
-                <li><router-link to="/game/index" activeClass="active">游戏中心</router-link></li>
-                <li><router-link to="/game/shop" activeClass="active">兑换商店</router-link></li>
-                <li><router-link to="/game/benefit" activeClass="active">公益中心</router-link></li>
-                <li><router-link to="/game/account/index" activeClass="active">账户中心</router-link></li>
+                <li><router-link to="/game/index" activeClass="active">{{ $t("gameNav.gameCore") }}</router-link></li>
+                <li><router-link to="/game/shop" activeClass="active">{{ $t("gameNav.exchange") }}</router-link></li>
+                <!-- <li><router-link to="/game/benefit" activeClass="active">{{ $t("gameNav.welfare") }}</router-link></li> -->
+                <li><router-link to="/game/account/" activeClass="active">{{ $t("gameNav.AccountCenter") }}</router-link></li>
             </ul>
         </div>
         <router-view></router-view>
@@ -68,10 +68,10 @@ export default {
      */
     outLogin:function(){
         var self = this;
+        localStorage.clear();
         myFn.myAjax('get',{}, myFn.apiAddress.memberLogin.quitLogin, function(res){
-            localStorage.clear();
-            self.userinfo = {};
-            self.$router.push({path:'/index'});
+            // self.userinfo = {};
+          self.$router.push({path:'/index'});
         })
     },
     // 切换语言包
@@ -161,7 +161,7 @@ export default {
   background: #F5F5F5;
   border-bottom: 1px solid #e0e0e0;
   text-align: center;
-  margin-bottom:30px;
+  margin-bottom:10px;
 }
 .backButton{
   position:relative;
